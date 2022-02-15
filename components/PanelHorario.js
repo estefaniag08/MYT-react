@@ -6,10 +6,10 @@ import ContenedorTareas from "./ContenedoresPanel/ContenedorTareas";
 
 function PanelHorario() {
   return (
-    <div className="md:w-2/12 w-full h-full md:grid gap-3 m-3">
+    <div className="2xl:w-2/12 grid gap-3 md:w-3/12 md:m-3 w-full h-full">
       <div>
         <button type="button" className={styles.boton}>
-          <div className="w-12 h-12">
+          <div className="md:w-12 md:h-12 w-10 h-10">
             <Image
               src="/img/agenda.svg"
               width={40}
@@ -17,7 +17,7 @@ function PanelHorario() {
               layout="responsive"
             />
           </div>
-          <h2 className="text-5xl">MI AGENDA</h2>
+          <h2 className="lg:text-5xl text-4xl whitespace-nowrap">MI AGENDA</h2>
         </button>
       </div>
       <ContenedorImportantes />
