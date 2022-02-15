@@ -1,4 +1,4 @@
-const FormularioFranja = () => {
+function FormularioFranja() {
   return (
     <div>FormularioFranja</div>
   )

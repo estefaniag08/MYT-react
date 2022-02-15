@@ -1,4 +1,4 @@
-const PanelHorario = () => {
+function PanelHorario(){
   return (
     <div>PanelHorario</div>
   )

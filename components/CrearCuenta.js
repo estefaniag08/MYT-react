@@ -1,5 +1,5 @@
 
-const CrearCuenta = () => {
+function CrearCuenta(){
   return (
     <div>CrearCuenta</div>
   )

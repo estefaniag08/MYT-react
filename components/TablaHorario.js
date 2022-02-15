@@ -1,5 +1,5 @@
 
-const TablaHorario = () => {
+function TablaHorario() {
   return (
     <div>TablaHorario</div>
   )

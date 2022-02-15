@@ -1,5 +1,5 @@
 
-const TablaAgenda = () => {
+function TablaAgenda(){
   return (
     <div>TablaAgenda</div>
   )

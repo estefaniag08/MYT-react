@@ -1,4 +1,4 @@
-const RecuperarCuenta = () => {
+function RecuperarCuenta() {
   return (
     <div>RecuperarCuenta</div>
   )

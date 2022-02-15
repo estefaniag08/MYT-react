@@ -1,12 +1,17 @@
 import Header from "./Header";
 import Footer from "./Footer";
-function FullLayout() {
+
+function FullLayout({children}) {
   return (
-    <div>FullLayout
-      <Header />
+    <div>
+      <Header/>
+      <div>
+        {children}
+
+      </div>
       <Footer/>
     </div>
   )
 }
 
-export default FullLayout
+export default FullLayout;

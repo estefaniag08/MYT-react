@@ -1,4 +1,4 @@
-const PanelTarea = () => {
+function PanelTarea(){
   return (
     <div>PanelTarea</div>
   )
