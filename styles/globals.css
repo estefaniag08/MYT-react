@@ -2,3 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-blue-200: #20557B;
+    --color-blue-100: #A0C9E6;
+    --color-blue-50: #DFEDF7;
+    --color-aqua-200: #49D1CD;
+    --color-aqua-100: #CFEEED;
+    --color-aqua-50: #E9F7F6;
+    --color-purple-200: #9D8CD3;
+    --color-purple-100: #D8D1ED;
+    --color-purple-50: #EBE8F6;
+    --color-gray-200: #4A4A4A;
+    --color-gray-100: #C4C4C4;
+    --color-gray-50: #F8F8F9;
+}
+
+html{
+    font-family: 'Amatic SC', cursive;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: xx-large;
+    font-family: 'Amatic SC', cursive;
+    line-height: 1.5;
+}
