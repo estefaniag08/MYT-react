@@ -1,3 +1,13 @@
 .contenedor{
     background-color: var(--color-gray-50);
+    color: var(--color-gray-200);
+}
+.contenedor:hover{
+    background-color: gainsboro;
+}
+.contenedor:hover button{
+    color: var(--color-blue-200);
+}
+.contenedor:hover h1{
+    color: var(--color-blue-200);
 }
