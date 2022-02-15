@@ -20,7 +20,6 @@ function PanelHorario() {
           <h2 className="text-5xl">MI AGENDA</h2>
         </button>
       </div>
-
       <ContenedorImportantes />
       <ContenedorFranjas />
       <ContenedorTareas />

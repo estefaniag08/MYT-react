@@ -30,5 +30,5 @@
     color: var(--color-gray-200);
 }
 .boton:active{
-    background-color: var(--color-aqua-200);
+    background-color: var(--color-aqua-200) !important;
 }
