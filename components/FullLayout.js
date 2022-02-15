@@ -1,6 +1,11 @@
+import Header from "./Header";
+import Footer from "./Footer";
 function FullLayout() {
   return (
-    <div>FullLayout</div>
+    <div>FullLayout
+      <Header />
+      <Footer/>
+    </div>
   )
 }
 

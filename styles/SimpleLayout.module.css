@@ -1,0 +1,8 @@
+.container{
+    background-image: url('/img/bg.svg');
+    background-size: cover;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
