@@ -1,0 +1,12 @@
+.boton{
+    background-color: var(--color-purple-200);
+    color: white;
+    padding: 0 1rem;
+}
+.boton:hover{
+    background-color: var(--color-aqua-200);
+}
+.boton:active{
+    background-color: var(--color-aqua-100);
+    color: var(--color-gray-200);
+}

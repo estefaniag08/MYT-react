@@ -1,6 +1,13 @@
+import styles from "../styles/PanelHorario.module.css";
+
 function PanelHorario(){
   return (
-    <div>PanelHorario</div>
+    <>
+      <button type="button" className={styles.boton}>MI AGENDA</button>
+      <div>Contenedor importantes</div>
+      <div>Contenedor franjas</div>
+      <div>Contenedor tareas</div>
+    </>
   )
 }
 

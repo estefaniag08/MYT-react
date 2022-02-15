@@ -3,12 +3,9 @@ import Footer from "./Footer";
 
 function FullLayout({children}) {
   return (
-    <div>
+    <div className="flex-colum min-h-screen">
       <Header/>
-      <div>
         {children}
-
-      </div>
       <Footer/>
     </div>
   )

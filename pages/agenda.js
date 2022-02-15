@@ -1,8 +1,10 @@
-
+import FullLayout from "../components/FullLayout";
 import styles from "../styles/Agenda.module.css"
 function Agenda() {
   return (
-    <div className={`mt-10 ${styles.clasesita}`}>Agenda</div>
+    <FullLayout>
+      <h1>Pruebita agenda</h1>
+    </FullLayout>
   )
 }
 

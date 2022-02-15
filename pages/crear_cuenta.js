@@ -1,6 +1,11 @@
+import SimpleLayout from "../components/SimpleLayout";
+import CrearCuentaContenedor from "../components/CrearCuentaContenedor";
+
 function CrearCuenta() {
   return (
-    <div>CrearCuenta</div>
+   <SimpleLayout>
+     <CrearCuentaContenedor />
+   </SimpleLayout>
   )
 }
 
