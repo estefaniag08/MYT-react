@@ -5,16 +5,14 @@ import TablaHorario from "../components/TablaHorario";
 function Horario() {
   return (
     <FullLayout>
-      <main className=" grid md:flex m-auto justify-center items-center">
-        <div className="md:w-9/12 w-full ">
-          <TablaHorario/>
+      <main className=" grid md:flex m-auto  items-center">
+        <div className="md:w-11/12 w-full ">
+          <TablaHorario />
         </div>
-        <div className="md:w-3/12 w-full h-full flex-col ">
-          <PanelHorario/>
-        </div>
+        <PanelHorario />
       </main>
     </FullLayout>
-  )
+  );
 }
 
 export default Horario;
