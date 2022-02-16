@@ -4,7 +4,7 @@ function ContenedorImportantes() {
     <div className={styles.contenedor}>
         <div className="text-5xl flex gap-4 items-center justify-center p-1 font-bold">
             <button type="button" className="font-bold">{"<"}</button>
-            <h1 className="text-5xl">TAREAS ## NOV</h1>
+            <h1 className="lg:text-5xl text-3xl">TAREAS ## NOV</h1>
             <button type="button" className="font-bold">{">"}</button>
         </div>
         <div className="text-2xl md:text-4xl grid items-center justify-center pb-4 whitespace-normal p-2">

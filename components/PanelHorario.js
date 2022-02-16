@@ -6,7 +6,7 @@ import ContenedorTareas from "./ContenedoresPanel/ContenedorTareas";
 
 function PanelHorario() {
   return (
-    <div className="2xl:w-2/12 grid gap-3 md:w-3/12 md:m-3 w-full h-full">
+    <div className="2xl:w-2/12 grid gap-3 md:w-3/12 md:m-3">
       <div>
         <button type="button" className={styles.boton}>
           <div className="md:w-12 md:h-12 w-10 h-10">
