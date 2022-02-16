@@ -6,7 +6,7 @@ import TablaSubtareas from "./Tablas/TablaSubtareas";
 function PanelTarea() {
   return (
     <div className=" lg:w-1/2  grid gap-3 md:m-3">
-      <Link href="/agenda">
+      <Link href="/horario">
         <div className="lg:place-self-end ">
           <button type="button" className={`${styles.boton}`}>
             <div className="md:w-12 md:h-12 w-10 h-10">
@@ -18,7 +18,7 @@ function PanelTarea() {
               />
             </div>
             <h2 className="lg:text-5xl text-4xl whitespace-nowrap">
-              MI AGENDA
+              MI CALENDARIO
             </h2>
           </button>
         </div>
