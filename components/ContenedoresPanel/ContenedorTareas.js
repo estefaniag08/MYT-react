@@ -4,7 +4,7 @@ import styles from "../../styles/ContenedoresPanel/ContenedorTareasFranjas.modul
 
 function ContenedorTareas() {
   return (
-    <div className={`flex gap-3 ${styles.contenedor}`}>
+    <div className={`flex-col gap-3 ${styles.contenedor}`}>
     <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Tareas</h1>
     <div className="gap-3 flex items-center justify-center">
       <button className={`text-4xl p-2 ${styles.boton}`}>
