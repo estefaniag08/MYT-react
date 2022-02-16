@@ -77,7 +77,7 @@ function PanelTarea() {
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
             <Image
-              src="/img/calendar/calendar-blank.png"
+              src="/img/book/book-remove.png"
               width={40}
               height={40}
               layout="responsive"
