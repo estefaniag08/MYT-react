@@ -18,7 +18,7 @@ function Horario() {
         />
       </Head>
       <FullLayout>
-        <main className="md:flex grid items-center gap-3 mx-2 ">
+        <main className="lg:flex grid gap-3 mx-2 ">
           <TablaHorario />
           <PanelHorario />
         </main>

@@ -7,7 +7,7 @@ import ContenedorTareas from "./ContenedoresPanel/ContenedorTareas";
 
 function PanelHorario() {
   return (
-    <div className="2xl:w-2/12 grid gap-3 md:w-3/12 md:m-3">
+    <div className="2xl:w-2/12 lg:self-center grid gap-3  lg:mt-3">
       <div>
         <Link href="/agenda">
           <button type="button" className={styles.boton}>
