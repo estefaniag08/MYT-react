@@ -5,7 +5,7 @@ function TablaHorario() {
     <div className="lg:w-11/12 md:w-8/12 w-full md:h-[90%] my-3 overflow-y-hidden">
       <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold ${styles.texto}`}>
             <button type="button" className="font-bold ">{"<"}</button>
-            <h1 className={`lg:text-5xl text-3xl `}>Semana 1 - 7 ago</h1>
+            <h1 className={`lg:text-5xl text-3xl `}>Semana 1 - 7 Nov</h1>
             <button type="button" className="font-bold">{">"}</button>
         </div>
       <div className=" md:h-[90%] md:overflow-y-scroll overflow-x-auto w-full">
