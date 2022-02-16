@@ -2,13 +2,13 @@ import Columna from "./Tablas/Columna";
 import styles from "../styles/TablaHorario.module.css";
 function TablaHorario() {
   return (
-    <div className="lg:w-11/12  w-full lg:h-[76vh] lg:self-center self-start overflow-y-hidden">
+    <div className="lg:w-11/12  w-full xl:h-[76vh] lg:self-center self-start overflow-y-hidden">
       <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold ${styles.texto}`}>
             <button type="button" className="font-bold ">{"<"}</button>
             <h1 className={`lg:text-5xl text-3xl `}>Semana 1 - 7 Nov</h1>
             <button type="button" className="font-bold">{">"}</button>
-        </div>
-      <div className=" md:h-[90%] md:overflow-y-scroll overflow-x-auto w-full">
+      </div>
+      <div className=" md:h-[90%] xl:overflow-y-scroll overflow-x-auto w-full">
         <table className="">
           <thead>
             <tr

@@ -18,7 +18,7 @@ function Agenda() {
         />
       </Head>
       <FullLayout>
-        <main className="lg:flex grid items-center gap-3 mx-2 2xl:h-[76vh]">
+        <main className="lg:flex grid  gap-3 mx-2">
           <TablaAgenda />
           <PanelTarea />
         </main>
