@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 function CrearCuentaContenedor(){
   return (
@@ -13,7 +14,9 @@ function CrearCuentaContenedor(){
         <h1 className="text-4xl pt-3">repite la contraseña:</h1>
         <input type="password" id="confirmar_password" name="confirmar_password" className="bg-white border-4 border-gray-600 h-8"/>
 
-        <button type="button" className="bg-color-blue-200 border-4 w-40 h-10 ">crear cuenta</button>      
+        <Link href="/">
+          <button type="button" className="bg-color-blue-200 border-4 w-40 h-10 ">crear cuenta</button>      
+        </Link>
       </div>
     </div>
   )
