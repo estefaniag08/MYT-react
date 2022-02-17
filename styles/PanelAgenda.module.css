@@ -49,7 +49,7 @@
     color: var(--color-blue-200)
 }
 
-.contenedor:hover button{
+.contenedor:hover .boton{
     background-color: var(--color-blue-200)
 }
 @media(min-with:1280px){

@@ -4,6 +4,7 @@ body .modal_modificarfranja{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 1000;
 }
 .modal_modificarfranja{
 	position: fixed;

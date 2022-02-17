@@ -13,7 +13,7 @@ function ContenedorFranjas() {
       <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Franjas</h1>
       <div className="flex gap-3 items-center justify-center">        
         
-        <input type="checkbox" id="btn_crearfranja" className={`${styles_franja.btn_crearfranja}`} />
+        <input type="checkbox" id="btn_crearfranja" className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`} />
         <label for="btn_crearfranja" class="lbl_crearfranja" className={`text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}>
         
           <div className="w-8 h-8">
