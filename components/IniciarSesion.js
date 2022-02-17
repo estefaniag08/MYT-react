@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 function IniciarSesion(){
   return (
@@ -7,9 +8,11 @@ function IniciarSesion(){
       <input type="text" id="username" name="username" className="bg-white border-4 border-gray-600"/>
       <h1 className="text-5xl pt-4">contraseña</h1>
       <input type="password" id="password" name="password" className="bg-white border-4 border-gray-600"/>
-      <a href="/" className="text-xl pb-5">¿olvidaste tu contraseña?</a>
-      <button type="button" className="bg-color-blue-200 border-4 ">iniciar sesión</button>
-      <a href="/" className="text-xl">crea tu cuenta</a>
+      <a href="/recuperar_cuenta" className="text-xl pb-5">¿olvidaste tu contraseña?</a>
+      <Link href="/horario">
+        <button type="button" className="bg-color-blue-200 border-4 ">iniciar sesión</button>
+      </Link>
+      <a href="/crear_cuenta" className="text-xl">crea tu cuenta</a>
     </div>
   )
 }
