@@ -2,7 +2,7 @@ import styles from "../styles/FormModFranja.module.css"
 
 function FormularioFranja() {
   return (
-    <div class="modal_modificarfranja" className={`${styles.modal_modificarfranja}`}>
+    <div  className={`${styles.modal_modificarfranja}`}>
 
         <div class="contenedor_modificarfranja" className={`${styles.contenedor_modificarfranja} flex flex-col items-center`}>            
           <header className={`${styles.header}`}>modificar franja</header>
@@ -14,11 +14,11 @@ function FormularioFranja() {
             
             <div className="columns-4 grid grid-cols-4 flex flex-wrap items-center">
               <h3 className={`${styles.p}  text-right`}> nombre:</h3>            
-              <input type="text" className=" bg-white border-4 border-gray-600 h-8 w-32 text-xl h-8 w-24" />          
+              <input type="text" className=" bg-white  h-8 w-32 text-xl h-8 w-24" />          
               <h3 className="">tipo:</h3>
-              <input type="text" className="bg-white border-4 border-gray-600 h-8 w-32 text-xl h-8 w-24" />
+              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
               <h3>descripción:</h3>
-              <input type="text" className="bg-white border-4 border-gray-600 h-8 w-32 text-xl h-8 w-24" />              
+              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />              
             </div>
                           
             <h1 className={`${styles.h1} col-span-4 inset-1/2`}> frecuencia</h1>
@@ -37,12 +37,12 @@ function FormularioFranja() {
 
             <div className="grid grid-cols-4 gap-4  items-center">
               <h3 className="text-right ">hora inicio:</h3>
-              <input type="text" className="bg-white border-4 border-gray-600 h-8 w-32 text-xl h-8 w-24 " />
+              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
               <h3 className="text-right ">hora final:</h3>
-              <input type="text" className="bg-white border-4 border-gray-600 h-8 w-32 text-xl h-8 w-24 " />
+              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
             </div>            
           </div>          
-          <button type="button" className="bg-white border-4 w-26 mt-[470px]">modificar</button>                    
+          <button type="button" className="bg-white p-1 font-bold text-5xl w-26 mt-[470px]">modificar</button>                    
         </div>        
       </div>    
   )
