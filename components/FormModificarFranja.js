@@ -1,14 +1,14 @@
-import styles from "../styles/FormFranja.module.css"
+import styles from "../styles/FormModFranja.module.css"
 
 function FormularioFranja() {
   return (
-    <div class="modal_crearfranja" className={`${styles.modal_crearfranja}`}>
+    <div  className={`${styles.modal_modificarfranja}`}>
 
-        <div class="contenedor_franja" className={`${styles.contenedor_franja} flex flex-col items-center`}>            
-          <header className={`${styles.header}`}>añadir franja</header>
-          <label for="btn_crearfranja" >X</label>
+        <div class="contenedor_modificarfranja" className={`${styles.contenedor_modificarfranja} flex flex-col items-center`}>            
+          <header className={`${styles.header}`}>modificar franja</header>
+          <label for="btn_modificarfranja" >X</label>
             
-          <div class="contenido_franja" className={`${styles.contenido_franja} flex flex-wrap flex-col justify-center items-center`}>
+          <div class="contenido_modificarfranja" className={`${styles.contenido_modificarfranja} flex flex-wrap flex-col justify-center items-center`}>
             
             <h1 className={`${styles.h1} col-span-4 inset-1/2`}> información general</h1>
             
@@ -42,7 +42,7 @@ function FormularioFranja() {
               <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
             </div>            
           </div>          
-          <button type="button" className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]">añadir</button>                    
+          <button type="button" className="bg-white p-1 font-bold text-5xl w-26 mt-[470px]">modificar</button>                    
         </div>        
       </div>    
   )

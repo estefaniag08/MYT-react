@@ -2,6 +2,11 @@ import Link from "next/link";
 import styles from "../styles/PanelAgenda.module.css";
 import TablaSubtareas from "./Tablas/TablaSubtareas";
 
+import styles_tarea from "../styles/FormTarea.module.css"
+import styles_modtarea from "../styles/FormModTarea.module.css"
+import FormularioTarea from "./FormularioTarea";
+import FormModificarTarea from "./FormModificarTarea";
+
 function PanelTarea() {
   return (
     <div className=" lg:w-1/2  grid gap-3 md:m-3">
@@ -51,7 +56,10 @@ function PanelTarea() {
         </section>
       </div>
       <div className={`${styles.contenedor} flex items-center`}>
-        <button type="button" className={styles.botonTareas}>
+
+
+        <input type="checkbox" id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />
+        <label for="btn_creartarea" class="lbl_creartarea" className={`${styles.botonTareas} ${styles.lbl_creartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-plus.png"
@@ -61,8 +69,11 @@ function PanelTarea() {
             />
           </div>
           <h2 className="xl:text-5xl text-[0]  whitespace-nowrap">AÑADIR</h2>
-        </button>
-        <button type="button" className={styles.botonTareas}>
+        </label>
+        <FormularioTarea />
+
+        <input type="checkbox" id="btn_modificartarea" className={`${styles_modtarea.btn_modificartarea}`} />
+        <label for="btn_modificartarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-edit.png"
@@ -72,7 +83,9 @@ function PanelTarea() {
             />
           </div>
           <h2 className="xl:text-5xl text-[0] whitespace-nowrap">MODIFICAR</h2>
-        </button>
+        </label>
+        <FormModificarTarea />
+
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img

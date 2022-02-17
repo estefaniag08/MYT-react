@@ -1,9 +1,9 @@
 import Head from "next/head";
 import SimpleLayout from "../components/SimpleLayout";
-import CrearCuentaContenedor from "../components/CrearCuentaContenedor";
+import PruebaBotonesTareaFranja from "../components/PruebaBotonesTareaFranja";
 
-function CrearCuenta() {
-  return (
+function CrearTarea(){
+  return (  
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,12 +12,12 @@ function CrearCuenta() {
           href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap"
           rel="stylesheet"
         />
-      </Head> 
-      <SimpleLayout>        
-        <CrearCuentaContenedor />          
+      </Head>  
+      <SimpleLayout>
+        <PruebaBotonesTareaFranja />
       </SimpleLayout>
     </>
   )
 }
 
-export default CrearCuenta
+export default CrearTarea

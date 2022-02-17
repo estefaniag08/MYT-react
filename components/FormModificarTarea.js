@@ -1,16 +1,16 @@
-import styles from "../styles/FormTarea.module.css"
+import styles from "../styles/FormModTarea.module.css"
 
-function FormularioTarea(){
+function FormModificarTarea(){
   return (          
-      <div class="modal_creartarea" className={`${styles.modal_creartarea}`}>
+      <div class="modal_modificartarea" className={`${styles.modal_modificartarea}`}>
 
-        <div class="contenedor" className={`${styles.contenedor} flex flex-col items-center`}>            
-          <header className={`${styles.header}`}>añadir tarea</header>
-          <label for="btn_creartarea" >X</label>
+        <div class="contenedor_modificartarea" className={`${styles.contenedor_modificartarea} flex flex-col items-center`}>            
+          <header className={`${styles.header}`}>modificar tarea</header>
+          <label for="btn_modificartarea" >X</label>
             
-          <div class="contenido" className={`${styles.contenido} flex flex-wrap flex-col justify-center items-center`}>
+          <div class="contenido_modificartarea" className={`${styles.contenido_modificartarea} flex flex-wrap flex-col justify-center items-center`}>
             
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> insertar tarea</h1>
+            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> información general</h1>
             
             <div className="columns-4 grid grid-cols-4 flex flex-wrap items-center">
               <h3 className={`${styles.p}  text-right`}> nombre:</h3>            
@@ -39,10 +39,10 @@ function FormularioTarea(){
               <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
             </div>            
           </div>          
-          <button type="button" className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]">añadir</button>                    
+          <button type="button" className="bg-white font-bold text-4xl p-1 w-26 mt-[470px]">modificar</button>                    
         </div>        
       </div>    
   )
 }
 
-export default FormularioTarea
+export default FormModificarTarea
