@@ -1,5 +1,5 @@
 import styles from "../styles/SimpleLayout.module.css";
-import Image from "next/image"
+
 function SimpleLayout({ children }) {
   return (
     <div className={` h-screen  ${styles.container}`}>
