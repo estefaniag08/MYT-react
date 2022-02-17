@@ -12,10 +12,10 @@ function PanelHorario() {
         <Link href="/agenda">
           <button type="button" className={styles.boton}>
             <div className="md:w-12 md:h-12 w-10 h-10">
-              <Image
+              <img
                 src="/img/agenda.svg"
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 layout="responsive"
               />
             </div>

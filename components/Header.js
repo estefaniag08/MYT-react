@@ -7,7 +7,7 @@ function Header() {
     <header className={`${styles.header} `}>
       <div className="flex items-center justify-center h-full">
         <div className="w-1/12 pl-4 hover:cursor-pointer">
-          <Image
+          <img
             layout="fixed"
             src="/img/hamburguer.svg"
             width={40}
@@ -18,7 +18,7 @@ function Header() {
           <div className=" flex items-center justify-center w-11/12 md:text-8xl text-6xl text-center text-white font-black">
             <a className="hover:cursor-pointer flex">
               <div className=" md:w-20 md:h-20 sm:w-14 sm:h-14">
-                <Image
+                <img
                   layout="responsive"
                   src="/img/icon2.svg"
                   width={96}

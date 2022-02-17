@@ -11,7 +11,7 @@ function ContenedorFranjas() {
       <div className="flex gap-3 items-center justify-center">
         <button className={`text-4xl p-2 ${styles.boton}`}>
           <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/calendar/calendar-plus.png"
               width={32}
               height={30}
@@ -21,7 +21,7 @@ function ContenedorFranjas() {
         </button>
         <button className={`text-4xl p-2 ${styles.boton}`}>
           <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/calendar/calendar-edit.png"
               width={32}
               height={30}
@@ -31,7 +31,7 @@ function ContenedorFranjas() {
         </button>
         <button className={`text-4xl p-2 ${styles.boton}`}>
           <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/calendar/calendar-remove.png"
               width={32}
               height={30}

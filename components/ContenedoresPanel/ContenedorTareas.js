@@ -9,7 +9,7 @@ function ContenedorTareas() {
     <div className="gap-3 flex items-center justify-center">
       <button className={`text-4xl p-2 ${styles.boton}`}>
       <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/book/book-plus.png"
               width={32}
               height={30}
@@ -19,7 +19,7 @@ function ContenedorTareas() {
       </button>
       <button className={`text-4xl p-2 ${styles.boton}`}>
       <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/book/book-edit.png"
               width={32}
               height={30}
@@ -29,7 +29,7 @@ function ContenedorTareas() {
       </button>
       <button className={`text-4xl p-2 ${styles.boton}`}>
       <div className="w-8 h-8">
-            <Image
+            <img
               src="/img/book/book-remove.png"
               width={32}
               height={30}

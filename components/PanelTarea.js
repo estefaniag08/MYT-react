@@ -10,10 +10,10 @@ function PanelTarea() {
         <div className="lg:place-self-end ">
           <button type="button" className={`${styles.boton}`}>
             <div className="md:w-12 md:h-12 w-10 h-10">
-              <Image
+              <img
                 src="/img/calendar/calendar-blank.png"
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 layout="responsive"
               />
             </div>
@@ -54,10 +54,10 @@ function PanelTarea() {
       <div className={`${styles.contenedor} flex items-center`}>
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
-            <Image
+            <img
               src="/img/book/book-plus.png"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               layout="responsive"
             />
           </div>
@@ -65,10 +65,10 @@ function PanelTarea() {
         </button>
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
-            <Image
+            <img
               src="/img/book/book-edit.png"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               layout="responsive"
             />
           </div>
@@ -76,10 +76,10 @@ function PanelTarea() {
         </button>
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
-            <Image
+            <img
               src="/img/book/book-remove.png"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               layout="responsive"
             />
           </div>
