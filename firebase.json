@@ -14,6 +14,22 @@
       {
         "source": "**",
         "destination": "/index.html"
+      },
+      {
+        "source": "/agenda",
+        "destination": "/agenda.html"
+      },
+      {
+        "source": "/horario",
+        "destination": "/horario.html"
+      },
+      {
+        "source": "/crear_cuenta",
+        "destination": "/crear_cuenta.html"
+      },
+      {
+        "source": "/recuperar_cuenta",
+        "destination": "/recuperar_cuenta.html"
       }
     ]
   }
