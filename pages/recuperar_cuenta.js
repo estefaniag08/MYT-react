@@ -1,6 +1,10 @@
-const RecuperarCuenta = () => {
+import SimpleLayout from "../components/SimpleLayout";
+import RecuperarCuentaContenedor from "../components/RecuperarCuentaContenedor";
+function RecuperarCuenta(){
   return (
-    <div>RecuperarCuenta</div>
+    <SimpleLayout>
+      <RecuperarCuentaContenedor />
+    </SimpleLayout>
   )
 }
 

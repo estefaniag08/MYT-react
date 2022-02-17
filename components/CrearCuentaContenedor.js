@@ -1,10 +1,10 @@
 
-function IniciarSesion(){
+function CrearCuentaContenedor(){
   return (
     <div className="bg-white shadow-md rounded-md opacity-80 w-full h-full">
-      <h1>Prueba Inicio sesión</h1>
+      <h1>Crear cuenta</h1>
     </div>
   )
 }
 
-export default IniciarSesion
+export default CrearCuentaContenedor

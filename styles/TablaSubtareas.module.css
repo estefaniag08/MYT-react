@@ -1,0 +1,13 @@
+.columna tr:nth-child(even) {
+    background-color: var(--color-blue-100);
+}
+
+.columna tr:nth-child(odd) {
+    background-color: var(--color-blue-50);
+}
+
+.cell{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}

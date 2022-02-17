@@ -1,7 +1,14 @@
-function FullLayout() {
+import Header from "./Header";
+import Footer from "./Footer";
+
+function FullLayout({children}) {
   return (
-    <div>FullLayout</div>
+    <div className="">
+      <Header/>
+        {children}
+      <Footer/>
+    </div>
   )
 }
 
-export default FullLayout
+export default FullLayout;

@@ -1,0 +1,76 @@
+.container{
+    background-color: var(--color-gray-50);
+    padding: 1rem;
+}
+
+.container h3{
+    color: var(--color-blue-200);
+    font-weight: bold;
+    font-size: 2rem;
+}
+@media (min-width: 1024px) { 
+    .container h3{
+        font-size: 2.5rem;
+    }
+}
+
+
+.boton{
+    background-color: var(--color-aqua-200);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) { 
+    .boton{
+        width: fit-content;
+    }
+}
+
+.boton:hover{
+    background-color: var(--color-aqua-100);
+}
+.boton:active{
+    background-color: var(--color-purple-200);
+}
+
+.contenedor{
+    background-color: var(--color-gray-50);
+    padding: 1rem;
+}
+.contenedor:hover{
+    background-color: gainsboro;
+    color: var(--color-blue-200)
+}
+
+.contenedor:hover button{
+    background-color: var(--color-blue-200)
+}
+@media(min-with:1280px){
+    
+}
+.botonTareas{
+    background-color: var(--color-gray-200);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+}
+.botonTareas:hover{
+    background-color: var(--color-blue-100) !important;
+    
+}
+
+.botonTareas:active{
+    background-color: var(--color-aqua-200) !important;
+}
