@@ -1,9 +1,10 @@
 
 import styles from "../../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
-import FormularioFranja from "../../components/FormularioFranja";
 import FormModificarFranja from "../../components/FormModificarFranja";
 import styles_franja from "../../styles/FormFranja.module.css"
 import styles_modfranja from  "../../styles/FormModFranja.module.css"
+
+import FormCrearFranja from "../FormCrearFranja";
 
 function ContenedorFranjas() {
   return (
@@ -25,7 +26,7 @@ function ContenedorFranjas() {
             />
           </div>
         </label>
-        <FormularioFranja />
+        <FormCrearFranja />
 
         <input type="checkbox" id="btn_modificarfranja" className={`${styles_modfranja.btn_modificarfranja}`} />
         <label for="btn_modificarfranja" class="lbl_modificarfranja" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}>
