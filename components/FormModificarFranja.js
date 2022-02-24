@@ -1,16 +1,16 @@
-import Modal from "./Modal";
+import Modal2 from "./Modal2";
 import FormularioFranja from "./FormularioFranja"
-import HeaderModFranja from "./headers_modal/Header_crearfranja";
-import BotonMod from "./headers_modal/BotonCrear"
+import HeaderModFranja from "./headers_modal/Header_modfranja";
+import BotonMod from "./headers_modal/BotonMod"
 
 function FormModificarFranja(){
   return (    
     <> 
-        <Modal>
+        <Modal2>
             <HeaderModFranja/>
             <FormularioFranja/>
             <BotonMod />
-        </Modal>     
+        </Modal2>     
     </>    
   );
 }
