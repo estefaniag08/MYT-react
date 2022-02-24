@@ -14,14 +14,13 @@ function Header() {
           />{" "}
         </div>
         <Link href="/horario">
-          <div className=" flex items-center justify-center w-11/12 md:text-8xl text-6xl text-center text-white font-black">
+          <div className=" flex items-center justify-center w-11/12 md:text-8xl sm:text-6xl text-5xl text-center text-white font-black">
             <a className="hover:cursor-pointer flex">
               <div className=" md:w-20 md:h-20 sm:w-14 sm:h-14">
                 <img
                   layout="responsive"
                   src="/img/icon2.svg"
-                  width={96}
-                  height={96}
+                  className="md:w-[96px] md:h-[96px] w-[50px] h-[50px]"
                 />
               </div>
               Manage your time
