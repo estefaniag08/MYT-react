@@ -1,0 +1,45 @@
+body .modal_sidebar{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	z-index: 1000;
+}
+.modal_sidebar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);	
+	transition: all 500ms ease;
+	opacity: 0;
+	visibility: hidden;
+}
+.btn_sidebar:checked ~ .modal_sidebar{
+	opacity: 1;
+	visibility: visible;
+} 
+.contenedor_sidebar{      
+	width: 350px;
+	height: 100%;
+	margin: auto;	
+	background-image: url('/img/bg.svg');
+  background-size: cover;
+	box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
+	transition: all 500ms ease;
+	position: absolute;
+	transform: translateX(-30%);
+}
+.btn_sidebar:checked ~ .modal_sidebar .contenedor_sidebar{
+	transform: translateY(0%);
+} 
+
+.btn_sidebar{
+	display: none;
+}
+
+@media only screen and (min-width:320px) and (max-width:768px){
+	.contenedor_sidebar{
+		width: 95%;
+	}
+}
