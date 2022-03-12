@@ -1,9 +1,10 @@
 
 import styles from "../../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
-import FormularioTarea from "../FormularioTarea";
+import FormCrearTarea from "../FormCrearTarea";
 import FormModificarTarea from "../FormModificarTarea";
-import styles_tarea from "../../styles/FormTarea.module.css"
-import styles_modtarea from "../../styles/FormModTarea.module.css"
+import styles_tarea from "../../styles/ModalCrearTarea.module.css"
+import styles_modtarea from "../../styles/ModalModTarea.module.css"
+
 
 function ContenedorTareas() {
   return (
@@ -23,10 +24,10 @@ function ContenedorTareas() {
               />
         </div>     
       </label>
-      <FormularioTarea />
+      <FormCrearTarea />
 
-      <input type="checkbox" id="btn_modificartarea" className={`${styles_modtarea.btn_modificartarea}`} />
-      <label for="btn_modificartarea" class="lbl_modificartarea" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificartarea}`}>
+      <input type="checkbox" id="btn_modtarea" className={`${styles_modtarea.btn_modtarea}`} />
+      <label for="btn_modtarea" class="lbl_modtarea" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificartarea}`}>
       
         <div className="w-8 h-8">
               <img

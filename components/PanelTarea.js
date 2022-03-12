@@ -2,9 +2,9 @@ import Link from "next/link";
 import styles from "../styles/PanelAgenda.module.css";
 import TablaSubtareas from "./Tablas/TablaSubtareas";
 
-import styles_tarea from "../styles/FormTarea.module.css"
-import styles_modtarea from "../styles/FormModTarea.module.css"
-import FormularioTarea from "./FormularioTarea";
+import styles_tarea from "../styles/ModalCrearTarea.module.css"
+import styles_modtarea from "../styles/ModalModTarea.module.css"
+import FormCrearTarea from "./FormCrearTarea";
 import FormModificarTarea from "./FormModificarTarea";
 
 function PanelTarea() {
@@ -70,7 +70,7 @@ function PanelTarea() {
           </div>
           <h2 className="xl:text-5xl text-[0]  whitespace-nowrap">AÑADIR</h2>
         </label>
-        <FormularioTarea />
+        <FormCrearTarea />
 
         <input type="checkbox" id="btn_modificartarea" className={`${styles_modtarea.btn_modificartarea}`} />
         <label for="btn_modificartarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        

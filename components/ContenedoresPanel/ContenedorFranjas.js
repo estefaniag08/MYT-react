@@ -1,8 +1,8 @@
 
 import styles from "../../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
-import FormModificarFranja from "../../components/FormModificarFranja";
-import styles_franja from "../../styles/FormFranja.module.css"
-import styles_modfranja from  "../../styles/FormModFranja.module.css"
+import FormModificarFranja from "../FormModificarFranja";
+import styles_franja from "../../styles/ModalCrearFranja.module.css"
+import styles_modfranja from  "../../styles/ModalModFranja.module.css"
 
 import FormCrearFranja from "../FormCrearFranja";
 
@@ -28,8 +28,8 @@ function ContenedorFranjas() {
         </label>
         <FormCrearFranja />
 
-        <input type="checkbox" id="btn_modificarfranja" className={`${styles_modfranja.btn_modificarfranja}`} />
-        <label for="btn_modificarfranja" class="lbl_modificarfranja" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}>
+        <input type="checkbox" id="btn_modfranja" className={`${styles_modfranja.btn_modfranja}`} />
+        <label for="btn_modfranja" class="lbl_modfranja" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}>
         
           <div className="w-8 h-8">
             <img
