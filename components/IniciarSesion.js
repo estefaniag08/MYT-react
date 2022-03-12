@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {userSchema} from "./Validations/LoginValidation"
 import * as yup from "yup";
 import { Formik, Form } from "formik"
 import { TextField } from './TextField';
