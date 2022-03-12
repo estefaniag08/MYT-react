@@ -1,6 +1,37 @@
+//import { doc, setDoc } from "@firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
+
 import styles from "../styles/FormFranja.module.css"
 
 function FormularioFranja() {
+  const pruebaSubmit = () =>{
+    const usuario = "vMCIp2NBOORMJhVcw9HV";
+    const _franja = collection(firestore, `franjas/${usuario}/franja}`)
+    const franja = {
+      activo: true,
+      descipcion: "prueba",
+      fecha_finalizacion: Date.now(),
+      frecuencia: [1,2,4],
+      hora_final: 1000,
+      hora_inicio: 1200,
+      nombre: "franja",
+      tipo: "Clase BD2"
+    }
+    
+    try{
+      console.log("Entraaaaa")
+      addDoc(_franja, franja).then(result => {
+        console.log(result);
+      })
+      getDocs(_franja).then( result => {
+        console.log(result.docs)
+      })
+    }catch(error){
+        console.log(error);
+    }
+  }
+  
   return (                    
     <div class="contenido_franja" className={`${styles.contenido_franja} font-bold grid grid-cols-1 text-center`}>
       
@@ -33,8 +64,9 @@ function FormularioFranja() {
         <h3 className="text-right ">hora inicio:</h3>
         <input type="text" className="bg-white text-xl h-6 w-24 sm:h-8" />
         <h3 className="text-right ">hora final:</h3>
-        <input type="text" className="bg-white text-xl h-6 w-24 sm:h-8" />
-      </div>            
+        <input type="text" className="bg-white text-xl h-6 w-24 sm:h-8"/>
+      </div>
+      <button onClick={() => {pruebaSubmit()}}>Prueba</button>    
     </div>          
                    
   )
