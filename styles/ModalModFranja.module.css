@@ -1,4 +1,4 @@
-body .modal_crearfranja{
+body .modal_modfranja{
 	width: 100%;
 	height: 100vh;
 	display: flex;
@@ -6,7 +6,7 @@ body .modal_crearfranja{
 	align-items: center;
 	z-index: 1000;
 }
-.modal_crearfranja{
+.modal_modfranja{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,11 +15,7 @@ body .modal_crearfranja{
 	opacity: 0;
 	visibility: hidden;
 }
-.btn_crearfranja:checked ~ .modal_crearfranja{
-	opacity: 1;
-	visibility: visible;
-} 
-.contenedor_franja{
+.contenedor_modfranja{
 	width: 505px;
 	height: 606px;
 	margin: auto;	
@@ -29,15 +25,12 @@ body .modal_crearfranja{
 	position: relative;
 	transform: translateY(-30%);
 }
-.btn_crearfranja:checked ~ .modal_crearfranja .contenedor_franja{
-	transform: translateY(0%);
-} 
-.contenedor_franja header{
+.contenedor_modfranja header{
 	padding: 10px;	
 	color: #fff;
 	text-align: center;
 }
-.contenedor_franja label{
+.contenedor_modfranja label{
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -45,7 +38,7 @@ body .modal_crearfranja{
 	font-size: 15px;
 	cursor: pointer;
 }
-.contenido_franja{
+.contenido_modfranja{
 	width: 90%;
 	height: 75%;
 	padding: 10px; 
@@ -54,24 +47,35 @@ body .modal_crearfranja{
 		top : 50%; left : 50%;
 		transform : translate(-50%, -50%);
 }
-.contenido_franja h1{
+.contenido_modfranja h1{
 	margin-bottom: 10px;
 	text-align: center;
 }
-.contenido_franja p{	
+.contenido_modfranja p{	
 	margin-bottom: 7px;
 }
-.btn_crearfranja{
+
+@media only screen and (min-width:320px) and (max-width:768px){
+	.contenedor_modfranja{
+		width: 95%;
+	}
+}
+
+
+.btn_modfranja:checked ~ .modal_modfranja{
+	opacity: 1;
+	visibility: visible;
+} 
+.btn_modfranja:checked ~ .modal_modfranja .contenedor_modfranja{
+	transform: translateY(0%);
+} 
+
+.btn_modfranja{
 	display: none;
 }
-.lbl_crearfranja{
+.lbl_crear{
 	background: #fff;
 	padding: 10px 15px;
 	border-radius: 4px;
 	cursor: pointer;
-}
-@media only screen and (min-width:320px) and (max-width:768px){
-	.contenedor_franja{
-		width: 95%;
-	}
 }

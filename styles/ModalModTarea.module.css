@@ -1,4 +1,4 @@
-body .modal_modificarfranja{
+body .modal_modtarea{
 	width: 100%;
 	height: 100vh;
 	display: flex;
@@ -6,7 +6,7 @@ body .modal_modificarfranja{
 	align-items: center;
 	z-index: 1000;
 }
-.modal_modificarfranja{
+.modal_modtarea{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,11 +15,7 @@ body .modal_modificarfranja{
 	opacity: 0;
 	visibility: hidden;
 }
-.btn_modificarfranja:checked ~ .modal_modificarfranja{
-	opacity: 1;
-	visibility: visible;
-} 
-.contenedor_modificarfranja{
+.contenedor_modtarea{
 	width: 505px;
 	height: 606px;
 	margin: auto;	
@@ -29,15 +25,12 @@ body .modal_modificarfranja{
 	position: relative;
 	transform: translateY(-30%);
 }
-.btn_modificarfranja:checked ~ .modal_modificarfranja .contenedor_modificarfranja{
-	transform: translateY(0%);
-} 
-.contenedor_modificarfranja header{
+.contenedor_modtarea header{
 	padding: 10px;	
 	color: #fff;
 	text-align: center;
 }
-.contenedor_modificarfranja label{
+.contenedor_modtarea label{
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -45,7 +38,7 @@ body .modal_modificarfranja{
 	font-size: 15px;
 	cursor: pointer;
 }
-.contenido_modificarfranja{
+.contenido_modtarea{
 	width: 90%;
 	height: 75%;
 	padding: 10px; 
@@ -54,24 +47,35 @@ body .modal_modificarfranja{
 		top : 50%; left : 50%;
 		transform : translate(-50%, -50%);
 }
-.contenido_modificarfranja h1{
+.contenido_modtarea h1{
 	margin-bottom: 10px;
 	text-align: center;
 }
-.contenido_modificarfranja p{	
+.contenido_modtarea p{	
 	margin-bottom: 7px;
 }
-.btn_modificarfranja{
+
+@media only screen and (min-width:320px) and (max-width:768px){
+	.contenedor_modtarea{
+		width: 95%;
+	}
+}
+
+
+.btn_modtarea:checked ~ .modal_modtarea{
+	opacity: 1;
+	visibility: visible;
+} 
+.btn_modtarea:checked ~ .modal_modtarea .contenedor_modtarea{
+	transform: translateY(0%);
+} 
+
+.btn_modtarea{
 	display: none;
 }
-.lbl_modificarfranja{
+.lbl_modtarea{
 	background: #fff;
 	padding: 10px 15px;
 	border-radius: 4px;
 	cursor: pointer;
-}
-@media only screen and (min-width:320px) and (max-width:768px){
-	.contenedor_modificarfranja{
-		width: 95%;
-	}
 }

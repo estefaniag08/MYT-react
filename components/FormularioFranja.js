@@ -1,4 +1,4 @@
-import styles_modal from "../styles/Modal.module.css"
+import styles_modal from "../styles/ModalCrearFranja.module.css"
 import * as yup from "yup";
 import { Formik, Form } from "formik"
 import { TextField } from './TextField';
@@ -32,7 +32,7 @@ function FormularioFranja() {
       {(formik) => {                    
         return (
           <Form>             
-            <div class="contenido" className={`${styles_modal.contenido} font-bold grid grid-cols-1 text-center`}>
+            <div class="contenido" className={`${styles_modal.contenido_crearfranja} font-bold grid grid-cols-1 text-center`}>
               
               <h1 className={`${styles_modal.h1} text-center text-4xl col-span-4 inset-1/2`}> información general franja</h1>
               
