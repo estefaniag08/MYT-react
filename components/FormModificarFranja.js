@@ -3,13 +3,12 @@ import FormularioFranja from "./FormularioFranja"
 import HeaderModFranja from "./headers_modal/Header_modfranja";
 import BotonMod from "./headers_modal/BotonMod"
 
-function FormModificarFranja(){
+function FormModificarFranja({idFranja}){
   return (    
     <> 
         <ModalModFranja>
             <HeaderModFranja/>
-            <FormularioFranja/>
-            <BotonMod />
+            <FormularioFranja idFranja={"cVUdbaoCFD1v2xutlusL"}/> //SOLO PARA PROBAR
         </ModalModFranja>     
     </>    
   );

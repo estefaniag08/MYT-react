@@ -9,7 +9,6 @@ function FormCrearFranja(){
         <ModalCrearFranja>
             <HeaderCrearFranja/>
             <FormularioFranja/>
-            <BotonCrear />
         </ModalCrearFranja>     
     </>    
   );
