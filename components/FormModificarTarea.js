@@ -8,8 +8,7 @@ function FormModificarTarea(){
     <> 
         <ModalModTarea>
             <HeaderModTarea/>
-            <FormularioTarea/>
-            <BotonMod />
+            <FormularioTarea/>            
         </ModalModTarea>     
     </>    
   );

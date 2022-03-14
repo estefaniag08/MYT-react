@@ -2,12 +2,15 @@
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
+import styles from "../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
+import styles_tarea from "../styles/ModalCrearTarea.module.css"
 import * as yup from "yup";
 import { Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 
 function FormularioFranja({ idFranja }) {
+  
   const [arregloFrecuencias, setArregloFrecuencias] = useState([]);
 
   const initialValues = {
@@ -27,7 +30,8 @@ function FormularioFranja({ idFranja }) {
   });
 
   const crearArregloFrecuencia = (event) => {
-    //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
+    //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras    
+
     const exists = arregloFrecuencias.indexOf(event.target.name);
     const nuevoArreglo = [];
     if (exists === -1) {
@@ -94,7 +98,7 @@ function FormularioFranja({ idFranja }) {
           <Form>
             <div
               class="contenido"
-              className={`${styles_modal.contenido_crearfranja} font-bold grid grid-cols-1 text-center`}
+              className={`${styles_modal.contenido_crearfranja} font-bold flex-col text-center`}
             >
               <h1
                 className={`${styles_modal.h1} text-center text-4xl col-span-4 inset-1/2`}
@@ -103,27 +107,27 @@ function FormularioFranja({ idFranja }) {
                 información general franja
               </h1>
 
-              <div className=" text-black grid grid-cols-2 gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
-                <h3 className={`${styles_modal.p} `}> nombre:</h3>
+              <div className=" text-black grid grid-cols-2 grid-rows-[35px_minmax(20px,_35px)_35px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
+                <h3 className={`${styles_modal.p} top-0`}> nombre:</h3>
                 <TextField
                   type="text"
                   name="nombreFranja"
                   id="nombreFranja"
-                  className=" bg-white  text-xl h-6 w-24 sm:h-8"
+                  className=" bg-white  text-xl h-5 sm:w-24 sm:h-8 "
                 />
-                <h3 className="">tipo:</h3>
+                <h3 className=" ">tipo:</h3>
                 <TextField
                   type="text"
                   name="tipoFranja"
                   id="tipoFranja"
-                  className="bg-white  text-xl h-6 w-24 sm:h-8"
+                  className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
                 />
                 <h3>descripción:</h3>
                 <TextField
                   type="text"
                   name="descripcionFranja"
                   id="descripcionFranja"
-                  className="bg-white  text-xl h-6 w-24 sm:h-8"
+                  className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
                 />
               </div>
 
@@ -133,7 +137,7 @@ function FormularioFranja({ idFranja }) {
                 {" "}
                 frecuencia
               </h1>
-              <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">
+              <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">                
                 <input
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                   type="button"
@@ -185,8 +189,12 @@ function FormularioFranja({ idFranja }) {
                   onClick={crearArregloFrecuencia}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
-              </div>
 
+                
+              </div>
+              <div className="bg-green-400 gap-3 flex items-center justify-center ">
+                
+              </div>
               <h1
                 className={`${styles_modal.h1} pt-5 text-4xl col-span-4 inset-1/2`}
               >
@@ -194,20 +202,20 @@ function FormularioFranja({ idFranja }) {
                 Rango
               </h1>
 
-              <div className="text-black grid grid-cols-2 gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
+              <div className="text-black grid grid-cols-2 grid-rows-[35px_minmax(20px,_35px)_35px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
                 <h3 className="text-right ">hora inicio:</h3>
                 <TextField
-                  type="text"
+                  type="time"
                   name="horaInicio"
                   id="horaInicio"
-                  className="bg-white text-xl h-6 w-24 sm:h-8"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />
                 <h3 className="text-right ">hora final:</h3>
                 <TextField
-                  type="text"
+                  type="time"
                   name="horaFinal"
                   id="horaFinal"
-                  className="bg-white text-xl h-6 w-24 sm:h-8"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />
               </div>
             </div>
@@ -215,6 +223,11 @@ function FormularioFranja({ idFranja }) {
               type="submit"
               value={"AÑADIR"}
               className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"
+            />
+            <input
+              type="reset"
+              value={"reset"}
+              className="bg-white font-bold text-4xl ml-5 p-1 w-24 mt-[470px]"
             />
           </Form>
         );

@@ -8,8 +8,7 @@ function FormCrearTarea(){
     <> 
         <ModalCrearTarea>
             <HeaderCrearTarea/>
-            <FormularioTarea/>
-            <BotonCrear />
+            <FormularioTarea/>            
         </ModalCrearTarea>     
     </>    
   );
