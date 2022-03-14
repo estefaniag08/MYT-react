@@ -7,7 +7,7 @@ import styles_modtarea from "../styles/ModalModTarea.module.css"
 import FormCrearTarea from "./FormCrearTarea";
 import FormModificarTarea from "./FormModificarTarea";
 
-function PanelTarea() {
+function PanelTarea({setTarea, idTarea, datosTarea}) {
   return (
     <div className=" lg:w-1/2  grid gap-3 md:m-3">
       <Link href="/horario">
@@ -59,7 +59,7 @@ function PanelTarea() {
 
 
         <input type="checkbox" id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />
-        <label for="btn_creartarea" class="lbl_creartarea" className={`${styles.botonTareas} ${styles.lbl_creartarea}`}>        
+        <label for="btn_creartarea" class="lbl_creartarea" onClick={()=>{ setTarea(null) }} className={`${styles.botonTareas} ${styles.lbl_creartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-plus.png"

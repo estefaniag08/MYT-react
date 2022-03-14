@@ -2,7 +2,6 @@
 function BotonCrear(){
   return (  
     <>        
-       
     </>              
   )
 }

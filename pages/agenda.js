@@ -1,8 +1,21 @@
+import { collection, getDocs, doc } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import FullLayout from "../components/FullLayout";
 import PanelTarea from "../components/PanelTarea";
 import TablaAgenda from "../components/TablaAgenda";
 function Agenda() {
+  const [listaTareas, setListaTareas] = useState([]);
+  const [listaFranjas, setListaFranjas] = useState([]);
+  useEffect(() => {
+    const coleccionTareas = collection(firestore, `tareas/${usuario}/tarea`)
+    try {
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   return (
     <>
       <Head>

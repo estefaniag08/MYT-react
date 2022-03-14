@@ -1,5 +1,5 @@
 //import { doc, setDoc } from "@firebase/firestore";
-import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
 import * as yup from "yup";
