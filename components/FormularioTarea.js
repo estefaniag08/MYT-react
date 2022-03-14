@@ -89,7 +89,8 @@ function FormularioTarea(){
                 <h3 className=" text-black text-right ">Seleccionar tarea general:</h3>
                 <input type="text" className="bg-white text-xl h-6 w-24 sm:h-8" />
               </div>            
-            </div>          
+            </div>        
+            <input type="submit" value={"AÑADIR"}className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"/>
           </Form>
               
         );

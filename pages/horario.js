@@ -2,7 +2,9 @@ import FullLayout from "../components/FullLayout";
 import PanelHorario from "../components/PanelHorario";
 import TablaHorario from "../components/TablaHorario";
 import Head from "next/head";
+import { useState } from "react";
 function Horario() {
+  const [idFranja, setFranja] = useState("");
   return (
     <>
       <Head>
@@ -19,8 +21,8 @@ function Horario() {
       </Head>
       <FullLayout>
         <main className="lg:flex grid gap-3 mx-2 ">
-          <TablaHorario />
-          <PanelHorario />
+          <TablaHorario setFranja={setFranja} />
+          <PanelHorario setFranja={setFranja} idFranja={idFranja}/>
         </main>
       </FullLayout>
     </>

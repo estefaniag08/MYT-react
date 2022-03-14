@@ -4,7 +4,7 @@ import ContenedorFranjas from "./ContenedoresPanel/ContenedorFranjas";
 import ContenedorImportantes from "./ContenedoresPanel/ContenedorImportantes";
 import ContenedorTareas from "./ContenedoresPanel/ContenedorTareas";
 
-function PanelHorario() {
+function PanelHorario({setFranja, idFranja}) {
   return (
     <div className="2xl:w-2/12 lg:self-center grid gap-3  lg:mt-3">
       <div>
@@ -23,7 +23,7 @@ function PanelHorario() {
         </Link>
       </div>
       <ContenedorImportantes />
-      <ContenedorFranjas />
+      <ContenedorFranjas setFranja={setFranja} idFranja={idFranja}/>
       <ContenedorTareas />
     </div>
   );

@@ -5,8 +5,16 @@ import styles_franja from "../../styles/ModalCrearFranja.module.css"
 import styles_modfranja from  "../../styles/ModalModFranja.module.css"
 
 import FormCrearFranja from "../FormCrearFranja";
+import { useEffect, useState } from "react";
 
-function ContenedorFranjas() {
+function ContenedorFranjas({setFranja, idFranja}) {
+  const handleModificarFranja = ()=>{
+    console.log("Entra handle")
+    //setFranja("cVUdbaoCFD1v2xutlusL");
+  }
+  const handleAnadirFranja = ()=>{
+    setFranja(null);
+  }
   return (
     <div
       className={`flex-col gap-3 justify-center items-center ${styles.contenedor}`}
@@ -14,7 +22,7 @@ function ContenedorFranjas() {
       <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Franjas</h1>
       <div className="flex gap-3 items-center justify-center">        
         
-        <input type="checkbox" id="btn_crearfranja" className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`} />
+        <input type="checkbox" id="btn_crearfranja" onClick={()=> {handleAnadirFranja()}}className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`} />
         <label for="btn_crearfranja" class="lbl_crearfranja" className={`text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}>
         
           <div className="w-8 h-8">
@@ -28,7 +36,7 @@ function ContenedorFranjas() {
         </label>
         <FormCrearFranja />
 
-        <input type="checkbox" id="btn_modfranja" className={`${styles_modfranja.btn_modfranja}`} />
+        <input type="checkbox" id="btn_modfranja" onClick={() => handleModificarFranja()} className={`${styles_modfranja.btn_modfranja}`} />
         <label for="btn_modfranja" class="lbl_modfranja" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}>
         
           <div className="w-8 h-8">
@@ -40,7 +48,7 @@ function ContenedorFranjas() {
             />
           </div>
         </label>
-        <FormModificarFranja />
+        <FormModificarFranja idFranja={idFranja} /> 
 
         <button className={`text-4xl p-2 ${styles.boton}`}>
           <div className="w-8 h-8">

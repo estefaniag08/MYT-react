@@ -1,5 +1,5 @@
 //import { doc, setDoc } from "@firebase/firestore";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
 import * as yup from "yup";
@@ -7,17 +7,29 @@ import { Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 
-function FormularioFranja({ idFranja }) {
-  const [arregloFrecuencias, setArregloFrecuencias] = useState([]);
-
-  const initialValues = {
+function FormularioFranja({ idFranja, datosFranja }) {
+  const [initialValues, setInitialValues] = useState({
     nombreFranja: "",
     tipoFranja: "",
     descripcionFranja: "",
     horaInicio: "",
     horaFinal: "",
-  };
-
+  });
+  const [arregloFrecuencias, setArregloFrecuencias] = useState([]);
+  useEffect(()=>{
+      if(idFranja){ //ESto no sirve aún
+        setInitialValues({
+          nombreFranja: datosFranja.nombreFranja,
+          tipoFranja: datosFranja.tipoFranja,
+          descripcionFranja: datosFranja.descripcionFranja,
+          horaInicio: datosFranja.horaInicio,
+          horaFinal: datosFranja.horaFinal,
+        });
+      } 
+  },[idFranja])
+  
+  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  
   const userSchema = yup.object().shape({
     nombreFranja: yup.string().required("Nombre de franja requerido"),
     tipoFranja: yup.string().required("Tipo de franja requerido"),
@@ -28,14 +40,14 @@ function FormularioFranja({ idFranja }) {
 
   const crearArregloFrecuencia = (event) => {
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
-    const exists = arregloFrecuencias.indexOf(event.target.name);
+    const exists = arregloFrecuencias.indexOf(Number(event.target.name));
     const nuevoArreglo = [];
     if (exists === -1) {
-      nuevoArreglo = arregloFrecuencias.map((value) => value);
-      nuevoArreglo.push(event.target.name);
+      nuevoArreglo = arregloFrecuencias.map((value) => Number(value));
+      nuevoArreglo.push(Number(event.target.name));
     } else {
       nuevoArreglo = arregloFrecuencias.filter(
-        (value) => value !== event.target.name
+        (value) => Number(value) !== Number(event.target.name)
       );
     }
     nuevoArreglo.sort();
@@ -44,50 +56,49 @@ function FormularioFranja({ idFranja }) {
   };
 
   const handleSubmit = async (values) => {
-    const usuario = "vMCIp2NBOORMJhVcw9HV";
-
     const franja = {
       activo: true,
       descripcion: values.descripcionFranja,
       frecuencia: [...arregloFrecuencias],
-      hora_final: values.horaInicio,
-      hora_inicio: values.horaFinal,
+      hora_final: Number(values.horaInicio),
+      hora_inicio: Number(values.horaFinal),
       nombre: values.nombreFranja,
       tipo: values.tipoFranja,
     };
-    if (idFranja) { //Modifica la franja
-      try{
+    if (idFranja) {
+      //Modifica la franja
+      try {
         const franjaUsuarioId = doc(
           firestore,
           `franjas/${usuario}/franja`,
           idFranja
         );
         await updateDoc(franjaUsuarioId, franja);
-      } catch(error){
+      } catch (error) {
         console.error(error);
       }
-     
-    } else { //Crea la franja
+    } else {
+      //Crea la franja
       const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
       try {
         const result = await addDoc(franjasUsuario, franja);
         console.log(result);
       } catch (error) {
         console.error(error);
-      } 
+      }
     }
     //ACÁ SE DEBE DE CERRAR EL MODAL
   };
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={userSchema}
+      initialValues={ initialValues }
       enableReinitialize={true}
       onSubmit={async (values, { resetForm }) => {
         await handleSubmit(values);
         resetForm();
       }}
+      validationSchema={userSchema}
     >
       {(formik) => {
         return (
@@ -213,7 +224,7 @@ function FormularioFranja({ idFranja }) {
             </div>
             <input
               type="submit"
-              value={"AÑADIR"}
+              value={idFranja ? "MODIFICAR": "AÑADIR"}
               className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"
             />
           </Form>
