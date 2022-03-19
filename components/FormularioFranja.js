@@ -2,10 +2,8 @@
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
-import styles from "../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
-import styles_tarea from "../styles/ModalCrearTarea.module.css"
 import * as yup from "yup";
-import { Formik, Form } from "formik";
+import { ErrorMessage, Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 
@@ -28,7 +26,19 @@ function FormularioFranja({ idFranja }) {
     horaInicio: yup.string().required("Hora de inicio de franja requerido"),
     horaFinal: yup.string().required("Hora final de franja requerido"),
   });
-
+  
+  const cambiarEstilo = (event) => {  
+    let color = event.target.style.backgroundColor     
+    if (color == "white"){
+      event.target.style.backgroundColor = "#49D1CD";
+      event.target.style.color= "white";      
+    }
+    else {
+      event.target.style.backgroundColor= "white";      
+      event.target.style.color= "black";
+    }    
+  }
+  
   const crearArregloFrecuencia = (event) => {
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras    
 
@@ -47,7 +57,7 @@ function FormularioFranja({ idFranja }) {
     console.log(arregloFrecuencias);
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values) => {        
     const usuario = "vMCIp2NBOORMJhVcw9HV";
 
     const franja = {
@@ -79,10 +89,26 @@ function FormularioFranja({ idFranja }) {
       } catch (error) {
         console.error(error);
       } 
-    }
+    }    
     //ACÁ SE DEBE DE CERRAR EL MODAL
+    
+    // CERRANDO MODAL DE CREAR FRANJA
+    if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
+      alert("cerrando modal de crear franja")
+      document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
+      document.getElementById("modal_crearfranja").style.visibility = "hidden"
+      document.getElementById("modal_crearfranja").style.opacity = "0"
+      document.getElementById("btn_crearfranja").checked = false
+    }
+    // CERRANDO MODAL DE MODIFICAR FRANJA
+    if (document.getElementById("modal_modfranja").style.visibility == "visible"){
+      document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
+      document.getElementById("modal_modfranja").style.visibility = "hidden"
+      document.getElementById("modal_modfranja").style.opacity = "0"
+      document.getElementById("btn_modfranja").checked = false
+    }
   };
-
+  
   return (
     <Formik
       initialValues={initialValues}
@@ -107,28 +133,28 @@ function FormularioFranja({ idFranja }) {
                 información general franja
               </h1>
 
-              <div className=" text-black grid grid-cols-2 grid-rows-[35px_minmax(20px,_35px)_35px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
-                <h3 className={`${styles_modal.p} top-0`}> nombre:</h3>
+              <div className=" text-black grid grid-cols-2 gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-1 sm:text-3xl">
+                <h3 className={`${styles_modal.p} top-0 mb-2 sm:mb-5`}> nombre:</h3>
                 <TextField
                   type="text"
                   name="nombreFranja"
                   id="nombreFranja"
                   className=" bg-white  text-xl h-5 sm:w-24 sm:h-8 "
-                />
-                <h3 className=" ">tipo:</h3>
+                />                
+                <h3 className="mb-2 sm:mb-5">tipo:</h3>
                 <TextField
                   type="text"
                   name="tipoFranja"
                   id="tipoFranja"
                   className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
-                />
-                <h3>descripción:</h3>
+                />                                
+                <h3 className="sm:col-span-2 mb-2 sm:mb-5">descripción:</h3>
                 <TextField
                   type="text"
                   name="descripcionFranja"
                   id="descripcionFranja"
-                  className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
-                />
+                  className="col-span-2 bg-white text-xl h-5 sm:w-36 sm:h-8 "
+                />                
               </div>
 
               <h1
@@ -139,17 +165,18 @@ function FormularioFranja({ idFranja }) {
               </h1>
               <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">                
                 <input
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white`}
                   type="button"
                   value={" D "}
                   name={7}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  id="boton"
                 />
                 <input
                   type="button"
                   value={" L "}
                   name={1}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
 
@@ -157,14 +184,14 @@ function FormularioFranja({ idFranja }) {
                   type="button"
                   value={" M "}
                   name={2}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
                 <input
                   type="button"
                   value={" M "}
                   name={3}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
 
@@ -172,21 +199,21 @@ function FormularioFranja({ idFranja }) {
                   type="button"
                   value={" J "}
                   name={4}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
                 <input
                   type="button"
                   value={" V "}
                   name={5}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
                 <input
                   type="button"
                   value={" S "}
                   name={6}
-                  onClick={crearArregloFrecuencia}
+                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
                 />
 
@@ -209,30 +236,25 @@ function FormularioFranja({ idFranja }) {
                   name="horaInicio"
                   id="horaInicio"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
-                />
+                />                
                 <h3 className="text-right ">hora final:</h3>
                 <TextField
                   type="time"
                   name="horaFinal"
                   id="horaFinal"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
-                />
+                />                
               </div>
-            </div>
+            </div>            
             <input
               type="submit"
               value={"AÑADIR"}
-              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"
-            />
-            <input
-              type="reset"
-              value={"reset"}
-              className="bg-white font-bold text-4xl ml-5 p-1 w-24 mt-[470px]"
-            />
+              className={` bg-white font-bold text-4xl p-1 w-24 mt-[470px] hover:cursor-pointer`}
+            />                                                        
           </Form>
         );
       }}
     </Formik>
-  );
+  );  
 }
 export default FormularioFranja;

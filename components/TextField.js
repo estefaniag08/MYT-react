@@ -10,7 +10,9 @@ export const TextField = ({ label, ...props }) => {
         {...field} {...props}
         autoComplete="off"
       />
-      <ErrorMessage component="div" name={field.name} className="error text-red-500 leading-3 text-xs sm:text-lg font-bold  truncate hover:overflow-visible hover:whitespace-normal " />
+      <div className="col-span-2 h-3 sm:h-6 -mt-1 ">
+        <ErrorMessage component="div" name={field.name} className="error text-red-500 leading-3 text-xs sm:text-lg font-bold  truncate hover:overflow-visible hover:whitespace-normal " />
+      </div>
     </div>
   )
 }

@@ -18,17 +18,25 @@ body .modal_sidebar{
 .btn_sidebar:checked ~ .modal_sidebar{
 	opacity: 1;
 	visibility: visible;
+}
+.elem{
+	opacity: 0;
+	visibility: hidden;
+}
+.btn_sidebar:checked ~ .elem{	
+	opacity: 1;
+	visibility: visible;
 } 
 .contenedor_sidebar{      
 	width: 350px;
 	height: 100%;
 	margin: auto;	
 	background-image: url('/img/bg.svg');
-  background-size: cover;
+  	background-size: cover;
 	box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
 	transition: all 500ms ease;
 	position: absolute;
-	transform: translateX(-30%);
+	transform: translateX(-30%);	
 }
 .btn_sidebar:checked ~ .modal_sidebar .contenedor_sidebar{
 	transform: translateY(0%);
