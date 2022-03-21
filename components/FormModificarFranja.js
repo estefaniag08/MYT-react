@@ -24,6 +24,7 @@ function FormModificarFranja({ idFranja }) {
           descripcionFranja: franjaEditarDatos.data().descripcion,
           horaInicio: franjaEditarDatos.data().hora_inicio,
           horaFinal: franjaEditarDatos.data().hora_final,
+          frecuencia:franjaEditarDatos.data().frecuencia
         });
         console.log("formModificarFranja", datosFranja);
       };
