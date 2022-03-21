@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { useState } from "react";
 import styles from "../styles/PanelHorario.module.css";
 import ContenedorFranjas from "./ContenedoresPanel/ContenedorFranjas";
 import ContenedorImportantes from "./ContenedoresPanel/ContenedorImportantes";
 import ContenedorTareas from "./ContenedoresPanel/ContenedorTareas";
 
 function PanelHorario({setFranja, idFranja}) {
+  const [prueba, setPrueba] = useState("");
   return (
     <div className="2xl:w-2/12 lg:self-center grid gap-3  lg:mt-3">
       <div>
@@ -23,8 +25,10 @@ function PanelHorario({setFranja, idFranja}) {
         </Link>
       </div>
       <ContenedorImportantes />
-      <ContenedorFranjas setFranja={setFranja} idFranja={"csuwPQ3DI9iLjKs8Y64X"}/>
+      <ContenedorFranjas setFranja={setFranja} idFranja={idFranja}/>
       <ContenedorTareas />
+      <input type="text" id="pruebatxt" onChange={(e) => {setPrueba(e.target.value)}}/>
+      <input type="button" value="prueba" onClick={()=> { console.log("selecciona franja"); setFranja(prueba)}}/>
     </div>
   );
 }
