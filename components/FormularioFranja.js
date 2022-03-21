@@ -72,13 +72,16 @@ function FormularioFranja({ idFranja, datosFranja }) {
 
   const handleSubmit = async (values) => {
     const usuario = "vMCIp2NBOORMJhVcw9HV";
-    console.log("entra?")
+    const arregloHoraFinal = values.hora_final.split(":");
+    const arregloHoraInicio = values.hora_inicio.split(":");
+    const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
+    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`
     const franja = {
       activo: true,
       descripcion: values.descripcionFranja,
       frecuencia: [...arregloFrecuencias],
-      hora_final: Number(values.horaInicio),
-      hora_inicio: Number(values.horaFinal),
+      hora_final: Number(stringHoraInicio),
+      hora_inicio: Number(stringHoraFinal),
       nombre: values.nombreFranja,
       tipo: values.tipoFranja,
     };
