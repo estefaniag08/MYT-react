@@ -19,13 +19,13 @@ function FormModificarFranja({ idFranja }) {
       const obtenerDocumento = async () => {
         const franjaEditarDatos = await getDoc(franjaEditar);
         setDatosFranja({
-          nombreFranja: franjaEditarDatos.nombre,
-          tipoFranja: franjaEditarDatos.tipo,
-          descripcionFranja: franjaEditarDatos.descripcion,
-          horaInicio: franjaEditarDatos.hora_inicio,
-          horaFinal: franjaEditarDatos.hora_final,
+          nombreFranja: franjaEditarDatos.data().nombre,
+          tipoFranja: franjaEditarDatos.data().tipo,
+          descripcionFranja: franjaEditarDatos.data().descripcion,
+          horaInicio: franjaEditarDatos.data().hora_inicio,
+          horaFinal: franjaEditarDatos.data().hora_final,
         });
-        console.log(franjaEditarDatos);
+        console.log("formModificarFranja", datosFranja);
       };
       obtenerDocumento();
     }
