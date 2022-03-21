@@ -243,7 +243,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                 Rango
               </h1>
 
-              <div className="text-black grid grid-cols-2 grid-rows-[35px_minmax(20px,_35px)_35px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
+              <div className="text-black grid grid-cols-2 gap-0 items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
                 <h3 className="text-right ">hora inicio:</h3>
                 <TextField
                   type="time"
@@ -263,7 +263,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
             <input
               type="submit"
               value={idFranja ? "MODIFICAR": "AÑADIR"}
-              className={` bg-white font-bold text-4xl p-1 w-24 mt-[470px]`}
+              className={` bg-white font-bold text-4xl p-1 w-24 mt-[470px] hover:cursor-pointer`}
             />
           </Form>
         );
