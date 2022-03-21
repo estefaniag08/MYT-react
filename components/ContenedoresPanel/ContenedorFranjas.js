@@ -8,6 +8,19 @@ import FormCrearFranja from "../FormCrearFranja";
 
 
 function ContenedorFranjas({setFranja, idFranja}) {
+ const abrirCerrarCrearFranja = () =>{
+    if (document.getElementById("modal_crearfranja").style.visibility == "hidden"){
+      document.getElementById("contenedor_crearfranja").style.transform = "translateY(0%)"
+      document.getElementById("modal_crearfranja").style.visibility = "visible"
+      document.getElementById("modal_crearfranja").style.opacity = "1"
+      document.getElementById("btn_crearfranja").checked = true      
+    }else {
+      document.getElementById("contenedor_crearfranja").style.transform = "translateY(-30%)"
+      document.getElementById("modal_crearfranja").style.visibility = "hidden"
+      document.getElementById("modal_crearfranja").style.opacity = "0"
+      document.getElementById("btn_crearfranja").checked = false      
+    }
+  }
 
   return (
     <div
@@ -16,7 +29,7 @@ function ContenedorFranjas({setFranja, idFranja}) {
       <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Franjas</h1>
       <div className="flex gap-3 items-center justify-center">        
         
-        <input type="checkbox" id="btn_crearfranja" onClick={()=> {setFranja(null);}}className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`} />
+        <input type="checkbox" id="btn_crearfranja" onClick={()=> {setFranja(null);abrirCerrarCrearFranja();}} id="btn_crearfranja"  className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`} />
         <label for="btn_crearfranja" class="lbl_crearfranja" className={`text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}>
         
           <div className="w-8 h-8">

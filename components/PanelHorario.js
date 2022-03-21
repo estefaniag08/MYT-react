@@ -23,7 +23,7 @@ function PanelHorario({setFranja, idFranja}) {
         </Link>
       </div>
       <ContenedorImportantes />
-      <ContenedorFranjas setFranja={setFranja} idFranja={idFranja}/>
+      <ContenedorFranjas setFranja={setFranja} idFranja={"csuwPQ3DI9iLjKs8Y64X"}/>
       <ContenedorTareas />
     </div>
   );

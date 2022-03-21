@@ -8,6 +8,7 @@ import TablaAgenda from "../components/TablaAgenda";
 function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
+  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
   useEffect(() => {
     const coleccionTareas = collection(firestore, `tareas/${usuario}/tarea`)
     try {
