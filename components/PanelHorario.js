@@ -28,7 +28,7 @@ function PanelHorario({setFranja, idFranja}) {
       <ContenedorFranjas setFranja={setFranja} idFranja={idFranja}/>
       <ContenedorTareas />
       <input type="text" id="pruebatxt" onChange={(e) => {setPrueba(e.target.value)}}/>
-      <input type="button" value="prueba" onClick={()=> { console.log("selecciona franja"); setFranja(prueba)}}/>
+      <input type="button" value="prueba" className="bg-blue-500 hover:cursor-pointer" onClick={()=> { console.log("selecciona franja"); setFranja(prueba)}}/>
     </div>
   );
 }

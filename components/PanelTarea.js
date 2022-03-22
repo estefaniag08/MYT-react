@@ -72,8 +72,8 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
         </label>
         <FormCrearTarea />
 
-        <input type="checkbox" id="btn_modificartarea" className={`${styles_modtarea.btn_modificartarea}`} />
-        <label for="btn_modificartarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
+        <input type="checkbox" id="btn_modtarea" className={`${styles_modtarea.btn_modtarea}`} />
+        <label for="btn_modtarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-edit.png"

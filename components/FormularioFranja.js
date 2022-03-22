@@ -9,6 +9,15 @@ import { ErrorMessage, Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 
+function getTime(time){
+  let timeString = time.toString()
+  if (timeString.length == 3){
+    timeString = "0".concat(timeString)
+  }
+  timeString = timeString.substring(0,2).concat(":").concat(timeString.substring(2))
+  return timeString
+}
+
 function FormularioFranja({ idFranja, datosFranja }) {
   const [initialValues, setInitialValues] = useState({
     nombreFranja: "",
@@ -17,16 +26,25 @@ function FormularioFranja({ idFranja, datosFranja }) {
     horaInicio: "",
     horaFinal: "",
   });
-  const [arregloFrecuencias, setArregloFrecuencias] = useState([]);
+  const [arregloFrecuencias, setArregloFrecuencias] = useState([]);        
+  //
+  /*
+  */
   useEffect(()=>{
-      if(idFranja){ //ESto no sirve aún
+      if(idFranja){ //ESto no sirve aún                        
         setInitialValues({
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: datosFranja.horaInicio,
-          horaFinal: datosFranja.horaFinal,
+          horaInicio: getTime(datosFranja.horaInicio),
+          horaFinal: getTime(datosFranja.horaFinal),
         });
+        
+        for (let i = 0; i < datosFranja.frecuencia.length; i++){
+          alert(datosFranja.frecuencia[i])
+          document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
+          document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
+        }        
       } 
   },[idFranja])
   
@@ -50,12 +68,12 @@ function FormularioFranja({ idFranja, datosFranja }) {
       event.target.style.backgroundColor= "white";      
       event.target.style.color= "black";
     }    
-  }
-  
+  }  
   const crearArregloFrecuencia = (event) => {
-    console.log("Probando")
+    console.log("Probando")    
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
     const exists = arregloFrecuencias.indexOf(Number(event.target.name));
+    alert("nuevo arreglo: " + arregloFrecuencias)
     const nuevoArreglo = [];
     if (exists === -1) {
       nuevoArreglo = arregloFrecuencias.map((value) => Number(value));
@@ -65,7 +83,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         (value) => Number(value) !== Number(event.target.name)
       );
     }
-    nuevoArreglo.sort();
+    nuevoArreglo.sort();    
     setArregloFrecuencias(nuevoArreglo);
     console.log(arregloFrecuencias);
   };
@@ -182,7 +200,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
               </h1>
               <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">                
                 <input
-                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white`}
+                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                   type="button"
                   value={" D "}
                   name={7}
@@ -194,7 +212,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" L "}
                   name={1}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
 
                 <input
@@ -202,14 +220,14 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" M "}
                   name={2}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
                 <input
                   type="button"
                   value={" M "}
                   name={3}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
 
                 <input
@@ -217,21 +235,21 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" J "}
                   name={4}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
                 <input
                   type="button"
                   value={" V "}
                   name={5}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
                 <input
                   type="button"
                   value={" S "}
                   name={6}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white"
+                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
                 />
 
                 
