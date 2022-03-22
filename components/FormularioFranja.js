@@ -31,7 +31,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
   /*
   */
   useEffect(()=>{
-      if(idFranja){ //ESto no sirve aún                        
+      if(idFranja){                       
         setInitialValues({
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
@@ -41,7 +41,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         });
         
         for (let i = 0; i < datosFranja.frecuencia.length; i++){
-          alert(datosFranja.frecuencia[i])
+          //alert(datosFranja.frecuencia[i])
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
         }        
@@ -90,8 +90,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
 
   const handleSubmit = async (values) => {
     const usuario = "vMCIp2NBOORMJhVcw9HV";
-    const arregloHoraFinal = values.hora_final.split(":");
-    const arregloHoraInicio = values.hora_inicio.split(":");
+    const arregloHoraFinal = values.horaFinal.split(":");
+    const arregloHoraInicio = values.horaInicio.split(":");
     const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
     const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`
     const franja = {
@@ -129,7 +129,6 @@ function FormularioFranja({ idFranja, datosFranja }) {
     
     // CERRANDO MODAL DE CREAR FRANJA
     if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
-      alert("cerrando modal de crear franja")
       document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
       document.getElementById("modal_crearfranja").style.visibility = "hidden"
       document.getElementById("modal_crearfranja").style.opacity = "0"
