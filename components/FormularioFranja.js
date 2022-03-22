@@ -2,7 +2,6 @@
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
-import styles from "../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
 import styles_tarea from "../styles/ModalCrearTarea.module.css"
 import * as yup from "yup";
 import { ErrorMessage, Formik, Form } from "formik";
@@ -58,16 +57,22 @@ function FormularioFranja({ idFranja, datosFranja }) {
     horaFinal: yup.string().required("Hora final de franja requerido"),
   });
   
-  const cambiarEstilo = (event) => {  
+  const cambiarEstilo = (event) => {      
     let color = event.target.style.backgroundColor     
-    if (color == "white"){
+    
+    if (color !== "white" && color !== "rgb(73, 209, 205)"){                 
       event.target.style.backgroundColor = "#49D1CD";
       event.target.style.color= "white";      
+    }else {
+      if (color != "white") {              
+        event.target.style.backgroundColor = "white";
+        event.target.style.color= "black";
+      } else {                    
+        event.target.style.backgroundColor= "#49D1CD";      
+        event.target.style.color= "white";
+      }
     }
-    else {
-      event.target.style.backgroundColor= "white";      
-      event.target.style.color= "black";
-    }    
+    
   }  
   const crearArregloFrecuencia = (event) => {
     console.log("Probando")    
@@ -200,7 +205,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
               </h1>
               <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">                
                 <input
-                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300  hover:cursor-pointer`}
                   type="button"
                   value={" D "}
                   name={7}
@@ -212,7 +217,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" L "}
                   name={1}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
                 />
 
                 <input
@@ -220,14 +225,14 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" M "}
                   name={2}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" M "}
                   name={3}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
                 <input
@@ -235,21 +240,21 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" J "}
                   name={4}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" V "}
                   name={5}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" S "}
                   name={6}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
                 
