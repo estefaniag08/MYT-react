@@ -10,7 +10,7 @@ function ContenedorTareas() {
   return (
     <div className={`flex-col gap-3 ${styles.contenedor}`}>
     <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Tareas</h1>
-    <div className="gap-3 flex items-center justify-center bg-red-400">
+    <div className="gap-3 flex items-center justify-center">
 
 
       <input type="checkbox" id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />

@@ -1,6 +1,11 @@
 import Columna from "./Tablas/Columna";
 import styles from "../styles/TablaHorario.module.css";
+import { useEffect } from "react";
 function TablaHorario() {
+  useEffect(()=>
+  {
+    
+  })
   return (
     <div className="lg:w-11/12  w-full xl:h-[76vh] lg:self-center self-start overflow-y-hidden">
       <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold ${styles.texto}`}>
@@ -24,6 +29,7 @@ function TablaHorario() {
               <th className="border-solid border-2 border-white">DOMINGO</th>
             </tr>
           </thead>
+          <tbody>
           <Columna
             stylesFather={"w-auto"}
             cellEven={`${styles.cellHour} text-white`}
@@ -64,6 +70,7 @@ function TablaHorario() {
             cellEven={`${styles.cellEven}`}
             cellOdd={`${styles.cellOdd}`}
           />
+          </tbody>
         </table>
       <div className={`${styles.degrade} w-full`}>{'-'}</div>
       </div>

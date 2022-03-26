@@ -62,8 +62,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
       activo: true,
       descripcion: values.descripcionFranja,
       frecuencia: [...arregloFrecuencias],
-      hora_final: Number(values.horaInicio),
-      hora_inicio: Number(values.horaFinal),
+      hora_final: (values.horaInicio),
+      hora_inicio: (values.horaFinal),
       nombre: values.nombreFranja,
       tipo: values.tipoFranja,
     };
@@ -89,7 +89,15 @@ function FormularioFranja({ idFranja, datosFranja }) {
         console.error(error);
       }
     }
+    setInitialValues({
+      nombreFranja: "",
+      tipoFranja: "",
+      descripcionFranja: "",
+      horaInicio: "",
+      horaFinal: "",
+    })
     //ACÁ SE DEBE DE CERRAR EL MODAL
+
   };
 
   return (

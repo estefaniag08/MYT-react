@@ -13,9 +13,11 @@
 
 .cellOdd{
     background-color: var(--color-purple-100);
+    color: var(--color-gray-200);
 }
 .cellEven{
     background-color: var(--color-purple-50);
+    color: var(--color-gray-200);
 }
 .cellHour{
     background-color: var(--color-purple-200);

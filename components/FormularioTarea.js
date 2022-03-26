@@ -31,12 +31,18 @@ function FormularioTarea({ idTarea }) {
   });
 
   const handleSubmit = async (values) => {
+    const arregloFecha = values.fechaEntrega.split("-")
+    const fechaFormateada = new Date(arregloFecha[0], Number(arregloFecha[1])-1, arregloFecha[2]);
+    
+    const arregloHora = values.horaEntrega.split(":");
+    const stringHora = `${arregloHora[0]}${arregloHora[1]}`
     const tarea = {
       activo: true,
       descripcion: values.descripcionTarea,
       dificultad: values.dificultadTarea,
       estado: "sin iniciar",
-      fecha_entrega: values.fechaEntrega,
+      fecha_entrega: fechaFormateada,
+      horaEntrega: Number(stringHora),
       nombre: values.nombreTarea, 
       tipo: values.tipoTarea
     };

@@ -1,11 +1,11 @@
 import Columna from "./Tablas/Columna";
+import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaAgenda.module.css";
-function TablaAgenda() {
+function TablaAgenda({listaTareas}) {
+  
   return (
     <div className=" lg:w-1/2 lg:h-screen lg:mt-8 w-full xl:h-[76vh] xl:self-center self-start overflow-y-hidden">
-      <div
-        className={`text-5xl  flex justify-end gap-4  p-1 font-bold ${styles.texto}`}
-      >
+      <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold`}>
         <button type="button" className="font-bold lg:text-5xl text-3xl">
           {"<"}
         </button>
@@ -14,7 +14,7 @@ function TablaAgenda() {
           {">"}
         </button>
       </div>
-      <div className=" md:h-[90%] md:overflow-y-auto overflow-x-auto w-full">
+      <div className={`md:h-[90%] md:overflow-y-auto overflow-x-auto w-full`}>
         <table className="">
           <thead>
             <tr
@@ -24,16 +24,24 @@ function TablaAgenda() {
               <th className="border-solid border-2 border-white">LUNES</th>
             </tr>
           </thead>
-          <Columna
-            stylesFather={"w-auto"}
-            cellEven={`${styles.cellHour} text-white`}
-            cellOdd={`${styles.cellHour} text-white`}
-          />
-          <Columna
-            stylesFather={"w-full"}
-            cellEven={`${styles.cellEven} text-white`}
-            cellOdd={`${styles.cellOdd} text-white`}
-          />
+          <tbody>
+            {listaTareas ? (
+              <>
+                <Columna
+                  stylesFather={"w-auto"}
+                  cellEven={`${styles.cellHour} text-white`}
+                  cellOdd={`${styles.cellHour} text-white`}
+                  
+                />
+                <ColumnaComp
+                  stylesFather={"w-full"}
+                  cellEven={`${styles.cellEven} text-white`}
+                  cellOdd={`${styles.cellOdd} text-white`}
+                  listaTareas={listaTareas}
+                />
+              </>
+            ): <></>}
+          </tbody>
         </table>
       </div>
       <div className={`${styles.degrade} w-full`}>{"-"}</div>
