@@ -35,19 +35,19 @@ function FormularioFranja({ idFranja, datosFranja }) {
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: getTime(datosFranja.horaInicio),
-          horaFinal: getTime(datosFranja.horaFinal),
+          horaInicio: datosFranja.horaInicio,//getTime(datosFranja.horaInicio),
+          horaFinal: datosFranja.horaFinal//getTime(datosFranja.horaFinal),
         });
-        
+        /*
         for (let i = 0; i < datosFranja.frecuencia.length; i++){
-          alert(datosFranja.frecuencia[i])
+          // alert(datosFranja.frecuencia[i])
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
-        }        
+        } */     
       } 
   },[idFranja])
   
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
   
   const userSchema = yup.object().shape({
     nombreFranja: yup.string().required("Nombre de franja requerido"),
@@ -93,12 +93,12 @@ function FormularioFranja({ idFranja, datosFranja }) {
     console.log(arregloFrecuencias);
   };
 
-  const handleSubmit = async (values) => {
-    const usuario = "vMCIp2NBOORMJhVcw9HV";
+  const handleSubmit = async (values) => {    
+    const usuario = localStorage.getItem("IdUser") // "vMCIp2NBOORMJhVcw9HV";
     const arregloHoraFinal = values.hora_final.split(":");
     const arregloHoraInicio = values.hora_inicio.split(":");
     const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
-    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`
+    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
     const franja = {
       activo: true,
       descripcion: values.descripcionFranja,
@@ -108,6 +108,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       nombre: values.nombreFranja,
       tipo: values.tipoFranja,
     };
+    
     if (idFranja) {
       //Modifica la franja
       try {
@@ -121,7 +122,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         console.error(error);
       }
     } else {
-      //Crea la franja
+      //Crea la franja      
       const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
       try {
         const result = await addDoc(franjasUsuario, franja);
