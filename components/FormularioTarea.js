@@ -17,7 +17,7 @@ function FormularioTarea({ idTarea }) {
   });
   useEffect(() => {}, [idTarea]);
 
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
   const userSchema = yup.object().shape({
     nombreTarea: yup.string().required("Nombre de tarea requerido"),

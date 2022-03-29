@@ -2,7 +2,6 @@
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles_modal from "../styles/ModalCrearFranja.module.css";
-import styles from "../styles/ContenedoresPanel/ContenedorTareasFranjas.module.css";
 import styles_tarea from "../styles/ModalCrearTarea.module.css"
 import * as yup from "yup";
 import { ErrorMessage, Formik, Form } from "formik";
@@ -36,19 +35,19 @@ function FormularioFranja({ idFranja, datosFranja }) {
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: getTime(datosFranja.horaInicio),
-          horaFinal: getTime(datosFranja.horaFinal),
+          horaInicio: datosFranja.horaInicio,//getTime(datosFranja.horaInicio),
+          horaFinal: datosFranja.horaFinal//getTime(datosFranja.horaFinal),
         });
-        
+        /*
         for (let i = 0; i < datosFranja.frecuencia.length; i++){
           //alert(datosFranja.frecuencia[i])
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
           document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
-        }        
+        } */     
       } 
   },[idFranja])
   
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
   
   const userSchema = yup.object().shape({
     nombreFranja: yup.string().required("Nombre de franja requerido"),
@@ -58,16 +57,22 @@ function FormularioFranja({ idFranja, datosFranja }) {
     horaFinal: yup.string().required("Hora final de franja requerido"),
   });
   
-  const cambiarEstilo = (event) => {  
+  const cambiarEstilo = (event) => {      
     let color = event.target.style.backgroundColor     
-    if (color == "white"){
+    
+    if (color !== "white" && color !== "rgb(73, 209, 205)"){                 
       event.target.style.backgroundColor = "#49D1CD";
       event.target.style.color= "white";      
+    }else {
+      if (color != "white") {              
+        event.target.style.backgroundColor = "white";
+        event.target.style.color= "black";
+      } else {                    
+        event.target.style.backgroundColor= "#49D1CD";      
+        event.target.style.color= "white";
+      }
     }
-    else {
-      event.target.style.backgroundColor= "white";      
-      event.target.style.color= "black";
-    }    
+    
   }  
   const crearArregloFrecuencia = (event) => {
     console.log("Probando")    
@@ -89,11 +94,11 @@ function FormularioFranja({ idFranja, datosFranja }) {
   };
 
   const handleSubmit = async (values) => {
-    const usuario = "vMCIp2NBOORMJhVcw9HV";
+    const usuario = localStorage.getItem("IdUser") //
     const arregloHoraFinal = values.horaFinal.split(":");
     const arregloHoraInicio = values.horaInicio.split(":");
     const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
-    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`
+    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
     const franja = {
       activo: true,
       descripcion: values.descripcionFranja,
@@ -103,6 +108,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       nombre: values.nombreFranja,
       tipo: values.tipoFranja,
     };
+    
     if (idFranja) {
       //Modifica la franja
       try {
@@ -116,7 +122,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         console.error(error);
       }
     } else {
-      //Crea la franja
+      //Crea la franja      
       const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
       try {
         const result = await addDoc(franjasUsuario, franja);
@@ -199,7 +205,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
               </h1>
               <div className="gap-3 flex items-center justify-center text-black text-2xl font-bold">                
                 <input
-                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  className={` text-2xl font-bold bg-white w-12 h-12 rounded-full  hover:bg-sky-300  hover:cursor-pointer`}
                   type="button"
                   value={" D "}
                   name={7}
@@ -211,7 +217,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" L "}
                   name={1}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
                 />
 
                 <input
@@ -219,14 +225,14 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" M "}
                   name={2}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" M "}
                   name={3}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
                 <input
@@ -234,21 +240,21 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" J "}
                   name={4}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" V "}
                   name={5}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
                   type="button"
                   value={" S "}
                   name={6}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  className="text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer"
+                  className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
                 

@@ -7,15 +7,15 @@ import { useState, useEffect } from "react";
 
 function FormModificarFranja({ idFranja }) {
   const [datosFranja, setDatosFranja] = useState({});
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") // "vMCIp2NBOORMJhVcw9HV"; //Como prueba  
   useEffect(() => {
-    if (idFranja) {
+    if (idFranja) {      
       console.log("Entra useEffect")
       const franjaEditar = doc(
         firestore,
         `franjas/${usuario}/franja`,
         idFranja
-      );
+      );      
       const obtenerDocumento = async () => {
         const franjaEditarDatos = await getDoc(franjaEditar);
         setDatosFranja({
@@ -27,8 +27,9 @@ function FormModificarFranja({ idFranja }) {
           frecuencia:franjaEditarDatos.data().frecuencia
         });
         console.log("formModificarFranja", datosFranja);
+        alert("HACIENDO LA CONSULTA DEL REGISTRO ... DATOS: " + datosFranja.nombreFranja)
       };
-      obtenerDocumento();
+      obtenerDocumento();      
     }
   }, [idFranja]);
 

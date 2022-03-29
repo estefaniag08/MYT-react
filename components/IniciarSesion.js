@@ -1,10 +1,13 @@
+import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import * as yup from "yup";
 import { Formik, Form } from "formik"
 import { TextField } from './TextField';
 
 function IniciarSesion(){
-
+  const router = useRouter()
   const initialValues = {
     username: "",
     password: ""
@@ -15,12 +18,43 @@ function IniciarSesion(){
     password: yup.string().min(4).max(20).required("la contraseña es requerida")    
   });
   
+  const handleSubmit = async (values) =>{
+    //alert("INICIANDO SESIÓN ...")
+    //alert("datos username: " + values.username + " password: " + values.password)
+    const collUsuarios = collection(firestore, `usuarios`)            
+    const queryUsuarios = query(
+      collUsuarios,
+      where("alias", "==", values.username),
+      where("password", "==", values.password)
+    )
+    //alert("consultando SI EL USUARIO EXISTE para iniciar SESION ...")
+    let array = []
+    try {
+      const usuarioRegistrado = await getDocs(queryUsuarios)
+      usuarioRegistrado.forEach((doc) =>{
+        array.push(doc.id)
+      })
+      //alert("usuarios con el alias: " + array.length) 
+      if (array.length == 1){
+        alert("iniciando sesión ....")
+        alert("id usuario que se guarda en el localstorage: " + array[0])
+        localStorage.setItem("IdUser", array[0]);
+        alert("recuperando id del localstorage: " + localStorage.getItem("IdUser"))
+        router.push("/horario")
+      } else {
+        alert("el usuario no existe, si desea puede registrarlo ...")
+      }            
+    } catch (error) {
+      alert(error)
+    }    
+  }
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={userSchema}
-      onSubmit={values =>{
-        console.log(values)
+      onSubmit={async (values) =>{
+        await handleSubmit(values);
       }}
        
     >
