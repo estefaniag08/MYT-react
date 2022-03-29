@@ -1,12 +1,13 @@
 import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import * as yup from "yup";
 import { Formik, Form } from "formik"
 import { TextField } from './TextField';
 
 function IniciarSesion(){
-
+  const router = useRouter()
   const initialValues = {
     username: "",
     password: ""
@@ -39,6 +40,7 @@ function IniciarSesion(){
         alert("id usuario que se guarda en el localstorage: " + array[0])
         localStorage.setItem("IdUser", array[0]);
         alert("recuperando id del localstorage: " + localStorage.getItem("IdUser"))
+        router.push("/horario")
       } else {
         alert("el usuario no existe, si desea puede registrarlo ...")
       }            
