@@ -47,7 +47,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       } 
   },[idFranja])
   
-  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  //const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
   
   const userSchema = yup.object().shape({
     nombreFranja: yup.string().required("Nombre de franja requerido"),
@@ -94,59 +94,63 @@ function FormularioFranja({ idFranja, datosFranja }) {
   };
 
   const handleSubmit = async (values) => {
-    const usuario = localStorage.getItem("IdUser") //
-    const arregloHoraFinal = values.horaFinal.split(":");
-    const arregloHoraInicio = values.horaInicio.split(":");
-    const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
-    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
-    const franja = {
-      activo: true,
-      descripcion: values.descripcionFranja,
-      frecuencia: [...arregloFrecuencias],
-      hora_final: Number(stringHoraInicio),
-      hora_inicio: Number(stringHoraFinal),
-      nombre: values.nombreFranja,
-      tipo: values.tipoFranja,
-    };
-    
-    if (idFranja) {
-      //Modifica la franja
-      try {
-        const franjaUsuarioId = doc(
-          firestore,
-          `franjas/${usuario}/franja`,
-          idFranja
-        );
-        await updateDoc(franjaUsuarioId, franja);
-      } catch (error) {
-        console.error(error);
+    var opcion = confirm("Estás seguro de que los campos son correctos ?")
+    if (opcion == true){
+      const usuario = localStorage.getItem("IdUser") //
+      const arregloHoraFinal = values.horaFinal.split(":");
+      const arregloHoraInicio = values.horaInicio.split(":");
+      const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
+      const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
+      const franja = {
+        activo: true,
+        descripcion: values.descripcionFranja,
+        frecuencia: [...arregloFrecuencias],
+        hora_final: Number(stringHoraInicio),
+        hora_inicio: Number(stringHoraFinal),
+        nombre: values.nombreFranja,
+        tipo: values.tipoFranja,
+      };
+      
+      if (idFranja) {
+        //Modifica la franja
+        try {
+          const franjaUsuarioId = doc(
+            firestore,
+            `franjas/${usuario}/franja`,
+            idFranja
+          );
+          await updateDoc(franjaUsuarioId, franja);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        //Crea la franja      
+        const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
+        try {
+          const result = await addDoc(franjasUsuario, franja);
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        } 
       }
-    } else {
-      //Crea la franja      
-      const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
-      try {
-        const result = await addDoc(franjasUsuario, franja);
-        console.log(result);
-      } catch (error) {
-        console.error(error);
-      } 
+      //ACÁ SE DEBE DE CERRAR EL MODAL
+      
+      // CERRANDO MODAL DE CREAR FRANJA
+      if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
+        document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
+        document.getElementById("modal_crearfranja").style.visibility = "hidden"
+        document.getElementById("modal_crearfranja").style.opacity = "0"
+        document.getElementById("btn_crearfranja").checked = false
+      }
+      // CERRANDO MODAL DE MODIFICAR FRANJA
+      if (document.getElementById("modal_modfranja").style.visibility == "visible"){
+        document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
+        document.getElementById("modal_modfranja").style.visibility = "hidden"
+        document.getElementById("modal_modfranja").style.opacity = "0"
+        document.getElementById("btn_modfranja").checked = false
+      }
     }
-    //ACÁ SE DEBE DE CERRAR EL MODAL
     
-    // CERRANDO MODAL DE CREAR FRANJA
-    if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
-      document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
-      document.getElementById("modal_crearfranja").style.visibility = "hidden"
-      document.getElementById("modal_crearfranja").style.opacity = "0"
-      document.getElementById("btn_crearfranja").checked = false
-    }
-    // CERRANDO MODAL DE MODIFICAR FRANJA
-    if (document.getElementById("modal_modfranja").style.visibility == "visible"){
-      document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
-      document.getElementById("modal_modfranja").style.visibility = "hidden"
-      document.getElementById("modal_modfranja").style.opacity = "0"
-      document.getElementById("btn_modfranja").checked = false
-    }
   };
   
   return (
@@ -179,6 +183,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="nombreFranja"
                   id="nombreFranja"
+                  aria-label="campo de nombre de franja"
                   className=" bg-white  text-xl h-5 sm:w-24 sm:h-8 "
                 />                
                 <h3 className="mb-2 sm:mb-5">tipo:</h3>
@@ -186,6 +191,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="tipoFranja"
                   id="tipoFranja"
+                  aria-label="campo de tipo de franja"
                   className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
                 />                                
                 <h3 className="sm:col-span-2 mb-2 sm:mb-5">descripción:</h3>
@@ -193,6 +199,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="descripcionFranja"
                   id="descripcionFranja"
+                  aria-label="campo de descripción de franja"
                   className="col-span-2 bg-white text-xl h-5 sm:w-36 sm:h-8 "
                 />                
               </div>
@@ -209,6 +216,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" D "}
                   name={7}
+                  aria-label="frecuencia domingo"
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
                   id="boton"
                 />
@@ -217,6 +225,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" L "}
                   name={1}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia lunes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
                 />
 
@@ -225,6 +234,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" M "}
                   name={2}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia martes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
@@ -232,6 +242,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" M "}
                   name={3}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia miercoles"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
@@ -240,6 +251,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" J "}
                   name={4}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia jueves"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
@@ -247,6 +259,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" V "}
                   name={5}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia viernes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
                 <input
@@ -254,6 +267,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" S "}
                   name={6}
                   onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  aria-label="frecuencia sabado"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
 
@@ -275,6 +289,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="time"
                   name="horaInicio"
                   id="horaInicio"
+                  step="3600"
+                  aria-label="campo de hora de inicio de franja"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />                
                 <h3 className="text-right ">hora final:</h3>
@@ -282,6 +298,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="time"
                   name="horaFinal"
                   id="horaFinal"
+                  step="3600"        
+                  aria-label="campo de hora final de franja"          
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />                
               </div>
