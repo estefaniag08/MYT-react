@@ -31,38 +31,54 @@ function FormularioTarea({ idTarea }) {
   });
 
   const handleSubmit = async (values) => {
-    const tarea = {
-      activo: true,
-      descripcion: values.descripcionTarea,
-      dificultad: values.dificultadTarea,
-      estado: "sin iniciar",
-      fecha_entrega: values.fechaEntrega,
-      nombre: values.nombreTarea, 
-      tipo: values.tipoTarea
-    };
-    if (idTarea) {
-      //Si es modificacion
-      try{
-          const tareaUsuarioId = doc(
-            firestore,
-            `tareas/${usuario}/tarea`,
-            idTarea
-          )
-          await updateDoc(tareaUsuarioId, tarea);
-      }catch(error){
-        console.error(error);
+    var opcion = confirm("Estas seguro de que los campos están correctos ?")
+    if (opcion == true){
+      const tarea = {
+        activo: true,
+        descripcion: values.descripcionTarea,
+        dificultad: values.dificultadTarea,
+        estado: "sin iniciar",
+        fecha_entrega: values.fechaEntrega,
+        nombre: values.nombreTarea, 
+        tipo: values.tipoTarea
+      };
+      if (idTarea) {
+        //Si es modificacion
+        try{
+            const tareaUsuarioId = doc(
+              firestore,
+              `tareas/${usuario}/tarea`,
+              idTarea
+            )
+            await updateDoc(tareaUsuarioId, tarea);
+        }catch(error){
+          console.error(error);
+        }
+      } else {
+        //Si es añadir
+        try {
+          const tareasUsuario = collection(firestore, `tareas/${usuario}/tarea`);
+          const result = await addDoc(tareasUsuario, tarea);
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    } else {
-      //Si es añadir
-      try {
-        const tareasUsuario = collection(firestore, `tareas/${usuario}/tarea`);
-        const result = await addDoc(tareasUsuario, tarea);
-        console.log(result);
-      } catch (error) {
-        console.log(error);
+      //ACÁ SE DEBE DE CERRAR EL MODAL    
+      if (document.getElementById("modal_creartarea").style.visibility == "visible"){
+        document.getElementById("contenedor_creartarea").transform = "translateY(-30%)"
+        document.getElementById("modal_creartarea").style.visibility = "hidden"
+        document.getElementById("modal_creartarea").style.opacity = "0"
+        document.getElementById("btn_creartarea").checked = false
       }
-    }
-    //ACÁ SE DEBE DE CERRAR EL MODAL
+      // CERRANDO MODAL DE MODIFICAR FRANJA
+      if (document.getElementById("modal_modtarea").style.visibility == "visible"){
+        document.getElementById("contenedor_modtarea").transform = "translateY(-30%)"
+        document.getElementById("modal_modtarea").style.visibility = "hidden"
+        document.getElementById("modal_modtarea").style.opacity = "0"
+        document.getElementById("btn_modtarea").checked = false
+      }
+    }    
   };
   return (
     <Formik
@@ -87,24 +103,28 @@ function FormularioTarea({ idTarea }) {
                   type="text"
                   name="nombreTarea"
                   id="nombreTarea" 
+                  aria-label="campo de nombre de tarea"
                   className=" bg-white text-xl h-5 sm:w-24 sm:h-8" />          
                 <h3 className="  text-black mb-2 sm:mb-5">dificultad:</h3>
                 <TextField 
                   type="text"
                   name="dificultadTarea"
                   id="dificultadTarea"
+                  aria-label="campo de dificultad de tarea"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
                 <h3 className=" text-black mb-2 sm:mb-5">descripción:</h3>
                 <TextField 
                   type="text"
                   name="descripcionTarea"
                   id="descripcionTarea" 
+                  aria-label="campo de descripción de tarea"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
                 <h3 className=" text-black mb-2 sm:mb-5">tipo:</h3>
                 <TextField 
                   type="text"
                   name="tipoTarea"
                   id="tipoTarea" 
+                  aria-label="campo de tipo de tarea"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
               </div>
                             
@@ -115,27 +135,23 @@ function FormularioTarea({ idTarea }) {
                 <TextField 
                   type="date"
                   name="fechaEntrega" 
-                  id="fechaEntrega"
+                  id="fechaEntrega"  
+                  aria-label="campo de fecha de entrega de tarea"                
                   className="bg-white  text-xl h-5 sm:w-32 sm:h-8" />
                 <h3 className=" text-black sm:mb-5">hora:</h3>
                 <TextField 
                   type="time"
                   name="horaEntrega"
-                  id="horaEntrega" 
+                  id="horaEntrega"    
+                  aria-label="campo de hora de entrega de tarea"               
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
               </div>
-
-              <h1 className={`${styles.h1} text-4xl  col-span-4 inset-1/2`}> Tarea General</h1>
-
-              <div className="grid grid-cols-2 gap-5 items-center text-2xl sm:text-3xl">
-                <h3 className=" text-black text-right  leading-5 sm:leading-6">Seleccionar tarea general:</h3>
-                <input type="text" className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
-              </div>            
+                          
             </div> 
- <input
+            <input
               type="submit"
               value={"AÑADIR"}
-              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"
+              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px] hover:cursor-pointer"
             />
           </Form>
         );
