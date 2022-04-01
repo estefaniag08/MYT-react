@@ -35,15 +35,14 @@ function FormularioFranja({ idFranja, datosFranja }) {
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: datosFranja.horaInicio,//getTime(datosFranja.horaInicio),
-          horaFinal: datosFranja.horaFinal//getTime(datosFranja.horaFinal),
+          horaInicio: getTime(datosFranja.horaInicio),//datosFranja.horaInicio,//,
+          horaFinal: getTime(datosFranja.horaFinal)//datosFranja.horaFinal//,
         });
-        /*
+        
         for (let i = 0; i < datosFranja.frecuencia.length; i++){
           //alert(datosFranja.frecuencia[i])
-          document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
-          document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
-        } */     
+          document.getElementsByName(datosFranja.frecuencia[i])[1].click()          
+        } 
       } 
   },[idFranja])
   
@@ -71,9 +70,46 @@ function FormularioFranja({ idFranja, datosFranja }) {
         event.target.style.backgroundColor= "#49D1CD";      
         event.target.style.color= "white";
       }
-    }
-    
+    }  
   }  
+  const resetStyleButtons = () => {
+    var btn_domingo = document.getElementById("btn_domingo")
+    var btn_lunes = document.getElementById("btn_lunes")
+    var btn_martes = document.getElementById("btn_martes")
+    var btn_miercoles = document.getElementById("btn_miercoles")
+    var btn_jueves = document.getElementById("btn_jueves")
+    var btn_viernes = document.getElementById("btn_viernes")
+    var btn_sabado = document.getElementById("btn_sabado")
+    if (btn_domingo.style.backgroundColor != "white"){
+      alert("cambiando color boton domingo")
+      btn_domingo.click()
+    }
+    if (btn_lunes.style.backgroundColor != "white"){
+      alert("cambiando color boton lunes")
+      btn_lunes.click()
+    }
+    if (btn_martes.style.backgroundColor != "white"){
+      alert("cambiando color boton martes")
+      btn_martes.click()
+    }
+    if (btn_miercoles.style.backgroundColor != "white"){
+      alert("cambiando color boton miercoles")
+      btn_miercoles.click()
+    }
+    if (btn_jueves.style.backgroundColor != "white"){
+      alert("cambiando color boton jueves")
+      btn_jueves.click()
+    }
+    if (btn_viernes.style.backgroundColor != "white"){
+      alert("cambiando color boton viernes")
+      btn_viernes.click()
+    }
+    if (btn_sabado.style.backgroundColor != "white"){
+      alert("cambiando color boton sabado")
+      btn_sabado.click()
+    }
+  }
+
   const crearArregloFrecuencia = (event) => {
     alert("probando arreglo frecuencia") 
     // Cambiando el estilo desde aca
@@ -136,6 +172,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
           console.error(error);
         } 
       }
+      // APAGANDO LOS BOTONES DE FRECUENCIA
+      resetStyleButtons()
       //ACÁ SE DEBE DE CERRAR EL MODAL
       
       // CERRANDO MODAL DE CREAR FRANJA
@@ -221,7 +259,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   name={7}
                   aria-label="frecuencia domingo"
                   onClick={(crearArregloFrecuencia)}
-                  id="boton"
+                  id="btn_domingo"
                 />
                 <input
                   type="button"
@@ -230,6 +268,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia lunes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
+                  id="btn_lunes"
                 />
 
                 <input
@@ -239,6 +278,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia martes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_martes"
                 />
                 <input
                   type="button"
@@ -247,6 +287,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia miercoles"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_miercoles"
                 />
 
                 <input
@@ -256,6 +297,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia jueves"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_jueves"
                 />
                 <input
                   type="button"
@@ -264,6 +306,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia viernes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_viernes"
                 />
                 <input
                   type="button"
@@ -272,6 +315,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia sabado"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_sabado"
                 />
 
                 
