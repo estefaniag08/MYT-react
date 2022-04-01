@@ -35,7 +35,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: getTime(datosFranja.horaInicio),//datosFranja.horaInicio,//,
+          horaInicio: getTime(datosFranja.horaInicio),//datosFranja.horaInicio,//
           horaFinal: getTime(datosFranja.horaFinal)//datosFranja.horaFinal//,
         });
         
@@ -72,7 +72,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       }
     }  
   }  
-  const resetStyleButtons = () => {
+  const resetStyleButtons = () => {    
     var btn_domingo = document.getElementById("btn_domingo")
     var btn_lunes = document.getElementById("btn_lunes")
     var btn_martes = document.getElementById("btn_martes")
@@ -80,44 +80,36 @@ function FormularioFranja({ idFranja, datosFranja }) {
     var btn_jueves = document.getElementById("btn_jueves")
     var btn_viernes = document.getElementById("btn_viernes")
     var btn_sabado = document.getElementById("btn_sabado")
-    if (btn_domingo.style.backgroundColor != "white"){
-      alert("cambiando color boton domingo")
+    if (btn_domingo.style.backgroundColor != "white"){      
       btn_domingo.click()
     }
-    if (btn_lunes.style.backgroundColor != "white"){
-      alert("cambiando color boton lunes")
+    if (btn_lunes.style.backgroundColor != "white"){      
       btn_lunes.click()
     }
-    if (btn_martes.style.backgroundColor != "white"){
-      alert("cambiando color boton martes")
+    if (btn_martes.style.backgroundColor != "white"){      
       btn_martes.click()
     }
-    if (btn_miercoles.style.backgroundColor != "white"){
-      alert("cambiando color boton miercoles")
+    if (btn_miercoles.style.backgroundColor != "white"){      
       btn_miercoles.click()
     }
-    if (btn_jueves.style.backgroundColor != "white"){
-      alert("cambiando color boton jueves")
+    if (btn_jueves.style.backgroundColor != "white"){      
       btn_jueves.click()
     }
-    if (btn_viernes.style.backgroundColor != "white"){
-      alert("cambiando color boton viernes")
+    if (btn_viernes.style.backgroundColor != "white"){      
       btn_viernes.click()
     }
-    if (btn_sabado.style.backgroundColor != "white"){
-      alert("cambiando color boton sabado")
+    if (btn_sabado.style.backgroundColor != "white"){      
       btn_sabado.click()
     }
   }
 
-  const crearArregloFrecuencia = (event) => {
-    alert("probando arreglo frecuencia") 
+  const crearArregloFrecuencia = (event) => {    
     // Cambiando el estilo desde aca
     cambiarEstilo(event)
     
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
     const exists = arregloFrecuencias.indexOf(Number(event.target.name));
-    alert("nuevo arreglo: " + arregloFrecuencias)
+    //alert("nuevo arreglo: " + arregloFrecuencias)
     const nuevoArreglo = [];
     if (exists === -1) {
       nuevoArreglo = arregloFrecuencias.map((value) => Number(value));
@@ -185,6 +177,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       }
       // CERRANDO MODAL DE MODIFICAR FRANJA
       if (document.getElementById("modal_modfranja").style.visibility == "visible"){
+        
         document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
         document.getElementById("modal_modfranja").style.visibility = "hidden"
         document.getElementById("modal_modfranja").style.opacity = "0"

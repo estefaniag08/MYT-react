@@ -24,6 +24,23 @@ function ContenedorFranjas({ setFranja, idFranja }) {
     }
   };
 
+  const abrirCerrarModFranja = () => {
+    if (
+      document.getElementById("modal_modfranja").style.visibility == "hidden"
+    ) {
+      document.getElementById("contenedor_modfranja").style.transform =
+        "translateY(0%)";
+      document.getElementById("modal_modfranja").style.visibility = "visible";
+      document.getElementById("modal_modfranja").style.opacity = "1";
+      document.getElementById("btn_modfranja").checked = true;
+    } else {
+      document.getElementById("contenedor_modfranja").style.transform =
+        "translateY(-30%)";
+      document.getElementById("modal_modfranja").style.visibility = "hidden";
+      document.getElementById("modal_modfranja").style.opacity = "0";
+      document.getElementById("btn_modfranja").checked = false;
+    }
+  };
   return (
     <div
       className={`flex-col gap-3 justify-center items-center ${styles.contenedor}`}
@@ -59,6 +76,7 @@ function ContenedorFranjas({ setFranja, idFranja }) {
         <input
           type="checkbox"
           id="btn_modfranja"
+          onClick={abrirCerrarModFranja}
           className={`${styles_modfranja.btn_modfranja}`}
         />
         <label
