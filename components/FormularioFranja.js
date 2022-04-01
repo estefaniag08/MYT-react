@@ -75,7 +75,10 @@ function FormularioFranja({ idFranja, datosFranja }) {
     
   }  
   const crearArregloFrecuencia = (event) => {
-    console.log("Probando")    
+    alert("probando arreglo frecuencia") 
+    // Cambiando el estilo desde aca
+    cambiarEstilo(event)
+    
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
     const exists = arregloFrecuencias.indexOf(Number(event.target.name));
     alert("nuevo arreglo: " + arregloFrecuencias)
@@ -217,14 +220,14 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   value={" D "}
                   name={7}
                   aria-label="frecuencia domingo"
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   id="boton"
                 />
                 <input
                   type="button"
                   value={" L "}
                   name={1}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia lunes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
                 />
@@ -233,7 +236,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" M "}
                   name={2}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia martes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
@@ -241,7 +244,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" M "}
                   name={3}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia miercoles"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
@@ -250,7 +253,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" J "}
                   name={4}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia jueves"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
@@ -258,7 +261,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" V "}
                   name={5}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia viernes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
@@ -266,7 +269,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" S "}
                   name={6}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
                   aria-label="frecuencia sabado"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
                 />
