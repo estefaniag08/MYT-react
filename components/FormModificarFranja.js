@@ -7,27 +7,30 @@ import { useState, useEffect } from "react";
 
 function FormModificarFranja({ idFranja }) {
   const [datosFranja, setDatosFranja] = useState({});
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") // "vMCIp2NBOORMJhVcw9HV"; //Como prueba  
   useEffect(() => {
     if (idFranja) {
+      //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      
       console.log("Entra useEffect")
       const franjaEditar = doc(
         firestore,
         `franjas/${usuario}/franja`,
         idFranja
-      );
+      );      
       const obtenerDocumento = async () => {
         const franjaEditarDatos = await getDoc(franjaEditar);
         setDatosFranja({
-          nombreFranja: franjaEditarDatos.nombre,
-          tipoFranja: franjaEditarDatos.tipo,
-          descripcionFranja: franjaEditarDatos.descripcion,
-          horaInicio: franjaEditarDatos.hora_inicio,
-          horaFinal: franjaEditarDatos.hora_final,
+          nombreFranja: franjaEditarDatos.data().nombre,
+          tipoFranja: franjaEditarDatos.data().tipo,
+          descripcionFranja: franjaEditarDatos.data().descripcion,
+          horaInicio: franjaEditarDatos.data().hora_inicio,
+          horaFinal: franjaEditarDatos.data().hora_final,
+          frecuencia:franjaEditarDatos.data().frecuencia
         });
-        console.log(franjaEditarDatos);
+        console.log("formModificarFranja", datosFranja);
+        //alert("HACIENDO LA CONSULTA DEL REGISTRO ... DATOS: " + datosFranja.nombreFranja)
       };
-      obtenerDocumento();
+      obtenerDocumento();      
     }
   }, [idFranja]);
 

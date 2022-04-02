@@ -9,7 +9,7 @@ function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
   const [fecha, setFecha] = useState(new Date());
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
   useEffect(() => {
   const fechaInicio = new Date(fecha);
     fechaInicio.setHours(0,0,0,0)

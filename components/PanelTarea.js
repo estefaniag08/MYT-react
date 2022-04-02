@@ -44,12 +44,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           <h3>Tipo:</h3>
           <input className=" h-10 xl:w-full" />
         </section>
-        <section className="xl:flex grid items-start">
-          <h3>Subtareas:</h3>
-          <div className="overflow-y-auto lg:h-44 h-20 w-full">
-            <TablaSubtareas />
-          </div>
-        </section>
+        
         <section className="xl:flex xl:gap-4 grid items-center">
           <h3>Entrega:</h3>
           <input className=" h-10 xl:w-full" />
@@ -72,8 +67,8 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
         </label>
         <FormCrearTarea />
 
-        <input type="checkbox" id="btn_modificartarea" className={`${styles_modtarea.btn_modificartarea}`} />
-        <label for="btn_modificartarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
+        <input type="checkbox" id="btn_modtarea" className={`${styles_modtarea.btn_modtarea}`} />
+        <label for="btn_modtarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-edit.png"

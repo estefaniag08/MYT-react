@@ -2,7 +2,7 @@ import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import styles from "../styles/ModalCrearTarea.module.css";
 import * as yup from "yup";
-import { Formik, Form } from "formik";
+import { ErrorMessage, Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ function FormularioTarea({ idTarea }) {
   });
   useEffect(() => {}, [idTarea]);
 
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
   const userSchema = yup.object().shape({
     nombreTarea: yup.string().required("Nombre de tarea requerido"),
@@ -31,9 +31,10 @@ function FormularioTarea({ idTarea }) {
   });
 
   const handleSubmit = async (values) => {
-    const arregloFecha = values.fechaEntrega.split("-")
+var opcion = confirm("Estas seguro de que los campos están correctos ?")
+    if (opcion == true){
+const arregloFecha = values.fechaEntrega.split("-")
     const fechaFormateada = new Date(arregloFecha[0], Number(arregloFecha[1])-1, arregloFecha[2]);
-    
     const arregloHora = values.horaEntrega.split(":");
     const stringHora = `${arregloHora[0]}${arregloHora[1]}`
     const tarea = {
@@ -69,6 +70,20 @@ function FormularioTarea({ idTarea }) {
       }
     }
     //ACÁ SE DEBE DE CERRAR EL MODAL
+ if (document.getElementById("modal_creartarea").style.visibility == "visible"){
+        document.getElementById("contenedor_creartarea").transform = "translateY(-30%)"
+        document.getElementById("modal_creartarea").style.visibility = "hidden"
+        document.getElementById("modal_creartarea").style.opacity = "0"
+        document.getElementById("btn_creartarea").checked = false
+      }
+      // CERRANDO MODAL DE MODIFICAR FRANJA
+      if (document.getElementById("modal_modtarea").style.visibility == "visible"){
+        document.getElementById("contenedor_modtarea").transform = "translateY(-30%)"
+        document.getElementById("modal_modtarea").style.visibility = "hidden"
+        document.getElementById("modal_modtarea").style.opacity = "0"
+        document.getElementById("btn_modtarea").checked = false
+      }
+    }    
   };
   return (
     <Formik
@@ -87,67 +102,62 @@ function FormularioTarea({ idTarea }) {
 
               <h1 className={`${styles.h1} text-4xl text-center col-span-4 inset-1/2`}> información general tarea</h1>
               
-              <div className=" grid grid-cols-2 grid-rows-[37px_minmax(20px,_37px)_37px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0  items-center text-2xl sm:grid-cols-4 sm:gap-3 sm:text-3xl">
-                <h3 className={`${styles.p} text-black `}> nombre:</h3>            
+              <div className=" grid grid-cols-2 gap-0  items-center text-2xl sm:grid-cols-4 sm:gap-2 sm:text-3xl">
+                <h3 className={`${styles.p} text-black mb-2 sm:mb-5`}> nombre:</h3>            
                 <TextField 
                   type="text"
                   name="nombreTarea"
                   id="nombreTarea" 
+                  aria-label="campo de nombre de tarea"
                   className=" bg-white text-xl h-5 sm:w-24 sm:h-8" />          
-                <h3 className="  text-black ">dificultad:</h3>
-                <TextField
+                <h3 className="  text-black mb-2 sm:mb-5">dificultad:</h3>
+                <TextField 
                   type="text"
                   name="dificultadTarea"
                   id="dificultadTarea"
-                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
-                <h3 className=" text-black ">descripción:</h3>
-                <TextField
+                  aria-label="campo de dificultad de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
+                <h3 className=" text-black mb-2 sm:mb-5">descripción:</h3>
+                <TextField 
                   type="text"
                   name="descripcionTarea"
                   id="descripcionTarea" 
-                  className="bg-white text-xl h-6 w-24 sm:h-8" />
-                <h3 className=" text-black ">tipo:</h3>
-                <TextField
+                  aria-label="campo de descripción de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                <h3 className=" text-black mb-2 sm:mb-5">tipo:</h3>
+                <TextField 
                   type="text"
                   name="tipoTarea"
                   id="tipoTarea" 
-                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                  aria-label="campo de tipo de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
               </div>
                             
               <h1 className={`${styles.h1} pt-3 text-4xl  col-span-4 inset-1/2`}> Entrega</h1>
               
-              <div className=" grid grid-cols-2 pb-0 grid-rows-[37px_minmax(20px,_37px)_0px] sm:grid-rows-[60px_minmax(10px,_35px)_0px] gap-0 flex-wrap items-center text-2xl sm:grid-cols-4 sm:text-3xl">
-                <h3 className=" text-black ">fecha:</h3>
+              <div className=" grid grid-cols-2 pb-0 gap-0 flex-wrap items-center text-2xl sm:grid-cols-4 sm:text-3xl">
+                <h3 className=" text-black sm:mb-5">fecha:</h3>
                 <TextField 
                   type="date"
                   name="fechaEntrega" 
-                  id="fechaEntrega"
+                  id="fechaEntrega"  
+                  aria-label="campo de fecha de entrega de tarea"                
                   className="bg-white  text-xl h-5 sm:w-32 sm:h-8" />
-                <h3 className=" text-black ">hora:</h3>
+                <h3 className=" text-black sm:mb-5">hora:</h3>
                 <TextField 
                   type="time"
                   name="horaEntrega"
-                  id="horaEntrega" 
-                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                  id="horaEntrega"    
+                  aria-label="campo de hora de entrega de tarea"               
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />                
               </div>
-
-              <h1 className={`${styles.h1} text-4xl  col-span-4 inset-1/2`}> Tarea General</h1>
-
-              <div className="grid grid-cols-2 gap-5 items-center text-2xl sm:text-3xl">
-                <h3 className=" text-black text-right  leading-5 sm:leading-6">Seleccionar tarea general:</h3>
-                <input type="text" className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
-              </div>            
+                          
             </div> 
- <input
+            <input
               type="submit"
               value={"AÑADIR"}
-              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]"
+              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px] hover:cursor-pointer"
             />
-<input
-              type="reset"
-              value={"reset"}
-              className="bg-white font-bold text-4xl ml-5 p-1 w-24 mt-[470px]"
-            />         
           </Form>
         );
       }}

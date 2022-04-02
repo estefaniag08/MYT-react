@@ -7,13 +7,26 @@ import styles_modtarea from "../../styles/ModalModTarea.module.css"
 
 
 function ContenedorTareas() {
+  const abrirCerrarModalTarea = () =>{
+    if (document.getElementById("modal_creartarea").style.visibility == "hidden"){
+      document.getElementById("contenedor_creartarea").style.transform = "translateY(0%)"
+      document.getElementById("modal_creartarea").style.visibility = "visible"
+      document.getElementById("modal_creartarea").style.opacity = "1"
+      document.getElementById("btn_creartarea").checked = true      
+    }else {
+      document.getElementById("contenedor_creartarea").style.transform = "translateY(-30%)"
+      document.getElementById("modal_creartarea").style.visibility = "hidden"
+      document.getElementById("modal_creartarea").style.opacity = "0"
+      document.getElementById("btn_creartarea").checked = false      
+    }
+  }
   return (
     <div className={`flex-col gap-3 ${styles.contenedor}`}>
     <h1 className={`text-5xl w-3/6 mb-2 ${styles.texto}`}>Tareas</h1>
-    <div className="gap-3 flex items-center justify-center">
+    <div className="gap-3 flex items-center justify-center bg-red-400">
 
 
-      <input type="checkbox" id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />
+      <input type="checkbox" onClick={abrirCerrarModalTarea} id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />
       <label for="btn_creartarea" class="lbl_creartarea" className={`text-4xl p-2 ${styles.boton} ${styles.lbl_creartarea}`}>      
         <div className="w-8 h-8">
               <img

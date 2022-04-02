@@ -6,6 +6,7 @@ import { useState } from "react";
 function Horario() {
   const [idFranja, setFranja] = useState("");
   return (
+    
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
