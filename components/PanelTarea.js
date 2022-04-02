@@ -44,12 +44,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           <h3>Tipo:</h3>
           <input className=" h-10 xl:w-full" />
         </section>
-        <section className="xl:flex grid items-start">
-          <h3>Subtareas:</h3>
-          <div className="overflow-y-auto lg:h-44 h-20 w-full">
-            <TablaSubtareas />
-          </div>
-        </section>
+        
         <section className="xl:flex xl:gap-4 grid items-center">
           <h3>Entrega:</h3>
           <input className=" h-10 xl:w-full" />
