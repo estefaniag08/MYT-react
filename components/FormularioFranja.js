@@ -35,19 +35,18 @@ function FormularioFranja({ idFranja, datosFranja }) {
           nombreFranja: datosFranja.nombreFranja,
           tipoFranja: datosFranja.tipoFranja,
           descripcionFranja: datosFranja.descripcionFranja,
-          horaInicio: datosFranja.horaInicio,//getTime(datosFranja.horaInicio),
-          horaFinal: datosFranja.horaFinal//getTime(datosFranja.horaFinal),
+          horaInicio: getTime(datosFranja.horaInicio),//datosFranja.horaInicio,//
+          horaFinal: getTime(datosFranja.horaFinal)//datosFranja.horaFinal//,
         });
-        /*
+        
         for (let i = 0; i < datosFranja.frecuencia.length; i++){
           //alert(datosFranja.frecuencia[i])
-          document.getElementsByName(datosFranja.frecuencia[i])[1].style.backgroundColor = "#49D1CD";
-          document.getElementsByName(datosFranja.frecuencia[i])[1].style.color = "white";
-        } */     
+          document.getElementsByName(datosFranja.frecuencia[i])[1].click()          
+        } 
       } 
   },[idFranja])
   
-  const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  //const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
   
   const userSchema = yup.object().shape({
     nombreFranja: yup.string().required("Nombre de franja requerido"),
@@ -71,14 +70,46 @@ function FormularioFranja({ idFranja, datosFranja }) {
         event.target.style.backgroundColor= "#49D1CD";      
         event.target.style.color= "white";
       }
-    }
-    
+    }  
   }  
-  const crearArregloFrecuencia = (event) => {
-    console.log("Probando")    
+  const resetStyleButtons = () => {    
+    var btn_domingo = document.getElementById("btn_domingo")
+    var btn_lunes = document.getElementById("btn_lunes")
+    var btn_martes = document.getElementById("btn_martes")
+    var btn_miercoles = document.getElementById("btn_miercoles")
+    var btn_jueves = document.getElementById("btn_jueves")
+    var btn_viernes = document.getElementById("btn_viernes")
+    var btn_sabado = document.getElementById("btn_sabado")
+    if (btn_domingo.style.backgroundColor != "white"){      
+      btn_domingo.click()
+    }
+    if (btn_lunes.style.backgroundColor != "white"){      
+      btn_lunes.click()
+    }
+    if (btn_martes.style.backgroundColor != "white"){      
+      btn_martes.click()
+    }
+    if (btn_miercoles.style.backgroundColor != "white"){      
+      btn_miercoles.click()
+    }
+    if (btn_jueves.style.backgroundColor != "white"){      
+      btn_jueves.click()
+    }
+    if (btn_viernes.style.backgroundColor != "white"){      
+      btn_viernes.click()
+    }
+    if (btn_sabado.style.backgroundColor != "white"){      
+      btn_sabado.click()
+    }
+  }
+
+  const crearArregloFrecuencia = (event) => {    
+    // Cambiando el estilo desde aca
+    cambiarEstilo(event)
+    
     //TODO Arreglar esto que no lo está haciendo bien, lo dejo así mientras
     const exists = arregloFrecuencias.indexOf(Number(event.target.name));
-    alert("nuevo arreglo: " + arregloFrecuencias)
+    //alert("nuevo arreglo: " + arregloFrecuencias)
     const nuevoArreglo = [];
     if (exists === -1) {
       nuevoArreglo = arregloFrecuencias.map((value) => Number(value));
@@ -94,59 +125,66 @@ function FormularioFranja({ idFranja, datosFranja }) {
   };
 
   const handleSubmit = async (values) => {
-    const usuario = localStorage.getItem("IdUser") //
-    const arregloHoraFinal = values.horaFinal.split(":");
-    const arregloHoraInicio = values.horaInicio.split(":");
-    const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
-    const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
-    const franja = {
-      activo: true,
-      descripcion: values.descripcionFranja,
-      frecuencia: [...arregloFrecuencias],
-      hora_final: Number(stringHoraInicio),
-      hora_inicio: Number(stringHoraFinal),
-      nombre: values.nombreFranja,
-      tipo: values.tipoFranja,
-    };
-    
-    if (idFranja) {
-      //Modifica la franja
-      try {
-        const franjaUsuarioId = doc(
-          firestore,
-          `franjas/${usuario}/franja`,
-          idFranja
-        );
-        await updateDoc(franjaUsuarioId, franja);
-      } catch (error) {
-        console.error(error);
+    var opcion = confirm("Estás seguro de que los campos son correctos ?")
+    if (opcion == true){
+      const usuario = localStorage.getItem("IdUser") //
+      const arregloHoraFinal = values.horaFinal.split(":");
+      const arregloHoraInicio = values.horaInicio.split(":");
+      const stringHoraFinal = `${arregloHoraFinal[0]}${arregloHoraFinal[1]}`
+      const stringHoraInicio = `${arregloHoraInicio[0]}${arregloHoraInicio[1]}`    
+      const franja = {
+        activo: true,
+        descripcion: values.descripcionFranja,
+        frecuencia: [...arregloFrecuencias],
+        hora_final: Number(stringHoraInicio),
+        hora_inicio: Number(stringHoraFinal),
+        nombre: values.nombreFranja,
+        tipo: values.tipoFranja,
+      };
+      
+      if (idFranja) {
+        //Modifica la franja
+        try {
+          const franjaUsuarioId = doc(
+            firestore,
+            `franjas/${usuario}/franja`,
+            idFranja
+          );
+          await updateDoc(franjaUsuarioId, franja);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        //Crea la franja      
+        const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
+        try {
+          const result = await addDoc(franjasUsuario, franja);
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        } 
       }
-    } else {
-      //Crea la franja      
-      const franjasUsuario = collection(firestore, `franjas/${usuario}/franja`);
-      try {
-        const result = await addDoc(franjasUsuario, franja);
-        console.log(result);
-      } catch (error) {
-        console.error(error);
-      } 
+      // APAGANDO LOS BOTONES DE FRECUENCIA
+      resetStyleButtons()
+      //ACÁ SE DEBE DE CERRAR EL MODAL
+      
+      // CERRANDO MODAL DE CREAR FRANJA
+      if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
+        document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
+        document.getElementById("modal_crearfranja").style.visibility = "hidden"
+        document.getElementById("modal_crearfranja").style.opacity = "0"
+        document.getElementById("btn_crearfranja").checked = false
+      }
+      // CERRANDO MODAL DE MODIFICAR FRANJA
+      if (document.getElementById("modal_modfranja").style.visibility == "visible"){
+        
+        document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
+        document.getElementById("modal_modfranja").style.visibility = "hidden"
+        document.getElementById("modal_modfranja").style.opacity = "0"
+        document.getElementById("btn_modfranja").checked = false
+      }
     }
-    //ACÁ SE DEBE DE CERRAR EL MODAL
     
-    // CERRANDO MODAL DE CREAR FRANJA
-    if (document.getElementById("modal_crearfranja").style.visibility == "visible"){
-      document.getElementById("contenedor_crearfranja").transform = "translateY(-30%)"
-      document.getElementById("modal_crearfranja").style.visibility = "hidden"
-      document.getElementById("modal_crearfranja").style.opacity = "0"
-      document.getElementById("btn_crearfranja").checked = false
-    }
-    // CERRANDO MODAL DE MODIFICAR FRANJA
-    if (document.getElementById("modal_modfranja").style.visibility == "visible"){
-      document.getElementById("contenedor_modfranja").transform = "translateY(-30%)"
-      document.getElementById("modal_modfranja").style.visibility = "hidden"
-      document.getElementById("modal_modfranja").style.opacity = "0"
-      document.getElementById("btn_modfranja").checked = false
-    }
   };
   
   return (
@@ -179,6 +217,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="nombreFranja"
                   id="nombreFranja"
+                  aria-label="campo de nombre de franja"
                   className=" bg-white  text-xl h-5 sm:w-24 sm:h-8 "
                 />                
                 <h3 className="mb-2 sm:mb-5">tipo:</h3>
@@ -186,6 +225,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="tipoFranja"
                   id="tipoFranja"
+                  aria-label="campo de tipo de franja"
                   className="bg-white  text-xl h-5 sm:w-24 sm:h-8"
                 />                                
                 <h3 className="sm:col-span-2 mb-2 sm:mb-5">descripción:</h3>
@@ -193,6 +233,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="text"
                   name="descripcionFranja"
                   id="descripcionFranja"
+                  aria-label="campo de descripción de franja"
                   className="col-span-2 bg-white text-xl h-5 sm:w-36 sm:h-8 "
                 />                
               </div>
@@ -209,52 +250,65 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="button"
                   value={" D "}
                   name={7}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
-                  id="boton"
+                  aria-label="frecuencia domingo"
+                  onClick={(crearArregloFrecuencia)}
+                  id="btn_domingo"
                 />
                 <input
                   type="button"
                   value={" L "}
                   name={1}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia lunes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300  hover:cursor-pointer`}
+                  id="btn_lunes"
                 />
 
                 <input
                   type="button"
                   value={" M "}
                   name={2}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia martes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_martes"
                 />
                 <input
                   type="button"
                   value={" M "}
                   name={3}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia miercoles"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_miercoles"
                 />
 
                 <input
                   type="button"
                   value={" J "}
                   name={4}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia jueves"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_jueves"
                 />
                 <input
                   type="button"
                   value={" V "}
                   name={5}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia viernes"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_viernes"
                 />
                 <input
                   type="button"
                   value={" S "}
                   name={6}
-                  onClick={(crearArregloFrecuencia, cambiarEstilo)}
+                  onClick={(crearArregloFrecuencia)}
+                  aria-label="frecuencia sabado"
                   className={`text-2xl font-bold bg-white w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-[#49D1CD] focus:text-white hover:cursor-pointer`}
+                  id="btn_sabado"
                 />
 
                 
@@ -275,6 +329,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="time"
                   name="horaInicio"
                   id="horaInicio"
+                  step="3600"
+                  aria-label="campo de hora de inicio de franja"
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />                
                 <h3 className="text-right ">hora final:</h3>
@@ -282,6 +338,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
                   type="time"
                   name="horaFinal"
                   id="horaFinal"
+                  step="3600"        
+                  aria-label="campo de hora final de franja"          
                   className="bg-white text-xl h-5 sm:w-24 sm:h-8"
                 />                
               </div>

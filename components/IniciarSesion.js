@@ -35,11 +35,8 @@ function IniciarSesion(){
         array.push(doc.id)
       })
       //alert("usuarios con el alias: " + array.length) 
-      if (array.length == 1){
-        alert("iniciando sesión ....")
-        alert("id usuario que se guarda en el localstorage: " + array[0])
-        localStorage.setItem("IdUser", array[0]);
-        alert("recuperando id del localstorage: " + localStorage.getItem("IdUser"))
+      if (array.length == 1){                
+        localStorage.setItem("IdUser", array[0]);        
         router.push("/horario")
       } else {
         alert("el usuario no existe, si desea puede registrarlo ...")
@@ -68,16 +65,17 @@ function IniciarSesion(){
                   <TextField                     
                     type="text"
                     name="username"
-                    id="username" 
-                    className=" w-full h-9 "  
-                    aria-label="Escribir username"                                                      
+                    id="username"
+                    aria-label="campo de nombre de usuario"
+                    className=" w-full h-9 "                                                        
                   />                   
 
                   <h1 className="text-[#4D4B51] sm:text-5xl sm:pt-4 font-semibold text-center">contraseña</h1>
                   <TextField                    
                     type="password" 
                     name="password"
-                    id="password"   
+                    id="password"
+                    aria-label="campo de contraseña"   
                     className=" h-9 w-full "                 
                   />                   
 

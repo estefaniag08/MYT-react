@@ -21,30 +21,33 @@ function CrearCuentaContenedor(){
   });
 
   const handleSubmit = async (values) => {
-    if (await consultarUsuario(values)){
-      //alert("datos username: " + values.username + " correo: " + values.email + " password: " + values.password)
-      const usuario = {
-        activo: true,
-        alias: values.username,
-        correo: values.email,
-        password: values.password
+    var opcion = confirm("Estas seguro de que los datos son correctos ?")
+    if (opcion == true){
+      if (await consultarUsuario(values)){
+        //alert("datos username: " + values.username + " correo: " + values.email + " password: " + values.password)
+        const usuario = {
+          activo: true,
+          alias: values.username,
+          correo: values.email,
+          password: values.password
+        }
+        // creando el usuario
+        const collUsuarios = collection(firestore, `usuarios`)
+        try {
+          const result = await addDoc(collUsuarios, usuario);
+          //alert("result: " + result)
+        } catch (error) {
+          alert(error)
+        }        
+        const idUser = await consultID(values);
+        //alert("id usuario creado: " + idUser)
+        crearEstructuraFranja(idUser);
+        crearEstructuraTarea(idUser);
+        alert("USUARIO CREADO CON EXITO")
+      } else {
+        alert("EL ALIAS YA SE ENCUENTRA REGISTRADO")
       }
-      // creando el usuario
-      const collUsuarios = collection(firestore, `usuarios`)
-      try {
-        const result = await addDoc(collUsuarios, usuario);
-        //alert("result: " + result)
-      } catch (error) {
-        alert(error)
-      }        
-      const idUser = await consultID(values);
-      //alert("id usuario creado: " + idUser)
-      crearEstructuraFranja(idUser);
-      crearEstructuraTarea(idUser);
-      alert("USUARIO CREADO CON EXITO")
-    } else {
-      alert("EL ALIAS YA SE ENCUENTRA REGISTRADO")
-    }    
+    }        
   }
 
   const consultID = async (values) => {
@@ -152,7 +155,8 @@ function CrearCuentaContenedor(){
                   <TextField 
                     type="text" 
                     id="username" 
-                    name="username"                    
+                    name="username"
+                    aria-label="campo de nombre de usuario"                    
                     className="w-full h-8"
                   />                  
 
@@ -160,7 +164,8 @@ function CrearCuentaContenedor(){
                   <TextField 
                     type="email"
                     name="email"
-                    id="email"                    
+                    id="email"
+                    aria-label="campo de correo electronico"                    
                     className="w-full h-8"
                   />                  
 
@@ -168,7 +173,8 @@ function CrearCuentaContenedor(){
                   <TextField 
                     type="password"
                     name="password"
-                    id="password"                    
+                    id="password"
+                    aria-label="campo de contraseña"                    
                     className="w-full h-8"
                   />                  
 
@@ -176,7 +182,8 @@ function CrearCuentaContenedor(){
                   <TextField
                     type="password"
                     name="repeat_password"
-                    id="repeat_password"                  
+                    id="repeat_password"  
+                    aria-label="campo de repetición de la contraseña"                
                     className="w-full h-8"
                   />                  
                   

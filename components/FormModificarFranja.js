@@ -9,7 +9,8 @@ function FormModificarFranja({ idFranja }) {
   const [datosFranja, setDatosFranja] = useState({});
   const usuario = localStorage.getItem("IdUser") // "vMCIp2NBOORMJhVcw9HV"; //Como prueba  
   useEffect(() => {
-    if (idFranja) {      
+    if (idFranja) {
+      //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      
       console.log("Entra useEffect")
       const franjaEditar = doc(
         firestore,
@@ -27,7 +28,7 @@ function FormModificarFranja({ idFranja }) {
           frecuencia:franjaEditarDatos.data().frecuencia
         });
         console.log("formModificarFranja", datosFranja);
-        alert("HACIENDO LA CONSULTA DEL REGISTRO ... DATOS: " + datosFranja.nombreFranja)
+        //alert("HACIENDO LA CONSULTA DEL REGISTRO ... DATOS: " + datosFranja.nombreFranja)
       };
       obtenerDocumento();      
     }
