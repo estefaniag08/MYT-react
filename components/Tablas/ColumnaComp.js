@@ -20,25 +20,25 @@ function Columna({
   ]);
   useEffect(() => {
     if (listaTareas) {
-        const arreglo = arregloTareas;
-        arreglo.map((elemento) => {
-          listaTareas.map((tarea) => {
-            if (
-              tarea.horaEntrega >= elemento.inicio &&
-              tarea.horaEntrega <= elemento.final
-            ) {
-              elemento.datos = { ...tarea };
-            }
-          });
+      const arreglo = arregloTareas;
+      arreglo.map((elemento) => {
+        listaTareas.map((tarea) => {
+          if (
+            tarea.horaEntrega >= elemento.inicio &&
+            tarea.horaEntrega <= elemento.final
+          ) {
+            elemento.datos = { ...tarea };
+          }
         });
-        setArregloTareas(arreglo)
-        console.log(arreglo[1])   
+      });
+      setArregloTareas(arreglo)
+      console.log(arreglo[1])
     }
   }, [listaTareas]);
   return listaTareas ? (
     <div className={`${stylesFather} flex-column w-full`}>
       <div name={0} className={`${cellEven} ${styles.cell}`}>
-        { arregloTareas[1]?.datos ? arregloTareas[1].datos.nombre : ""}
+        {arregloTareas[1]?.datos ? arregloTareas[1].datos.nombre : ""}
       </div>
       <div name={100} className={`${cellOdd} ${styles.cell}`}>
         1

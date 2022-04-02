@@ -9,21 +9,21 @@ function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
   const [fecha, setFecha] = useState(new Date());
-const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
   useEffect(() => {
-  const fechaInicio = new Date(fecha);
-    fechaInicio.setHours(0,0,0,0)
+    const fechaInicio = new Date(fecha);
+    fechaInicio.setHours(0, 0, 0, 0)
     const fechaFinal = new Date();
     fechaFinal.setDate(fecha.getDate() + 1);
-    fechaFinal.setHours(0,0,0,0);
-    
+    fechaFinal.setHours(0, 0, 0, 0);
+
     const coleccionTareas = collection(firestore, `tareas/${usuario}/tarea`);
     const queryTareas = query(
       coleccionTareas,
       where("fecha_entrega", ">=", fechaInicio),
       where("fecha_entrega", "<", fechaFinal)
     );
-    
+
     try {
       const arregloTareas = []
       const obtenerListas = async () => {
@@ -33,7 +33,7 @@ const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
             id: item.id,
             ...item.data()
           }
-       })
+        })
         setListaTareas(arregloTareas);
       };
       obtenerListas();

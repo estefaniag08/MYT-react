@@ -3,15 +3,15 @@ import FormularioTarea from "./FormularioTarea"
 import HeaderCrearTarea from "./headers_modal/Header_creartarea";
 import BotonCrear from "./headers_modal/BotonCrear"
 
-function FormCrearTarea(){
+function FormCrearTarea() {
 
-  return (    
-    <> 
-        <ModalCrearTarea>
-            <HeaderCrearTarea/>
-            <FormularioTarea/>
-        </ModalCrearTarea>     
-    </>    
+  return (
+    <>
+      <ModalCrearTarea>
+        <HeaderCrearTarea />
+        <FormularioTarea />
+      </ModalCrearTarea>
+    </>
   );
 }
 

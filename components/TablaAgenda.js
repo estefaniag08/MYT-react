@@ -1,8 +1,8 @@
 import Columna from "./Tablas/Columna";
 import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaAgenda.module.css";
-function TablaAgenda({listaTareas}) {
-  
+function TablaAgenda({ listaTareas }) {
+
   return (
     <div className=" lg:w-1/2 lg:h-screen lg:mt-8 w-full xl:h-[76vh] xl:self-center self-start overflow-y-hidden">
       <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold`}>
@@ -31,7 +31,7 @@ function TablaAgenda({listaTareas}) {
                   stylesFather={"w-auto"}
                   cellEven={`${styles.cellHour} text-white`}
                   cellOdd={`${styles.cellHour} text-white`}
-                  
+
                 />
                 <ColumnaComp
                   stylesFather={"w-full"}
@@ -40,7 +40,7 @@ function TablaAgenda({listaTareas}) {
                   listaTareas={listaTareas}
                 />
               </>
-            ): <></>}
+            ) : <></>}
           </tbody>
         </table>
       </div>
