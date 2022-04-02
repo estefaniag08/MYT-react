@@ -56,7 +56,6 @@ function IniciarSesion(){
       onSubmit={async (values) =>{
         await handleSubmit(values);
       }}
-       
     >
       {(formik) => {                    
           return (
@@ -64,13 +63,14 @@ function IniciarSesion(){
               <Form>
                 <div className="flex flex-col w-80 h-full justify-center">
                 
-                  <h1 className="text-[#20557B] text-5xl sm:text-6xl font-semibold text-center">iniciar sesión</h1>
+                  <h1 className="text-[#20557B] text-5xl sm:text-6xl font-semibold text-center" >iniciar sesión</h1>
                   <h1 className="text-[#4D4B51] sm:text-5xl sm:pt-4 font-semibold text-center">usuario</h1>
                   <TextField                     
                     type="text"
                     name="username"
                     id="username" 
-                    className=" w-full h-9 "                                                        
+                    className=" w-full h-9 "  
+                    aria-label="Escribir username"                                                      
                   />                   
 
                   <h1 className="text-[#4D4B51] sm:text-5xl sm:pt-4 font-semibold text-center">contraseña</h1>
