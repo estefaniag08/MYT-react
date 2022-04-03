@@ -27,12 +27,12 @@ function TablaAgenda({ listaTareas, fecha, setFecha }) {
         </button>
       </div>
       <div className={`md:h-[90%] md:overflow-y-auto overflow-x-auto w-full`}>
-        <table className="">
+        <table className="w-full">
           <thead>
             <tr
               className={`${styles.header} border-solid border-2 border-white text-4xl text-white`}
             >
-              <th className="border-solid border-2 border-white p-2">Hora</th>
+              <th className={`border-solid border-2 border-white p-2 ${styles.columnaHoraAncho}`}>Hora</th>
               <th className="border-solid border-2 border-white">{obtenerNombreDelDiaYNumero(fecha)}</th>
             </tr>
           </thead>

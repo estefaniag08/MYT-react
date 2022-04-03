@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/clientApp";
 import Head from "next/head";
 import { useEffect, useState } from "react";

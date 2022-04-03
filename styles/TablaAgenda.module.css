@@ -42,5 +42,8 @@
     color: rgb(255,255,255,0);
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,0) 8%, rgba(255,255,255,0.5578606442577031) 70%, rgba(255,255,255,0.9) 100%);
+}
 
+.columnaHoraAncho{
+    width: 65px;
 }
