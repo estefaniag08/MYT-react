@@ -10,7 +10,7 @@ import FormModificarTarea from "./FormModificarTarea";
 function PanelTarea({setTarea, idTarea, datosTarea}) {
   const abrirCerrarCrearTarea = () => {
     if (
-      document.getElementById("modal_creartarea").style.visibility == "hidden"
+      document.getElementById("modal_creartarea").style.visibility != "visible"
     ) {
       document.getElementById("contenedor_creartarea").style.transform =
         "translateY(0%)";
@@ -28,7 +28,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
 
   const abrirCerrarModTarea = () => {
     if (
-      document.getElementById("modal_modtarea").style.visibility == "hidden"
+      document.getElementById("modal_modtarea").style.visibility != "visible"
     ) {
       document.getElementById("contenedor_modtarea").style.transform =
         "translateY(0%)";
@@ -94,7 +94,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           onClick={abrirCerrarCrearTarea}
           className={`${styles_tarea.btn_creartarea}`} 
         />
-        <label for="btn_creartarea" class="lbl_creartarea" onClick={()=>{ setTarea(null) }} className={`${styles.botonTareas} ${styles.lbl_creartarea}`}>        
+        <label for="btn_creartarea" class="lbl_creartarea" onClick={()=>{ setTarea(null) }} className={`hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_creartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-plus.png"
@@ -113,7 +113,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           onClick={abrirCerrarModTarea}  
           className={`${styles_modtarea.btn_modtarea}`} 
         />
-        <label for="btn_modtarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
+        <label for="btn_modtarea" class="lbl_modificartarea" className={`hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-edit.png"

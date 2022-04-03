@@ -7,9 +7,9 @@ function Header() {
   const abrirCerrarCrearFranja = () => {
     //alert("Interactuando con sidebar")
     if (
-      document.getElementById("modal_sidebar").style.visibility == "hidden"
+      document.getElementById("modal_sidebar").style.visibility != "visible"
     ) {
-      //alert("OCULTO, vamos a abrirlo...")
+      //alert("OCULTO, vamos a abrirlo...  ")
       document.getElementById("elem").style.visibility = "visible"
       document.getElementById("contenedor_sidebar").style.transform =
         "translateX(0%)";
@@ -17,7 +17,7 @@ function Header() {
       document.getElementById("modal_sidebar").style.opacity = "1";
       document.getElementById("btn_sidebar").checked = true;
     } else {
-      //alert("VISIBLE, vamos a cerrarlo...")
+      //alert("VISIBLE, vamos a cerrarlo... ")
       document.getElementById("elem").style.visibility = "hidden"
       document.getElementById("contenedor_sidebar").style.transform =
         "translateX(-30%)";
