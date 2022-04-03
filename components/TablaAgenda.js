@@ -8,15 +8,28 @@ function TablaAgenda({ listaTareas, dia, setDia }) {
     if (esHoy(dia)) return 'Hoy';
     return obtenerNombreDelDiaYNumero(dia);
   }
+  const [tituloDia, setTituloDia] = useState(obtenerTituloDia(dia));
+  const cambiarDia = (cambioDia) => {
+    dia.setDate(dia.getDate() + cambioDia);
+    setDia(dia);
+    setTituloDia(obtenerTituloDia(dia));
+    console.log(dia);
+  }
+  const clicSiguienteDia = () => {
+    cambiarDia(1);
+  }
+  const clicDiaAnterior = () => {
+    cambiarDia(-1);
+  }
 
   return (
     <div className=" lg:w-1/2 lg:h-screen lg:mt-8 w-full xl:h-[76vh] xl:self-center self-start overflow-y-hidden">
       <div className={`text-5xl  flex justify-end gap-4  p-1 font-bold`}>
-        <button type="button" className="font-bold lg:text-5xl text-3xl">
+        <button onClick={clicDiaAnterior} type="button" className="font-bold lg:text-5xl text-3xl">
           {"<"}
         </button>
         <h1 className={`lg:text-5xl text-3xl `}>{obtenerTituloDia()}</h1>
-        <button type="button" className="font-bold lg:text-5xl text-3xl ">
+        <button onClick={clicSiguienteDia} type="button" className="font-bold lg:text-5xl text-3xl ">
           {">"}
         </button>
       </div>
