@@ -8,6 +8,41 @@ import FormCrearTarea from "./FormCrearTarea";
 import FormModificarTarea from "./FormModificarTarea";
 
 function PanelTarea({setTarea, idTarea, datosTarea}) {
+  const abrirCerrarCrearTarea = () => {
+    if (
+      document.getElementById("modal_creartarea").style.visibility == "hidden"
+    ) {
+      document.getElementById("contenedor_creartarea").style.transform =
+        "translateY(0%)";
+      document.getElementById("modal_creartarea").style.visibility = "visible";
+      document.getElementById("modal_creartarea").style.opacity = "1";
+      document.getElementById("btn_creartarea").checked = true;
+    } else {
+      document.getElementById("contenedor_creartarea").style.transform =
+        "translateY(-30%)";
+      document.getElementById("modal_creartarea").style.visibility = "hidden";
+      document.getElementById("modal_creartarea").style.opacity = "0";
+      document.getElementById("btn_creartarea").checked = false;
+    }
+  };
+
+  const abrirCerrarModTarea = () => {
+    if (
+      document.getElementById("modal_modtarea").style.visibility == "hidden"
+    ) {
+      document.getElementById("contenedor_modtarea").style.transform =
+        "translateY(0%)";
+      document.getElementById("modal_modtarea").style.visibility = "visible";
+      document.getElementById("modal_modtarea").style.opacity = "1";
+      document.getElementById("btn_modtarea").checked = true;
+    } else {
+      document.getElementById("contenedor_modtarea").style.transform =
+        "translateY(-30%)";
+      document.getElementById("modal_modtarea").style.visibility = "hidden";
+      document.getElementById("modal_modtarea").style.opacity = "0";
+      document.getElementById("btn_modtarea").checked = false;
+    }
+  };
   return (
     <div className=" lg:w-1/2  grid gap-3 md:m-3">
       <Link href="/horario">
@@ -53,7 +88,12 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
       <div className={`${styles.contenedor} flex items-center`}>
 
 
-        <input type="checkbox" id="btn_creartarea" className={`${styles_tarea.btn_creartarea}`} />
+        <input 
+          type="checkbox" 
+          id="btn_creartarea" 
+          onClick={abrirCerrarCrearTarea}
+          className={`${styles_tarea.btn_creartarea}`} 
+        />
         <label for="btn_creartarea" class="lbl_creartarea" onClick={()=>{ setTarea(null) }} className={`${styles.botonTareas} ${styles.lbl_creartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
@@ -67,7 +107,12 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
         </label>
         <FormCrearTarea />
 
-        <input type="checkbox" id="btn_modtarea" className={`${styles_modtarea.btn_modtarea}`} />
+        <input 
+          type="checkbox" 
+          id="btn_modtarea" 
+          onClick={abrirCerrarModTarea}  
+          className={`${styles_modtarea.btn_modtarea}`} 
+        />
         <label for="btn_modtarea" class="lbl_modificartarea" className={`${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
