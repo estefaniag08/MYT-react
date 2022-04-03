@@ -27,7 +27,7 @@ function TablaAgenda({ listaTareas, dia, setDia }) {
         <button onClick={clicDiaAnterior} type="button" className="font-bold lg:text-5xl text-3xl">
           {"<"}
         </button>
-        <h1 className={`lg:text-5xl text-3xl `}>{obtenerTituloDia()}</h1>
+        <h1 className={`lg:text-5xl text-3xl `}>{tituloDia}</h1>
         <button onClick={clicSiguienteDia} type="button" className="font-bold lg:text-5xl text-3xl ">
           {">"}
         </button>
