@@ -1,7 +1,13 @@
 import Columna from "./Tablas/Columna";
 import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaAgenda.module.css";
-function TablaAgenda({ listaTareas }) {
+import { useState } from "react";
+import { formatearFechaDiaMesAnio, esHoy, obtenerNombreDelDia, obtenerNombreDelDiaYNumero } from '../services/date.service';
+function TablaAgenda({ listaTareas, dia, setDia }) {
+  const obtenerTituloDia = () => {
+    if (!esHoy(dia)) return 'Hoy';
+    return obtenerNombreDelDiaYNumero(dia);
+  }
 
   return (
     <div className=" lg:w-1/2 lg:h-screen lg:mt-8 w-full xl:h-[76vh] xl:self-center self-start overflow-y-hidden">
@@ -9,7 +15,7 @@ function TablaAgenda({ listaTareas }) {
         <button type="button" className="font-bold lg:text-5xl text-3xl">
           {"<"}
         </button>
-        <h1 className={`lg:text-5xl text-3xl `}>Semana 1 - 7 Nov</h1>
+        <h1 className={`lg:text-5xl text-3xl `}>{obtenerTituloDia()}</h1>
         <button type="button" className="font-bold lg:text-5xl text-3xl ">
           {">"}
         </button>
