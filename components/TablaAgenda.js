@@ -5,7 +5,7 @@ import { useState } from "react";
 import { formatearFechaDiaMesAnio, esHoy, obtenerNombreDelDia, obtenerNombreDelDiaYNumero } from '../services/date.service';
 function TablaAgenda({ listaTareas, dia, setDia }) {
   const obtenerTituloDia = () => {
-    if (!esHoy(dia)) return 'Hoy';
+    if (esHoy(dia)) return 'Hoy';
     return obtenerNombreDelDiaYNumero(dia);
   }
 
