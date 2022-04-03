@@ -2,23 +2,17 @@ import Columna from "./Tablas/Columna";
 import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaAgenda.module.css";
 import { useState } from "react";
-import { formatearFechaDiaMesAnio, esHoy, obtenerNombreDelDia, obtenerNombreDelDiaYNumero } from '../services/date.service';
-function TablaAgenda({ listaTareas, dia, setDia }) {
-  const obtenerTituloDia = () => {
-    if (esHoy(dia)) return 'Hoy';
-    return obtenerNombreDelDiaYNumero(dia);
-  }
-  const [tituloDia, setTituloDia] = useState(obtenerTituloDia(dia));
-  const cambiarDia = (cambioDia) => {
-    dia.setDate(dia.getDate() + cambioDia);
-    setDia(dia);
-    setTituloDia(obtenerTituloDia(dia));
-  }
+import { cambiarDia, esHoy, obtenerNombreDelDiaYNumero, obtenerTituloDia } from '../services/date.service';
+function TablaAgenda({ listaTareas, fecha, setFecha }) {
+
+  const [tituloDia, setTituloDia] = useState(obtenerTituloDia(fecha));
+
   const clicSiguienteDia = () => {
-    cambiarDia(1);
+    cambiarDia(1, fecha, setFecha, setTituloDia);
   }
+
   const clicDiaAnterior = () => {
-    cambiarDia(-1);
+    cambiarDia(-1, fecha, setFecha, setTituloDia);
   }
 
   return (
@@ -39,7 +33,7 @@ function TablaAgenda({ listaTareas, dia, setDia }) {
               className={`${styles.header} border-solid border-2 border-white text-4xl text-white`}
             >
               <th className="border-solid border-2 border-white p-2">Hora</th>
-              <th className="border-solid border-2 border-white">{obtenerNombreDelDiaYNumero(dia)}</th>
+              <th className="border-solid border-2 border-white">{obtenerNombreDelDiaYNumero(fecha)}</th>
             </tr>
           </thead>
           <tbody>

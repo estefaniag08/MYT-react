@@ -57,3 +57,17 @@ export function esHoy(date) {
         date.getFullYear() === currentDate.getFullYear()
     );
 }
+
+export function cambiarDia(cambioDia, fecha, setFecha, setTituloDia) {
+    const nuevaFecha = new Date();
+    nuevaFecha.setDate(fecha.getDate() + cambioDia);
+    fecha = nuevaFecha;
+    console.log(nuevaFecha);
+    setFecha(nuevaFecha);
+    setTituloDia(obtenerTituloDia(nuevaFecha));
+}
+
+export function obtenerTituloDia(fecha) {
+    if (esHoy(fecha)) return 'Hoy';
+    return obtenerNombreDelDiaYNumero(fecha);
+}

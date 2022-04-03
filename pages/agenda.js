@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import FullLayout from "../components/FullLayout";
 import PanelTarea from "../components/PanelTarea";
 import TablaAgenda from "../components/TablaAgenda";
+import { obtenerSoloActivas } from "../services/docList.service";
+
 function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
-  const [dia, setDia] = useState(new Date());
   const [fecha, setFecha] = useState(new Date());
   const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+
   useEffect(() => {
     const fechaInicio = new Date(fecha);
     fechaInicio.setHours(0, 0, 0, 0)
@@ -18,24 +20,20 @@ function Agenda() {
     fechaFinal.setDate(fecha.getDate() + 1);
     fechaFinal.setHours(0, 0, 0, 0);
     llenarListaTareas(fechaInicio, fechaFinal);
-  }, []);
+  }, [fecha]);
 
   const llenarListaTareas = async (fechaInicio, fechaFinal) => {
     const coleccionTareas = collection(firestore, `tareas/${usuario}/tarea`);
     const queryTareas = query(
       coleccionTareas,
       where("fecha_entrega", ">=", fechaInicio),
-      where("fecha_entrega", "<", fechaFinal)
+      where("fecha_entrega", "<", fechaFinal),
     );
-    let taskArray = []
+    let arregloTareas = []
     const snapshotTareas = await getDocs(queryTareas);
-    taskArray = snapshotTareas.docs.map(item => {
-      return {
-        id: item.id,
-        ...item.data()
-      }
-    })
-    setListaTareas(taskArray);
+    arregloTareas = obtenerSoloActivas(snapshotTareas);
+    console.log('arregloTareas', arregloTareas);
+    setListaTareas(arregloTareas);
   }
 
   return (
@@ -54,7 +52,7 @@ function Agenda() {
       </Head>
       <FullLayout>
         <main className="lg:flex grid  gap-3 mx-2">
-          <TablaAgenda listaTareas={listaTareas} dia={dia} setDia={setDia} />
+          <TablaAgenda listaTareas={listaTareas} fecha={fecha} setFecha={setFecha} />
           <PanelTarea />
         </main>
       </FullLayout>
