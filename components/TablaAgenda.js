@@ -13,7 +13,6 @@ function TablaAgenda({ listaTareas, dia, setDia }) {
     dia.setDate(dia.getDate() + cambioDia);
     setDia(dia);
     setTituloDia(obtenerTituloDia(dia));
-    console.log(dia);
   }
   const clicSiguienteDia = () => {
     cambiarDia(1);
@@ -40,7 +39,7 @@ function TablaAgenda({ listaTareas, dia, setDia }) {
               className={`${styles.header} border-solid border-2 border-white text-4xl text-white`}
             >
               <th className="border-solid border-2 border-white p-2">Hora</th>
-              <th className="border-solid border-2 border-white">LUNES</th>
+              <th className="border-solid border-2 border-white">{obtenerNombreDelDiaYNumero(dia)}</th>
             </tr>
           </thead>
           <tbody>
