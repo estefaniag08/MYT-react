@@ -79,13 +79,13 @@ function IniciarSesion(){
                     className=" h-9 w-full "                 
                   />                   
 
-                  <a href="/recuperar_cuenta" className="text-xl pb-5 text-right">¿olvidaste tu contraseña?</a>                                          
+                  <a href="/recuperar_cuenta" className="text-xl pb-5 text-right hover:font-bold active:text-[#49D1CD]">¿olvidaste tu contraseña?</a>    
                   
-                  <button type="submit" className="bg-[#20557B] text-white font-bold text-4xl p-1"> 
+                  <button type="submit" className="bg-[#20557B] text-white font-bold text-4xl p-1 hover:bg-[#A0C9E6] active:bg-[#49D1CD]"> 
                     iniciar sesión
                   </button>            
                   
-                  <a href="/crear_cuenta" className="text-xl text-center">crea tu cuenta</a>                                                                                                                                        
+                  <a href="/crear_cuenta" className="text-xl text-center hover:font-bold active:text-[#49D1CD]">crea tu cuenta</a>                                                                                                                                        
                 </div>
               </Form>
             </div>

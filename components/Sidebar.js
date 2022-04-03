@@ -13,14 +13,14 @@ function Sidebar(){
             <div class="contenedor_sidebar" id="contenedor_sidebar" className={` ${styles.contenedor_sidebar} font-bold flex flex-col text-5xl`}>                      
                 <h1 className={`${styles.elem} text-white pt-8 text-right pr-10`}>Hola, usuario</h1>  
                 <Link href="/horario">
-                    <div className={`${styles.elem} bg-[#F8F8F9] opacity-90 mt-10 mx-1 h-20 hover:cursor-pointer flex items-center justify-center`}>
+                    <div className={`${styles.elem} bg-[#F8F8F9] hover:bg-[#A0C9E6] active:bg-[#49D1CD] opacity-90 mt-10 mx-1 h-20 hover:cursor-pointer flex items-center justify-center`}>
                         
                         <h1 className=" text-center text-[#4A4A4A]">mi calendario</h1>
                         
                     </div>
                 </Link>
                 <Link href="/agenda">
-                    <div className={`${styles.elem} bg-[#F8F8F9] opacity-90 mt-1 mx-1 h-20 hover:cursor-pointer flex items-center justify-center`}>
+                    <div className={`${styles.elem} bg-[#F8F8F9] hover:bg-[#A0C9E6] active:bg-[#49D1CD] opacity-90 mt-1 mx-1 h-20 hover:cursor-pointer flex items-center justify-center`}>
                         <h1 className=" text-center text-[#4A4A4A]">mi agenda</h1>
                     </div> 
                 </Link> 
@@ -29,7 +29,7 @@ function Sidebar(){
                     type="submit" 
                     id="elem" 
                     onClick={cerrarSesion}
-                    className={`${styles.elem} bg-[#F8F8F9] opacity-90 inset-x-0 mb-1 mx-1 h-20 hover:cursor-pointer flex items-center justify-center absolute bottom-0 text-center text-[#4A4A4A] font-bold`}
+                    className={`${styles.elem} bg-[#F8F8F9] hover:bg-[#A0C9E6] active:bg-[#49D1CD] opacity-90 inset-x-0 mb-1 mx-1 h-20 hover:cursor-pointer flex items-center justify-center absolute bottom-0 text-center text-[#4A4A4A] font-bold`}
                     value="cerrar sesión"
                 />              
             </div>            
