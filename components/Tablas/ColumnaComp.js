@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "../../styles/TablaHorario.module.css";
+import { RowComp } from "./RowComp";
 function Columna({
   stylesFather,
   cellOdd,
@@ -7,108 +8,36 @@ function Columna({
   listaTareas,
   listaFranjas,
   horas,
+  setTareaSeleccionada
 }) {
-  const [arregloTareas, setArregloTareas] = useState([
-    {
-      inicio: 0,
-      final: 59,
-    },
-    {
-      inicio: 1600,
-      final: 1659,
-    },
-  ]);
-  useEffect(() => {
-    if (listaTareas) {
-      const arreglo = arregloTareas;
-      arreglo.map((elemento) => {
-        listaTareas.map((tarea) => {
-          if (
-            tarea.horaEntrega >= elemento.inicio &&
-            tarea.horaEntrega <= elemento.final
-          ) {
-            elemento.datos = { ...tarea };
-          }
-        });
-      });
-      setArregloTareas(arreglo)
-      console.log(arreglo[1])
+  const arregloTareas = useRef([]);
+  const llenarTabla = () => {
+    let day = [];
+    for (let i = 0; i < 24; i++) {
+      let hour = [];
+      hour.push(listaTareas.filter((tarea) =>
+        tarea.horaEntrega > i * 100 && tarea.horaEntrega <= (i + 1) * 100
+      ));
+      day.push(hour);
     }
+    return day;
+  }
+  useEffect(() => {
+    arregloTareas.current = llenarTabla();
+    console.log('arregloTareas.current', arregloTareas.current)
   }, [listaTareas]);
+
   return listaTareas ? (
-    <div className={`${stylesFather} flex-column w-full table-cell`}>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        {arregloTareas[1]?.datos ? arregloTareas[1].datos.nombre : ""}
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
-      <div name={0} className={`${cellEven} ${styles.cell}`}>
-        0
-      </div>
-      <div name={100} className={`${cellOdd} ${styles.cell}`}>
-        1
-      </div>
+    <div className={`${stylesFather} flex-column w-full  table-cell`}>
+      {
+        arregloTareas.current.map((tareas, index) =>
+        (
+          <div key={index} name={index} className={`${cellEven} ${styles.cell}`}>
+            <RowComp key={index} tareas={tareas} llave={index} />
+          </div>
+        )
+        )
+      }
     </div>
   ) : (
     <></>
