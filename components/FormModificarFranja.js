@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 function FormModificarFranja({ idFranja }) {
   const [datosFranja, setDatosFranja] = useState({});
-  const usuario = localStorage.getItem("IdUser") // "vMCIp2NBOORMJhVcw9HV"; //Como prueba  
+  const usuario =  "vMCIp2NBOORMJhVcw9HV"; //Como prueba  localStorage.getItem("IdUser")
   useEffect(() => {
     if (idFranja) {
       //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      
@@ -28,7 +28,6 @@ function FormModificarFranja({ idFranja }) {
           frecuencia:franjaEditarDatos.data().frecuencia
         });
         console.log("formModificarFranja", datosFranja);
-        //alert("HACIENDO LA CONSULTA DEL REGISTRO ... DATOS: " + datosFranja.nombreFranja)
       };
       obtenerDocumento();      
     }
