@@ -1,20 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function RowComp({ tareas, llave }) {
-    let rows = [];
-    tareas.forEach(tarea => {
-        rows.push(Tarea(tarea));
-    });
+    const [tareasLista, setTareasLista] = useState([]);
+    useEffect(()=>{
+        let rows = [];
+        tareas.forEach(tarea => {
+            rows.push(tarea);
+        });
+        setTareasLista(rows);
+    },[tareas]);
+
+    useEffect(()=>{
+        let rows = [];
+        tareas.forEach(tarea => {
+            rows.push(tarea);
+        });
+        setTareasLista(rows);
+    },[]);
+    
     return (
-        tareas.map((tarea, index) => (
-            <Tarea key={`${index}-${llave}`} tarea={tarea} />
-        ))
+        tareasLista.map((tarea) => {
+            
+            return(
+            <Tarea key={`tarea-${llave}`} tarea={tarea} />
+        )})
     );
 
 }
 
-function Tarea(tarea) {
-    const nombre = tarea[21] ? tarea[21]?.nombre : 'asdasd';
-    return (<a>{nombre}a</a>);
+function Tarea({tarea}) {
+    const nombre = tarea[0] ? tarea[0]?.nombre : '.';
+    return (<a>{`${nombre} `}</a>);
 
 }

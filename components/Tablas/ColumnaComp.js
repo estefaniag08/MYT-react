@@ -33,7 +33,7 @@ function Columna({
         arregloTareas.current.map((tareas, index) =>
         (
           <div key={index} name={index} className={`${cellEven} ${styles.cell}`}>
-            <RowComp key={index} tareas={tareas} llave={index} />
+            <RowComp key={index} tareas={tareas} llave={index} />{' '}
           </div>
         )
         )
