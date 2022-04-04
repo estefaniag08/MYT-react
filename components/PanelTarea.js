@@ -32,7 +32,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
 
   const abrirCerrarModTarea = () => {
     if (
-      document.getElementById("modal_modtarea").style.visibility != "visible"
+      document.getElementById("modal_modtarea").style.visibility !== "visible"
     ) {
       document.getElementById("contenedor_modtarea").style.transform =
         "translateY(0%)";
@@ -128,11 +128,12 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
               layout="responsive"
             />
           </div>
-          <a className="xl:text-5xl text-[0] whitespace-nowrap">MODIFICAR</a>
+          <a className="xl:text-5xl text-[0] whitespace-nowrap"
+          >MODIFICAR</a>
         </label>
-        {tareaSeleccionada && <FormModificarTarea tareaSeleccionada={tareaSeleccionada}
+        <FormModificarTarea tareaSeleccionada={tareaSeleccionada}
           setTareaSeleccionada={setTareaSeleccionada} setListaTareas={setListaTareas}
-          listaTareas={listaTareas} />}
+          listaTareas={listaTareas} />
 
         <button type="button" className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">

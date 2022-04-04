@@ -3,7 +3,7 @@ import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaAgenda.module.css";
 import { useState } from "react";
 import { cambiarDia, esHoy, obtenerNombreDelDiaYNumero, obtenerTituloDia } from '../services/date.service';
-function TablaAgenda({ listaTareas, fecha, setFecha }) {
+function TablaAgenda({ listaTareas, fecha, setFecha, setTareaSeleccionada }) {
   const [tituloDia, setTituloDia] = useState(obtenerTituloDia(fecha));
   const clicSiguienteDia = () => {
     cambiarDia(1, fecha, setFecha, setTituloDia);
@@ -46,7 +46,7 @@ function TablaAgenda({ listaTareas, fecha, setFecha }) {
                   stylesFather={"w-full"}
                   cellEven={`${styles.cellEven} text-white`}
                   cellOdd={`${styles.cellOdd} text-white`}
-                  listaTareas={listaTareas}
+                  listaTareas={listaTareas} setTareaSeleccionada={setTareaSeleccionada}
                 />
               </>
             ) : <></>}

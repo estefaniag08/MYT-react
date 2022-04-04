@@ -10,7 +10,9 @@ import { formatearFechaAnioMesDia, getTime } from "../services/date.service";
 function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
   setListaTareas, listaTareas, esClicModificar }) {
   const iniciarValores = () => {
-    if (!esClicModificar) {
+    console.log('tareaSeleccionada', tareaSeleccionada);
+    if (!esClicModificar || !tareaSeleccionada) {
+      console.log('vacíooooo');
       return {
         nombre: "",
         descripcion: "",

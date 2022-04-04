@@ -33,11 +33,9 @@ function Agenda() {
     let arregloTareas = []
     const snapshotTareas = await getDocs(queryTareas);
     arregloTareas = obtenerSoloActivas(snapshotTareas);
-    console.log('arregloTareas', arregloTareas);
     setListaTareas(arregloTareas);
     const nuevaTareaSeleccionada = arregloTareas[0]
     setTareaSeleccionada(nuevaTareaSeleccionada);
-    console.log('tareaSeleccionada', tareaSeleccionada);
   }
 
   return (
@@ -56,7 +54,7 @@ function Agenda() {
       </Head>
       <FullLayout>
         <main className="lg:flex grid  gap-3 mx-2">
-          <TablaAgenda listaTareas={listaTareas} fecha={fecha} setFecha={setFecha} />
+          <TablaAgenda listaTareas={listaTareas} fecha={fecha} setFecha={setFecha} setTareaSeleccionada={setTareaSeleccionada} />
           <PanelTarea tareaSeleccionada={tareaSeleccionada} setListaTareas={setListaTareas}
             listaTareas={listaTareas} setTareaSeleccionada={setTareaSeleccionada} />
         </main>
