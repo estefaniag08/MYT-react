@@ -38,7 +38,7 @@ function Columna({
     }
   }, [listaTareas]);
   return (
-    <td className={`${stylesFather} `}>
+    <td className={`${stylesFather} table-cell`}>
       <tr name={0} className={` ${cellEven} ${styles.cell}`}>
         0
       </tr>

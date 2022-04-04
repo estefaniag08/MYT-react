@@ -36,7 +36,7 @@ function Columna({
     }
   }, [listaTareas]);
   return listaTareas ? (
-    <div className={`${stylesFather} flex-column w-full`}>
+    <div className={`${stylesFather} flex-column w-full table-cell`}>
       <div name={0} className={`${cellEven} ${styles.cell}`}>
         {arregloTareas[1]?.datos ? arregloTareas[1].datos.nombre : ""}
       </div>

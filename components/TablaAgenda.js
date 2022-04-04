@@ -40,13 +40,13 @@ function TablaAgenda({ listaTareas, fecha, setFecha }) {
             {listaTareas ? (
               <>
                 <Columna
-                  stylesFather={"w-auto"}
+                  stylesFather={"w-auto border-solid border-2 border-white"}
                   cellEven={`${styles.cellHour} text-white`}
                   cellOdd={`${styles.cellHour} text-white`}
 
                 />
                 <ColumnaComp
-                  stylesFather={"w-full"}
+                  stylesFather={"w-full border-solid border-2 border-white"}
                   cellEven={`${styles.cellEven} text-white`}
                   cellOdd={`${styles.cellOdd} text-white`}
                   listaTareas={listaTareas}
