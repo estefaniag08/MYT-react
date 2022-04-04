@@ -4,13 +4,10 @@ import styles from "../styles/TablaAgenda.module.css";
 import { useState } from "react";
 import { cambiarDia, esHoy, obtenerNombreDelDiaYNumero, obtenerTituloDia } from '../services/date.service';
 function TablaAgenda({ listaTareas, fecha, setFecha }) {
-
   const [tituloDia, setTituloDia] = useState(obtenerTituloDia(fecha));
-
   const clicSiguienteDia = () => {
     cambiarDia(1, fecha, setFecha, setTituloDia);
   }
-
   const clicDiaAnterior = () => {
     cambiarDia(-1, fecha, setFecha, setTituloDia);
   }

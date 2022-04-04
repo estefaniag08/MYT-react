@@ -10,6 +10,7 @@ import { obtenerSoloActivas } from "../services/docList.service";
 function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
+  const [tareaSeleccionada, setTareaSeleccionada] = useState();
   const [fecha, setFecha] = useState(new Date());
   const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
@@ -34,6 +35,9 @@ function Agenda() {
     arregloTareas = obtenerSoloActivas(snapshotTareas);
     console.log('arregloTareas', arregloTareas);
     setListaTareas(arregloTareas);
+    const nuevaTareaSeleccionada = arregloTareas[0]
+    setTareaSeleccionada(nuevaTareaSeleccionada);
+    console.log('tareaSeleccionada', tareaSeleccionada);
   }
 
   return (
@@ -53,7 +57,8 @@ function Agenda() {
       <FullLayout>
         <main className="lg:flex grid  gap-3 mx-2">
           <TablaAgenda listaTareas={listaTareas} fecha={fecha} setFecha={setFecha} />
-          <PanelTarea />
+          <PanelTarea tareaSeleccionada={tareaSeleccionada} setListaTareas={setListaTareas}
+            listaTareas={listaTareas} setTareaSeleccionada={setTareaSeleccionada} />
         </main>
       </FullLayout>
     </>

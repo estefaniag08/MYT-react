@@ -39,6 +39,10 @@ export function formatearFechaDiaMesAnio(date) {
     );
 }
 
+export function formatearFechaAnioMesDia(date) {
+    return (`${date.getFullYear()}-${completarDigitos(date.getMonth() + 1)}-${completarDigitos(date.getDate())}`);
+}
+
 export function obtenerNombreDelDia(date) {
     const options = { weekday: 'long' };
     return date.toLocaleDateString('es-CO', options);
@@ -70,4 +74,13 @@ export function cambiarDia(cambioDia, fecha, setFecha, setTituloDia) {
 export function obtenerTituloDia(fecha) {
     if (esHoy(fecha)) return 'Hoy';
     return obtenerNombreDelDiaYNumero(fecha);
+}
+
+export function getTime(time) {
+    let timeString = time.toString()
+    if (timeString.length == 3) {
+        timeString = "0".concat(timeString)
+    }
+    timeString = timeString.substring(0, 2).concat(":").concat(timeString.substring(2))
+    return timeString
 }
