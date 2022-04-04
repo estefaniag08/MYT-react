@@ -10,7 +10,7 @@ function FormModificarTarea({ tareaSeleccionada, setTareaSeleccionada, setListaT
         <HeaderModTarea />
         <FormularioTarea tareaSeleccionada={tareaSeleccionada}
           setTareaSeleccionada={setTareaSeleccionada} setListaTareas={setListaTareas}
-          listaTareas={listaTareas}
+          listaTareas={listaTareas} esClicModificar={true}
         />
       </ModalModTarea>
     </>

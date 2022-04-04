@@ -100,7 +100,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
           onClick={abrirCerrarCrearTarea}
           className={`${styles_tarea.btn_creartarea}`}
         />
-        <label htmlFor="btn_creartarea" onClick={() => { setTarea(null) }} className={`lbl_creartarea hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_creartarea}`}>
+        <label htmlFor="btn_creartarea" className={`lbl_creartarea hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_creartarea}`}>
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-plus.png"

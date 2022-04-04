@@ -7,9 +7,10 @@ import { TextField } from "./TextField";
 import { useEffect, useState } from "react";
 import { formatearFechaAnioMesDia, getTime } from "../services/date.service";
 
-function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, listaTareas }) {
+function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
+  setListaTareas, listaTareas, esClicModificar }) {
   const iniciarValores = () => {
-    if (!tareaSeleccionada) {
+    if (!esClicModificar) {
       return {
         nombre: "",
         descripcion: "",
@@ -63,7 +64,7 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTare
       tipo: values.tipoTarea
     };
     console.log('tarea', tarea);
-    if (tareaSeleccionada) {
+    if (esClicModificar) {
       //Si es modificacion
       try {
         const tareaUsuarioId = doc(
