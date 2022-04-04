@@ -8,7 +8,7 @@ import FormCrearFranja from "../FormCrearFranja";
 function ContenedorFranjas({ setFranja, idFranja }) {
   const abrirCerrarCrearFranja = () => {
     if (
-      document.getElementById("modal_crearfranja").style.visibility == "hidden"
+      document.getElementById("modal_crearfranja").style.visibility != "visible"
     ) {
       document.getElementById("contenedor_crearfranja").style.transform =
         "translateY(0%)";
@@ -26,7 +26,7 @@ function ContenedorFranjas({ setFranja, idFranja }) {
 
   const abrirCerrarModFranja = () => {
     if (
-      document.getElementById("modal_modfranja").style.visibility == "hidden"
+      document.getElementById("modal_modfranja").style.visibility != "visible"
     ) {
       document.getElementById("contenedor_modfranja").style.transform =
         "translateY(0%)";
@@ -58,9 +58,8 @@ function ContenedorFranjas({ setFranja, idFranja }) {
           className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`}
         />
         <label
-          for="btn_crearfranja"
-          class="lbl_crearfranja"
-          className={`text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}
+          htmlFor="btn_crearfranja"          
+          className={`lbl_crearfranja hover:cursor-pointer text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}
         >
           <div className="w-8 h-8">
             <img
@@ -80,9 +79,8 @@ function ContenedorFranjas({ setFranja, idFranja }) {
           className={`${styles_modfranja.btn_modfranja}`}
         />
         <label
-          for="btn_modfranja"
-          class="lbl_modfranja"
-          className={`text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}
+          htmlFor="btn_modfranja"          
+          className={`lbl_modfranja hover:cursor-pointer text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}
         >
           <div className="w-8 h-8">
             <img

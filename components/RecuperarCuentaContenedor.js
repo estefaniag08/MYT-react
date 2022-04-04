@@ -35,7 +35,8 @@ function RecuperarCuentaContenedor() {
                     id="email"                    
                     className="w-full "
                   />                                   
-                  <button type="submit" className="bg-[#20557B] mt-9 text-white p-1 text-4xl font-bold">recuperar cuenta</button>      
+                  <button type="submit" className="bg-[#20557B] mt-9 text-white p-1 text-4xl font-bold hover:bg-[#A0C9E6] active:bg-[#49D1CD]">recuperar cuenta</button>      
+                  <a href="/" className="text-xl text-center hover:font-bold active:text-[#49D1CD]">Volver a inicio</a>
 
                 </div>
               </Form>
