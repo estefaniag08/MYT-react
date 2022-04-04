@@ -35,56 +35,60 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
   useEffect(() => {
     console.log(initialValues);
   })
-  // const usuario = localStorage.getItem("IdUser") 
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser") 
+  //const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
   const userSchema = yup.object().shape({
-    nombreTarea: yup.string().required("Nombre de tarea requerido"),
-    descripcionTarea: yup
+    nombre: yup.string().required("Nombre de tarea requerido"),
+    descripcion: yup
       .string()
       .required("Descripción de la tarea requerida"),
-    dificultadTarea: yup.string().required("Dificultad requerida"),
-    tipoTarea: yup.string().required("Tipo requerido"),
-    fechaEntrega: yup.string().required("Fecha de entrega requerida"),
+    dificultad: yup.string().required("Dificultad requerida"),
+    tipo: yup.string().required("Tipo requerido"),
+    fecha_entrega: yup.string().required("Fecha de entrega requerida"),
     horaEntrega: yup.string().required("hora de entrega requerida"),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values) => {    
     console.log('init handle');
-    const arregloFecha = values.fechaEntrega.split("-")
+    const arregloFecha = values.fecha_entrega.split("-")
     const fechaFormateada = new Date(arregloFecha[0], Number(arregloFecha[1]) - 1, arregloFecha[2]);
+    alert("usuario: " + usuario + "  fecha entrega: " + fechaFormateada)
     const arregloHora = values.horaEntrega.split(":");
-    const stringHora = `${arregloHora[0]}${arregloHora[1]}`
+    const stringHora = `${arregloHora[0]}${arregloHora[1]}`    
     const tarea = {
       activo: true,
-      descripcion: values.descripcionTarea,
-      dificultad: values.dificultadTarea,
+      descripcion: values.descripcion,
+      dificultad: values.dificultad,
       estado: "sin iniciar",
       fecha_entrega: fechaFormateada,
       horaEntrega: Number(stringHora),
-      nombre: values.nombreTarea,
-      tipo: values.tipoTarea
+      nombre: values.nombre,
+      tipo: values.tipo
     };
+    
     console.log('tarea', tarea);
     if (esClicModificar) {
       //Si es modificacion
-      try {
+      try {        
         const tareaUsuarioId = doc(
           firestore,
           `tareas/${usuario}/tarea`,
           tareaSeleccionada.id
-        )
+        )        
         console.log(tareaUsuarioId);
         await updateDoc(tareaUsuarioId, tarea);
+        alert("despues de actualizar documento ...")
       } catch (error) {
+        alert("error: "+ error)
         console.error(error);
       }
     } else {
       //Si es añadir
-      try {
-        const tareasUsuario = collection(firestore, `tareas/${usuario}/tarea`);
-        const result = await addDoc(tareasUsuario, tarea);
-        console.log(result);
+      try {        
+        const tareasUsuario = collection(firestore, `tareas/${usuario}/tarea`);        
+        const result = await addDoc(tareasUsuario, tarea);        
+        console.log(result);        
       } catch (error) {
         console.log(error);
       }
@@ -108,7 +112,7 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
     <Formik
       initialValues={initialValues}
       enableReinitialize={true}
-      onSubmit={async (values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {        
         await handleSubmit(values);
         resetForm();
       }}
@@ -170,7 +174,7 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
             <input
               type="submit"
               value={tareaSeleccionada ? "MODIFICAR" : "AÑADIR"}
-              className="bg-white font-bold text-4xl p-1 w-24 mt-[470px] hover:cursor-pointer"
+              className="bg-white font-bold text-4xl p-1 w-28 mt-[470px] hover:cursor-pointer"
             />
           </Form>
         );
