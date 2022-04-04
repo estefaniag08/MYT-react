@@ -72,6 +72,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
       }
     }  
   }  
+  
   const resetStyleButtons = () => {    
     var btn_domingo = document.getElementById("btn_domingo")
     var btn_lunes = document.getElementById("btn_lunes")
@@ -165,7 +166,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         } 
       }
       // APAGANDO LOS BOTONES DE FRECUENCIA
-      resetStyleButtons()
+      resetStyleButtons()      
       //ACÁ SE DEBE DE CERRAR EL MODAL
       
       // CERRANDO MODAL DE CREAR FRANJA

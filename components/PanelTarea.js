@@ -94,7 +94,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           onClick={abrirCerrarCrearTarea}
           className={`${styles_tarea.btn_creartarea}`} 
         />
-        <label for="btn_creartarea" class="lbl_creartarea" onClick={()=>{ setTarea(null) }} className={`hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_creartarea}`}>        
+        <label htmlFor="btn_creartarea" onClick={()=>{ setTarea(null) }} className={`lbl_creartarea hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_creartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-plus.png"
@@ -113,7 +113,7 @@ function PanelTarea({setTarea, idTarea, datosTarea}) {
           onClick={abrirCerrarModTarea}  
           className={`${styles_modtarea.btn_modtarea}`} 
         />
-        <label for="btn_modtarea" class="lbl_modificartarea" className={`hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
+        <label htmlFor="btn_modtarea" className={`lbl_modificartarea hover:cursor-pointer ${styles.botonTareas} ${styles.lbl_modificartarea}`}>        
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-edit.png"

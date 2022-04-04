@@ -31,7 +31,7 @@ function Header() {
       <div className="flex items-center justify-center h-full">      
 
         <input type="checkbox" onClick={abrirCerrarCrearFranja} id="btn_sidebar" className={` ${styles_side.btn_sidebar} ${styles_side.botonIcono}`} />
-        <label for="btn_sidebar" class="lbl_crearfranja" className={`z-[2000] text-4xl p-2 ${styles_side.lbl_crearfranja} ${styles_side.boton} `}> 
+        <label htmlFor="btn_sidebar" className={`lbl_crearfranja z-[2000] text-4xl p-2 ${styles_side.lbl_crearfranja} ${styles_side.boton} `}> 
         
           <div className="w-13 h-13 z-[2000] pl-2 hover:cursor-pointer ">
             <img

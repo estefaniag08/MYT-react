@@ -9,8 +9,8 @@ function Sidebar(){
         router.push("/")
     } 
     return (        
-        <div class="modal_sidebar" id="modal_sidebar" className={` ${styles.modal_sidebar}`}>
-            <div class="contenedor_sidebar" id="contenedor_sidebar" className={` ${styles.contenedor_sidebar} font-bold flex flex-col text-5xl`}>                      
+        <div id="modal_sidebar" className={`modal_sidebar ${styles.modal_sidebar}`}>
+            <div id="contenedor_sidebar" className={`contenedor_sidebar ${styles.contenedor_sidebar} font-bold flex flex-col text-5xl`}>                      
                 <h1 className={`${styles.elem} text-white pt-8 text-right pr-10`}>Hola, usuario</h1>  
                 <Link href="/horario">
                     <div className={`${styles.elem} bg-[#F8F8F9] hover:bg-[#A0C9E6] active:bg-[#49D1CD] opacity-90 mt-10 mx-1 h-20 hover:cursor-pointer flex items-center justify-center`}>

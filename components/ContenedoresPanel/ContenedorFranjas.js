@@ -58,9 +58,8 @@ function ContenedorFranjas({ setFranja, idFranja }) {
           className={`${styles_franja.btn_crearfranja} ${styles_franja.botonIcono}`}
         />
         <label
-          for="btn_crearfranja"
-          class="lbl_crearfranja"
-          className={`hover:cursor-pointer text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}
+          htmlFor="btn_crearfranja"          
+          className={`lbl_crearfranja hover:cursor-pointer text-4xl p-2 ${styles.lbl_crearfranja} ${styles.boton} `}
         >
           <div className="w-8 h-8">
             <img
@@ -80,9 +79,8 @@ function ContenedorFranjas({ setFranja, idFranja }) {
           className={`${styles_modfranja.btn_modfranja}`}
         />
         <label
-          for="btn_modfranja"
-          class="lbl_modfranja"
-          className={`hover:cursor-pointer text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}
+          htmlFor="btn_modfranja"          
+          className={`lbl_modfranja hover:cursor-pointer text-4xl p-2 ${styles.boton} ${styles.lbl_modificarfranja}`}
         >
           <div className="w-8 h-8">
             <img
