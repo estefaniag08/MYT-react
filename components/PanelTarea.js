@@ -50,7 +50,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
     }
   };
   const eliminarTarea = async () => {
-    if (typeof tareaSeleccionada === "undefined"){
+    if (typeof tareaSeleccionada === "undefined"){ 
       alert("No hay tarea seleccionada para eliminar")
     } else {    
       var opcion = confirm("¿Estás seguro de que deseas eliminar la tarea seleccionada ?")  
