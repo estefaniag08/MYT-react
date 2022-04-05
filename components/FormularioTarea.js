@@ -1,48 +1,190 @@
-import styles from "../styles/FormTarea.module.css"
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
+import styles from "../styles/ModalCrearTarea.module.css";
+import * as yup from "yup";
+import { ErrorMessage, Formik, Form } from "formik";
+import { TextField } from "./TextField";
+import { useEffect, useState } from "react";
+import { formatearFechaAnioMesDia, getTime } from "../services/date.service";
 
-function FormularioTarea(){
-  return (          
-      <div class="modal_creartarea" className={`${styles.modal_creartarea}`}>
+function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
+  setListaTareas, listaTareas, esClicModificar }) {
+  const [initialValues, setInitialValues] = useState({
+    nombre: "",
+    descripcion: "",
+    dificultad: "",
+    tipo: "",
+    fecha_entrega: "",
+    horaEntrega: "",
+  });
+  function iniciarValores()  {
+    if (!esClicModificar || !tareaSeleccionada?.nombre) {
+      return {
+        nombre: "",
+        descripcion: "",
+        dificultad: "",
+        tipo: "",
+        fecha_entrega: "",
+        horaEntrega: "",
+      }
+    }
+    const datosInicialesTareaSeleccionada = {
+      ...tareaSeleccionada,
+      fecha_entrega: formatearFechaAnioMesDia(tareaSeleccionada.fecha_entrega.toDate()),
+      horaEntrega: getTime(tareaSeleccionada.horaEntrega)
+    };
+    return datosInicialesTareaSeleccionada;
+  };
 
-        <div class="contenedor" className={`${styles.contenedor} flex flex-col items-center`}>            
-          <header className={`${styles.header}`}>añadir tarea</header>
-          <label for="btn_creartarea" >X</label>
-            
-          <div class="contenido" className={`${styles.contenido} flex flex-wrap flex-col justify-center items-center`}>
-            
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> insertar tarea</h1>
-            
-            <div className="columns-4 grid grid-cols-4 flex flex-wrap items-center">
-              <h3 className={`${styles.p}  text-right`}> nombre:</h3>            
-              <input type="text" className=" bg-white  h-8 w-32 text-xl h-8 w-24" />          
-              <h3 className="">dificultad:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
-              <h3>descripción:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
-              <h3 className="text-right">tipo:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
+  useEffect(() => {
+    setInitialValues(iniciarValores());
+  },[tareaSeleccionada])
+  
+  const usuario = localStorage.getItem("IdUser") 
+  //const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+
+  const userSchema = yup.object().shape({
+    nombre: yup.string().required("Nombre de tarea requerido"),
+    descripcion: yup
+      .string()
+      .required("Descripción de la tarea requerida"),
+    dificultad: yup.string().required("Dificultad requerida"),
+    tipo: yup.string().required("Tipo requerido"),
+    fecha_entrega: yup.string().required("Fecha de entrega requerida"),
+    horaEntrega: yup.string().required("hora de entrega requerida"),
+  });
+
+  const handleSubmit = async (values) => {    
+    console.log('init handle');
+    const arregloFecha = values.fecha_entrega.split("-")
+    const fechaFormateada = new Date(arregloFecha[0], Number(arregloFecha[1]) - 1, arregloFecha[2]);
+    
+    const arregloHora = values.horaEntrega.split(":");
+    const stringHora = `${arregloHora[0]}${arregloHora[1]}`    
+    const tarea = {
+      activo: true,
+      descripcion: values.descripcion,
+      dificultad: values.dificultad,
+      estado: "sin iniciar",
+      fecha_entrega: fechaFormateada,
+      horaEntrega: Number(stringHora),
+      nombre: values.nombre,
+      tipo: values.tipo
+    };
+    
+    console.log('tarea', tarea);
+    if (esClicModificar) {
+      //Si es modificacion
+      try {        
+        const tareaUsuarioId = doc(
+          firestore,
+          `tareas/${usuario}/tarea`,
+          tareaSeleccionada.id
+        )        
+        console.log(tareaUsuarioId);
+        await updateDoc(tareaUsuarioId, tarea);
+      } catch (error) {
+        
+        console.error(error);
+      }
+    } else {
+      //Si es añadir
+      try {        
+        const tareasUsuario = collection(firestore, `tareas/${usuario}/tarea`);        
+        const result = await addDoc(tareasUsuario, tarea);        
+        console.log(result);        
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    //ACÁ SE DEBE DE CERRAR EL MODAL
+    if (document.getElementById("modal_creartarea").style.visibility == "visible") {
+      document.getElementById("contenedor_creartarea").transform = "translateY(-30%)"
+      document.getElementById("modal_creartarea").style.visibility = "hidden"
+      document.getElementById("modal_creartarea").style.opacity = "0"
+      document.getElementById("btn_creartarea").checked = false
+    }
+    // CERRANDO MODAL DE MODIFICAR FRANJA
+    if (document.getElementById("modal_modtarea").style.visibility == "visible") {
+      document.getElementById("contenedor_modtarea").transform = "translateY(-30%)"
+      document.getElementById("modal_modtarea").style.visibility = "hidden"
+      document.getElementById("modal_modtarea").style.opacity = "0"
+      document.getElementById("btn_modtarea").checked = false
+    }
+  };
+  return (
+    <Formik
+      initialValues={initialValues}
+      enableReinitialize={true}
+      onSubmit={async (values, { resetForm }) => {        
+        await handleSubmit(values);
+        resetForm();
+      }}
+      validationSchema={userSchema}
+    >
+      {(formik) => {
+        return (
+          <Form>
+            <div class="contenido" className={`${styles.contenido_creartarea} grid grid-cols-1  text-center`}>
+              <h1 className={`${styles.h1} text-4xl text-center col-span-4 inset-1/2`}> información general tarea</h1>
+              <div className=" grid grid-cols-2 gap-0  items-center text-2xl sm:grid-cols-4 sm:gap-2 sm:text-3xl">
+                <h3 className={`${styles.p} text-black mb-2 sm:mb-5`}> nombre:</h3>
+                <TextField
+                  type="text"
+                  name="nombre"
+                  id="nombreTarea"
+                  aria-label="campo de nombre de tarea"
+                  className=" bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                <h3 className="  text-black mb-2 sm:mb-5">dificultad:</h3>
+                <TextField
+                  type="text"
+                  name="dificultad"
+                  id="dificultadTarea"
+                  aria-label="campo de dificultad de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                <h3 className=" text-black mb-2 sm:mb-5">descripción:</h3>
+                <TextField
+                  type="text"
+                  name="descripcion"
+                  id="descripcionTarea"
+                  aria-label="campo de descripción de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+                <h3 className=" text-black mb-2 sm:mb-5">tipo:</h3>
+                <TextField
+                  type="text"
+                  name="tipo"
+                  id="tipoTarea"
+                  aria-label="campo de tipo de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+              </div>
+              <h1 className={`${styles.h1} pt-3 text-4xl  col-span-4 inset-1/2`}> Entrega</h1>
+              <div className=" grid grid-cols-2 pb-0 gap-0 flex-wrap items-center text-2xl sm:grid-cols-4 sm:text-3xl">
+                <h3 className=" text-black sm:mb-5">fecha:</h3>
+                <TextField
+                  type="date"
+                  name="fecha_entrega"
+                  id="fechaEntrega"
+                  aria-label="campo de fecha de entrega de tarea"
+                  className="bg-white  text-xl h-5 sm:w-32 sm:h-8" />
+                <h3 className=" text-black sm:mb-5">hora:</h3>
+                <TextField
+                  type="time"
+                  name="horaEntrega"
+                  id="horaEntrega"
+                  aria-label="campo de hora de entrega de tarea"
+                  className="bg-white text-xl h-5 sm:w-24 sm:h-8" />
+              </div>
             </div>
-                          
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> Entrega</h1>
-            
-            <div className="grid grid-cols-4 gap-4  items-center">
-              <h3 className="text-right">fecha:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
-              <h3 className="text-right">hora:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
-            </div>
-
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> Tarea General</h1>
-
-            <div className="grid grid-cols-2 gap-2  items-center">
-              <h3 className="text-right ">Seleccionar tarea general:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
-            </div>            
-          </div>          
-          <button type="button" className="bg-white font-bold text-4xl p-1 w-24 mt-[470px]">añadir</button>                    
-        </div>        
-      </div>    
-  )
+            <input
+              type="submit"
+              value={tareaSeleccionada ? "MODIFICAR" : "AÑADIR"}
+              className="bg-white font-bold text-4xl p-1 w-28 mt-[470px] hover:cursor-pointer"
+            />
+          </Form>
+        );
+      }}
+    </Formik>
+  );
 }
 
-export default FormularioTarea
+export default FormularioTarea;

@@ -1,51 +1,46 @@
-import styles from "../styles/FormModFranja.module.css"
+import ModalModFranja from "./ModalModFranja";
+import FormularioFranja from "./FormularioFranja";
+import HeaderModFranja from "./headers_modal/Header_modfranja";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
+import { useState, useEffect } from "react";
 
-function FormularioFranja() {
+function FormModificarFranja({ idFranja }) {
+  const [datosFranja, setDatosFranja] = useState({});
+  const usuario = localStorage.getItem("IdUser"); //"vMCIp2NBOORMJhVcw9HV"; //Como prueba  localStorage.getItem("IdUser")
+  useEffect(() => {
+    if (idFranja) {
+      //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      
+      console.log("Entra useEffect", idFranja)
+      const franjaEditar = doc(
+        firestore,
+        `franjas/${usuario}/franja`,
+        idFranja
+      );      
+      const obtenerDocumento = async () => {
+        const franjaEditarDatos = await getDoc(franjaEditar);
+        setDatosFranja({
+          nombreFranja: franjaEditarDatos.data().nombre,
+          tipoFranja: franjaEditarDatos.data().tipo,
+          descripcionFranja: franjaEditarDatos.data().descripcion,
+          horaInicio: franjaEditarDatos.data().hora_inicio,
+          horaFinal: franjaEditarDatos.data().hora_final,
+          frecuencia:franjaEditarDatos.data().frecuencia
+        });
+        console.log("formModificarFranja", datosFranja);
+      };
+      obtenerDocumento();      
+    }
+  }, [idFranja]);
+
   return (
-    <div  className={`${styles.modal_modificarfranja}`}>
-
-        <div class="contenedor_modificarfranja" className={`${styles.contenedor_modificarfranja} flex flex-col items-center`}>            
-          <header className={`${styles.header}`}>modificar franja</header>
-          <label for="btn_modificarfranja" >X</label>
-            
-          <div class="contenido_modificarfranja" className={`${styles.contenido_modificarfranja} flex flex-wrap flex-col justify-center items-center`}>
-            
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> información general</h1>
-            
-            <div className="columns-4 grid grid-cols-4 flex flex-wrap items-center">
-              <h3 className={`${styles.p}  text-right`}> nombre:</h3>            
-              <input type="text" className=" bg-white  h-8 w-32 text-xl h-8 w-24" />          
-              <h3 className="">tipo:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />
-              <h3>descripción:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24" />              
-            </div>
-                          
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> frecuencia</h1>
-            
-            <div className="gap-3 flex items-center justify-center">
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> D </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> l </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> m </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> m </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> j </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> v </button>
-              <button className="text-2xl bg-slate-300 w-12 h-12 rounded-full hover:bg-sky-300 focus:bg-sky-600"> s </button>
-            </div>
-
-            <h1 className={`${styles.h1} col-span-4 inset-1/2`}> Rango</h1>
-
-            <div className="grid grid-cols-4 gap-4  items-center">
-              <h3 className="text-right ">hora inicio:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
-              <h3 className="text-right ">hora final:</h3>
-              <input type="text" className="bg-white  h-8 w-32 text-xl h-8 w-24 " />
-            </div>            
-          </div>          
-          <button type="button" className="bg-white p-1 font-bold text-5xl w-26 mt-[470px]">modificar</button>                    
-        </div>        
-      </div>    
-  )
+    <>
+      <ModalModFranja>
+        <HeaderModFranja />
+        <FormularioFranja idFranja={idFranja} datosFranja={datosFranja} />
+      </ModalModFranja>
+    </>
+  );
 }
 
-export default FormularioFranja
+export default FormModificarFranja;
