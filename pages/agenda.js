@@ -10,7 +10,7 @@ import { obtenerSoloActivas } from "../services/docList.service";
 function Agenda() {
   const [listaTareas, setListaTareas] = useState([]);
   const [listaFranjas, setListaFranjas] = useState([]);
-  const [tareaSeleccionada, setTareaSeleccionada] = useState();
+  const [tareaSeleccionada, setTareaSeleccionada] = useState({});
   const [fecha, setFecha] = useState(new Date());
   const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
 

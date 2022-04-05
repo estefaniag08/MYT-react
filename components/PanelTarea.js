@@ -9,7 +9,7 @@ import { formatearFechaDiaMesAnio } from "../services/date.service";
 
 function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, listaTareas }) {
   const obtenerFechaEntrega = () => {
-    if (!tareaSeleccionada) return '';
+    if (!tareaSeleccionada?.nombre) return '';
     return formatearFechaDiaMesAnio(tareaSeleccionada.fecha_entrega.toDate());
   }
   const abrirCerrarCrearTarea = () => {
@@ -68,7 +68,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
       </Link>
       <div className={`${styles.container} `}>
         <h1 className="lg:text-6xl text-4xl font-bold text-center mb-1">
-          Titulo tarea: {tareaSeleccionada?.nombre}
+          Titulo tarea: { tareaSeleccionada?.nombre }
         </h1>
         <section className="flex">
           <h3 className="2xl:w-1/6 lg:1/4 w-1/2">Descripción:</h3>

@@ -26,14 +26,15 @@ function Columna({
     arregloTareas.current = llenarTabla();
     console.log('arregloTareas.current', arregloTareas.current)
   }, [listaTareas]);
+  
 
   return listaTareas ? (
     <div className={`${stylesFather} flex-column w-full  table-cell`}>
       {
         arregloTareas.current.map((tareas, index) =>
         (
-          <div key={index} name={index} className={`${cellEven} ${styles.cell}`}>
-            <RowComp key={index} tareas={tareas} llave={index} />{' '}
+          <div key={index} name={index} className={`${ index%2 === 0 ? cellEven: cellOdd} ${styles.cell}`}>
+            <RowComp key={index} tareas={tareas} llave={index} setTareaSeleccionada={setTareaSeleccionada}/>{' '}
           </div>
         )
         )

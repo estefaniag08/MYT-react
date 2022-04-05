@@ -9,9 +9,17 @@ import { formatearFechaAnioMesDia, getTime } from "../services/date.service";
 
 function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
   setListaTareas, listaTareas, esClicModificar }) {
-  const iniciarValores = () => {
+  const [initialValues, setInitialValues] = useState({
+    nombre: "",
+    descripcion: "",
+    dificultad: "",
+    tipo: "",
+    fecha_entrega: "",
+    horaEntrega: "",
+  });
+  function iniciarValores()  {
     console.log('tareaSeleccionada', tareaSeleccionada);
-    if (!esClicModificar || !tareaSeleccionada) {
+    if (!esClicModificar || !tareaSeleccionada?.nombre) {
       console.log('vacíooooo');
       return {
         nombre: "",
@@ -30,11 +38,12 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
     console.log(datosInicialesTareaSeleccionada);
     return datosInicialesTareaSeleccionada;
   };
-  const [initialValues, setInitialValues] = useState(iniciarValores());
 
   useEffect(() => {
     console.log(initialValues);
-  })
+    setInitialValues(iniciarValores());
+  },[tareaSeleccionada])
+  
   const usuario = localStorage.getItem("IdUser") 
   //const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
