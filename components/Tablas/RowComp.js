@@ -77,7 +77,7 @@ function Tarea({tarea, setTareaSeleccionada}) {
 
 function Franja({franja, setFranja}) {
     const handleOnClick = (franja)=>{
-        setFranja(franja);
+        setFranja(franja.id);
     }
     return (
         franja.length > 0 ?

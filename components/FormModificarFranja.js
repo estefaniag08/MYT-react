@@ -11,7 +11,7 @@ function FormModificarFranja({ idFranja }) {
   useEffect(() => {
     if (idFranja) {
       //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      
-      console.log("Entra useEffect")
+      console.log("Entra useEffect", idFranja)
       const franjaEditar = doc(
         firestore,
         `franjas/${usuario}/franja`,
