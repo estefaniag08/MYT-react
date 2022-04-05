@@ -118,7 +118,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
   };
 
   const handleSubmit = async (values) => {
-    var opcion = confirm("Estás seguro de que los campos son correctos ?")
+    var opcion = confirm("¿Estás seguro de que los campos son correctos?")
     if (opcion == true) {
       const usuario = localStorage.getItem("IdUser") //
       const arregloHoraFinal = values.horaFinal.split(":");

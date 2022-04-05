@@ -58,7 +58,7 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
     console.log('init handle');
     const arregloFecha = values.fecha_entrega.split("-")
     const fechaFormateada = new Date(arregloFecha[0], Number(arregloFecha[1]) - 1, arregloFecha[2]);
-    alert("usuario: " + usuario + "  fecha entrega: " + fechaFormateada)
+    
     const arregloHora = values.horaEntrega.split(":");
     const stringHora = `${arregloHora[0]}${arregloHora[1]}`    
     const tarea = {
@@ -83,9 +83,8 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
         )        
         console.log(tareaUsuarioId);
         await updateDoc(tareaUsuarioId, tarea);
-        alert("despues de actualizar documento ...")
       } catch (error) {
-        alert("error: "+ error)
+        
         console.error(error);
       }
     } else {

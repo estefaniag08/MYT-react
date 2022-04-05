@@ -4,8 +4,11 @@ import Link from "next/link";
 import * as yup from "yup";
 import { Formik, Form } from "formik"
 import { TextField } from './TextField';
+import {useRouter} from "next/router";
 
 function CrearCuentaContenedor(){
+  const router = useRouter()
+
   const initialValues = {
     username: "",
     email: "",
@@ -21,7 +24,7 @@ function CrearCuentaContenedor(){
   });
 
   const handleSubmit = async (values) => {
-    var opcion = confirm("Estas seguro de que los datos son correctos ?")
+    var opcion = confirm("¿Estás seguro de que los datos son correctos?")
     if (opcion == true){
       if (await consultarUsuario(values)){
         //alert("datos username: " + values.username + " correo: " + values.email + " password: " + values.password)
@@ -37,15 +40,16 @@ function CrearCuentaContenedor(){
           const result = await addDoc(collUsuarios, usuario);
           //alert("result: " + result)
         } catch (error) {
-          alert(error)
+          //alert(error)
         }        
         const idUser = await consultID(values);
         //alert("id usuario creado: " + idUser)
         crearEstructuraFranja(idUser);
         crearEstructuraTarea(idUser);
-        alert("USUARIO CREADO CON EXITO")
+        alert("Su cuenta ha sido creada con éxito.")
+        router.push("/");
       } else {
-        alert("EL ALIAS YA SE ENCUENTRA REGISTRADO")
+        alert("El alias ya se encuentra registrado.")
       }
     }        
   }

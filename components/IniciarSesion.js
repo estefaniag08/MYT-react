@@ -39,10 +39,10 @@ function IniciarSesion(){
         localStorage.setItem("IdUser", array[0]);        
         router.push("/horario")
       } else {
-        alert("el usuario no existe, si desea puede registrarlo ...")
+        alert("El usuario no existe, si desea puede registrase.")
       }            
     } catch (error) {
-      alert(error)
+      //alert(error)
     }    
   }
 
