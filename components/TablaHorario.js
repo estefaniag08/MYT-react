@@ -3,6 +3,7 @@ import { firestore } from "../firebase/clientApp";
 import Columna from "./Tablas/Columna";
 import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaHorario.module.css";
+import stylesAgenda from "../styles/TablaAgenda.module.css";
 import { useEffect, useState } from "react";
 import {
   cambiarDia,
@@ -29,7 +30,8 @@ function TablaHorario({ setFranja}) {
     { number: 7, text: "domingo" },
   ])
   const [franjasSemana, setFranjasSemana] = useState([]);
-  const usuario = "vMCIp2NBOORMJhVcw9HV";
+ const estiloHeaderTail = "table-cell border-solid border-2 border-white";
+ const usuario = "vMCIp2NBOORMJhVcw9HV";
 
 
   const llenarListaFranjas = async() => {
@@ -97,9 +99,10 @@ function TablaHorario({ setFranja}) {
   const obtenerTitulosDias = (arregloFechas) => {
     const titulos = [];
     arregloFechas.forEach( dia => {
-      titulos.push(obtenerTituloDia(dia));
+      titulos.push(obtenerTituloDia(dia)
+      );
     })
-    setArregloTitulosDias(titulos);
+    setArregloTitulosDias(titulos);    
   }
 
   const obtenerFranjasPorDia = (arregloFranjas, dia) => {
@@ -120,7 +123,7 @@ function TablaHorario({ setFranja}) {
 
   const clicDiaAnteriorSemana = () => {
     cambiarDia(-7, fechaRef, setFechaRef);
-  }
+  }  
 
   return (
     <div className="lg:w-11/12  w-full xl:h-[76vh] lg:self-center self-start overflow-y-hidden">
@@ -142,89 +145,117 @@ function TablaHorario({ setFranja}) {
               className={`${styles.header} table-row border-solid border-2 border-white text-4xl text-white text-center`}
             >
               <div className="table-cell border-solid border-2 border-white p-2">Hora</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[0] ?? 'LUNES'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[1] ?? 'MARTES'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[2] ?? 'MIÉRCOLES'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[3] ?? 'JUEVES'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[4] ?? 'VIERNES'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[5] ?? 'SÁBADO'}</div>
-              <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[6] ?? 'DOMINGO'}</div>
+              <div className={(arregloTitulosDias[0] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[0] ?? 'LUNES'}
+              </div>
+              <div className={ (arregloTitulosDias[1] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[1] ?? 'MARTES'}
+              </div>
+              <div className={(arregloTitulosDias[2] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[2] ?? 'MIÉRCOLES'}
+              </div>
+              <div className={(arregloTitulosDias[3] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[3] ?? 'JUEVES'}
+              </div>
+              <div className={(arregloTitulosDias[4] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[4] ?? 'VIERNES'}
+              </div>
+              <div className={(arregloTitulosDias[5] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[5] ?? 'SÁBADO'}
+              </div>
+              <div className={(arregloTitulosDias[6] === "Hoy") ? 
+                `${stylesAgenda.header} ${estiloHeaderTail}` : 
+                `${styles.header} ${estiloHeaderTail}`}>
+                  {arregloTitulosDias[6] ?? 'DOMINGO'}
+              </div>
             </div>
           </div>
           <div className="table-row-group">{
-          franjasSemana.length > 1 ? (
-            <>
-              <Columna
-                stylesFather={"w-auto border-solid border-2 border-white"}
-                cellEven={`${styles.cellHour} text-white`}
-                cellOdd={`${styles.cellHour} text-white`}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[1]}
-                setFranja={setFranja}
+  franjasSemana.length > 1 ? (
+<>
+            <Columna
+              stylesFather={"w-auto border-solid border-2 border-white"}
+              cellEven={`${styles.cellHour} text-white`}
+              cellOdd={`${styles.cellHour} text-white`}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[0] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[0] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[1]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[2]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[1] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[1] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[2]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[3]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[2] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[2] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[3]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[4]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[3] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[3] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[4]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[5]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[4] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[4] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[5]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[6]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[5] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[5] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[6]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-              <ColumnaComp
-                stylesFather={"w-[14%] border-solid border-2 border-white"}
-                cellEven={`${styles.cellEven}`}
-                cellOdd={`${styles.cellOdd}`}
-                listaTareas={[]}
-                listaFranjas={franjasSemana[7]}
-                setFranja={setFranja}
+            />
+            <ColumnaComp
+              stylesFather={"w-[14%] border-solid border-2 border-white"}
+              cellEven={(arregloTitulosDias[6] === "Hoy") ? `${stylesAgenda.cellEven}` : `${styles.cellEven}`}
+              cellOdd={(arregloTitulosDias[6] === "Hoy") ? `${stylesAgenda.cellOdd}` : `${styles.cellOdd}`}
+              listaTareas={[]}
+              listaFranjas={franjasSemana[7]}
+setFranja={setFranja}
                 esTarea={false}
-              />
-            </>
-            )
-        : <></>}</div>
+            />
+ </>
+)
+          : <></>}</div>
         </div>
         <div className={`${styles.degrade} w-full`}>{"-"}</div>
       </div>

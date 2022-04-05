@@ -6,6 +6,8 @@ import styles_modtarea from "../styles/ModalModTarea.module.css"
 import FormCrearTarea from "./FormCrearTarea";
 import FormModificarTarea from "./FormModificarTarea";
 import { formatearFechaDiaMesAnio } from "../services/date.service";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
 
 function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, listaTareas }) {
   const obtenerFechaEntrega = () => {
@@ -47,6 +49,35 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
       document.getElementById("btn_modtarea").checked = false;
     }
   };
+  const eliminarTarea = async () => {
+    if (typeof tareaSeleccionada === "undefined"){
+      alert("No hay tarea seleccionada para eliminar")
+    } else {      
+      const usuario = localStorage.getItem("IdUser");         
+      const tarea = {
+        activo: false,
+        descripcion: tareaSeleccionada.descripcion,
+        dificultad: tareaSeleccionada.dificultad,
+        estado: "sin iniciar",
+        fecha_entrega: tareaSeleccionada.fecha_entrega,
+        horaEntrega: tareaSeleccionada.horaEntrega,
+        nombre: tareaSeleccionada.nombre,
+        tipo: tareaSeleccionada.tipo
+      };      
+      //Si es modificacion
+      try {        
+        const tareaUsuarioId = doc(
+          firestore,
+          `tareas/${usuario}/tarea`,
+          tareaSeleccionada.id
+        )                
+        console.log(tareaUsuarioId);
+        await updateDoc(tareaUsuarioId, tarea);        
+      } catch (error) {        
+        console.error(error);
+      }
+    }
+  }
   return (
     <div className=" lg:w-1/2  grid gap-3 md:m-3">
       <Link href="/horario">
@@ -135,7 +166,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
           setTareaSeleccionada={setTareaSeleccionada} setListaTareas={setListaTareas}
           listaTareas={listaTareas} />
 
-        <button type="button" className={styles.botonTareas}>
+        <button type="button" onClick={eliminarTarea} className={styles.botonTareas}>
           <div className="md:w-12 md:h-12 w-10 h-10">
             <img
               src="/img/book/book-remove.png"
