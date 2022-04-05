@@ -136,8 +136,8 @@ function FormularioFranja({ idFranja, datosFranja }) {
         activo: true,
         descripcion: values.descripcionFranja,
         frecuencia: [...arregloFrecuencias],
-        hora_final: Number(stringHoraInicio),
-        hora_inicio: Number(stringHoraFinal),
+        hora_final: Number(stringHoraFinal),
+        hora_inicio: Number(stringHoraInicio),
         nombre: values.nombreFranja,
         tipo: values.tipoFranja,
       };

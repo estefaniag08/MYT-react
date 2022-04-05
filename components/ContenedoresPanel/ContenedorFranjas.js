@@ -44,8 +44,8 @@ function ContenedorFranjas({ setFranja, idFranja }) {
   };
   const eliminarFranja = async () => {      
     if (idFranja) {   
-      var opcion = confirm("Estás seguro de que desea eliminar la franja seleccionada ? ")
-      alert("id franja : " + idFranja)  
+      var opcion = confirm("¿Estás seguro de que desea eliminar la franja seleccionada? ")
+      //alert("id franja : " + idFranja)  
       if (opcion === true){
         const usuario = localStorage.getItem("IdUser");         
         const franjaEditar = doc(
@@ -70,7 +70,7 @@ function ContenedorFranjas({ setFranja, idFranja }) {
             idFranja
           );
           await updateDoc(franjaUsuarioId, franja);
-          alert("despues de eliminar franja ...")
+          //alert("despues de eliminar franja ...")
         } catch (error) {
           console.error(error);
         }

@@ -53,7 +53,7 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
     if (typeof tareaSeleccionada === "undefined"){
       alert("No hay tarea seleccionada para eliminar")
     } else {    
-      var opcion = confirm("Estás seguro de que deseas eliminar la tarea seleccionada ?")  
+      var opcion = confirm("¿Estás seguro de que deseas eliminar la tarea seleccionada ?")  
       if (opcion === true){
         const usuario = localStorage.getItem("IdUser");         
         const tarea = {
