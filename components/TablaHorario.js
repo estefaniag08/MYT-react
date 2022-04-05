@@ -1,3 +1,5 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { firestore } from "../firebase/clientApp";
 import Columna from "./Tablas/Columna";
 import ColumnaComp from "./Tablas/ColumnaComp";
 import styles from "../styles/TablaHorario.module.css";
@@ -10,9 +12,11 @@ import {
   obtenerTituloSemana,
   obtenerTituloDia
 } from "../services/date.service";
-function TablaHorario({ setFranja, listaFranjas }) {
+import { obtenerSoloActivas } from "../services/docList.service";
+function TablaHorario({ setFranja}) {
   const [fechaRef, setFechaRef] = useState(new Date());
   const [ tituloSemana, setTituloSemana ] = useState("");
+  const [listaFranjas, setListaFranjas] = useState([]);
   const [ arregloFechasSemana, setArregloFechasSemana] = useState([]);
   const [ arregloTitulosDias, setArregloTitulosDias] = useState([]);
   const [ semana, setSemana] = useState([
@@ -25,33 +29,50 @@ function TablaHorario({ setFranja, listaFranjas }) {
     { number: 7, text: "domingo" },
   ])
   const [franjasSemana, setFranjasSemana] = useState([]);
+  const usuario = "vMCIp2NBOORMJhVcw9HV";
 
-  useEffect(() => {
+
+  const llenarListaFranjas = async() => {
+    const coleccionFranjas = collection(firestore, `franjas/${usuario}/franja`);
+    let franjas = await getDocs(coleccionFranjas);
+    
+    let arregloFranjas = [];
+    arregloFranjas = obtenerSoloActivas(franjas);
+
+    console.log('arregloFranjas', arregloFranjas);
+    setListaFranjas(arregloFranjas);
+    crearFranjasDia(arregloFranjas);
+   
+  }
+
+  useEffect(async () => {
+    await llenarListaFranjas();
     let arregloFechas = [];
     arregloFechas = obtenerArregloFechasSemana();
     setArregloFechasSemana(arregloFechas);
     obtenerTituloSemana(arregloFechas[0], arregloFechas[arregloFechas.length -1], setTituloSemana);
-    //obtenerFranjasPorDia(1);
+
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
+    await llenarListaFranjas();
     let arregloFechas = [];
     arregloFechas = obtenerArregloFechasSemana();
     setArregloFechasSemana(arregloFechas);
     obtenerTituloSemana(arregloFechas[0], arregloFechas[arregloFechas.length -1], setTituloSemana);
   }, [fechaRef]);
 
-  useEffect(() => {
+  const crearFranjasDia= (arregloFranjas) =>{
     let franjaSemana = [];
     franjaSemana.push([])
     semana.forEach(dia => {
       let franjaDia = [];
-      franjaDia = obtenerFranjasPorDia(dia.number);
+      franjaDia = obtenerFranjasPorDia(arregloFranjas, dia.number);
       franjaSemana.push(franjaDia);
     })
     setFranjasSemana(franjaSemana);
     console.log(franjaSemana)
-  },[listaFranjas])
+  }
 
   const obtenerArregloFechasSemana = ()=>{
     const nombreFechaRef = obtenerNombreDelDia(fechaRef);
@@ -81,9 +102,9 @@ function TablaHorario({ setFranja, listaFranjas }) {
     setArregloTitulosDias(titulos);
   }
 
-  const obtenerFranjasPorDia = (dia) => {
+  const obtenerFranjasPorDia = (arregloFranjas, dia) => {
     let franjasDia = [];
-    listaFranjas.forEach( franja => {
+    arregloFranjas.forEach( franja => {
       for(let i=0; i<franja.frecuencia.length-1; i++){
         if(franja.frecuencia[i] === dia){
           franjasDia.push(franja)
@@ -130,62 +151,80 @@ function TablaHorario({ setFranja, listaFranjas }) {
               <div className="table-cell border-solid border-2 border-white">{arregloTitulosDias[6] ?? 'DOMINGO'}</div>
             </div>
           </div>
-          <div className="table-row-group">
-            <Columna
-              stylesFather={"w-auto border-solid border-2 border-white"}
-              cellEven={`${styles.cellHour} text-white`}
-              cellOdd={`${styles.cellHour} text-white`}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[1]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[2]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[3]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[4]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[5]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[6]}
-            />
-            <ColumnaComp
-              stylesFather={"w-[14%] border-solid border-2 border-white"}
-              cellEven={`${styles.cellEven}`}
-              cellOdd={`${styles.cellOdd}`}
-              listaTareas={[]}
-              listaFranjas={franjasSemana[7]}
-            />
-          </div>
+          <div className="table-row-group">{
+          franjasSemana.length > 1 ? (
+            <>
+              <Columna
+                stylesFather={"w-auto border-solid border-2 border-white"}
+                cellEven={`${styles.cellHour} text-white`}
+                cellOdd={`${styles.cellHour} text-white`}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[1]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[2]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[3]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[4]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[5]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[6]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+              <ColumnaComp
+                stylesFather={"w-[14%] border-solid border-2 border-white"}
+                cellEven={`${styles.cellEven}`}
+                cellOdd={`${styles.cellOdd}`}
+                listaTareas={[]}
+                listaFranjas={franjasSemana[7]}
+                setFranja={setFranja}
+                esTarea={false}
+              />
+            </>
+            )
+        : <></>}</div>
         </div>
         <div className={`${styles.degrade} w-full`}>{"-"}</div>
       </div>

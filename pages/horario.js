@@ -10,21 +10,9 @@ function Horario() {
   const [idFranja, setFranja] = useState("");
   const [listaFranjas, setListaFranjas] = useState([]);
   const [fechas, setFechas] = useState([]);
-  const usuario = "vMCIp2NBOORMJhVcw9HV";
-  useEffect(()=> {
-    llenarListaFranjas();
-  },[])
+  const [ actualizaTabla, setActualizaTabla] = useState(false);
 
-  const llenarListaFranjas = async() => {
-    const coleccionFranjas = collection(firestore, `franjas/${usuario}/franja`);
   
-    let franjas = await getDocs(coleccionFranjas);
-    
-    let arregloFranjas = [];
-    arregloFranjas = obtenerSoloActivas(franjas);
-    console.log('arregloFranjas', arregloFranjas);
-    setListaFranjas(arregloFranjas);
-  }
   return (
     
     <>
@@ -42,7 +30,9 @@ function Horario() {
       </Head>
       <FullLayout>
         <main className="lg:flex grid gap-3 mx-2 ">
-          <TablaHorario setFranja={setFranja} listaFranjas={listaFranjas}/>
+          
+              <TablaHorario setFranja={setFranja} />
+          
           <PanelHorario setFranja={setFranja} idFranja={idFranja}/>
         </main>
       </FullLayout>

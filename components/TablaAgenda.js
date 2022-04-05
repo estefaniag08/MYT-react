@@ -47,6 +47,8 @@ function TablaAgenda({ listaTareas, fecha, setFecha, setTareaSeleccionada }) {
                   cellEven={`${styles.cellEven} text-white`}
                   cellOdd={`${styles.cellOdd} text-white`}
                   listaTareas={listaTareas} setTareaSeleccionada={setTareaSeleccionada}
+                  listaFranjas={[]}
+                  esTarea={true}
                 />
               </>
             ) : <></>}

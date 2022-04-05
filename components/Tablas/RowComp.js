@@ -1,40 +1,67 @@
 import { useEffect, useState } from "react";
 
-export function RowComp({ tareas, llave, setTareaSeleccionada }) {
+export function RowComp({ tareas, franjas, llave, setTareaSeleccionada, setFranja, esTarea }) {
     const [tareasLista, setTareasLista] = useState([]);
+    const [franjasLista, setFranjasLista] = useState([]);
+
     useEffect(()=>{
-        let rows = [];
-        tareas.forEach(tarea => {
-            rows.push(tarea);
-        });
-        setTareasLista(rows);
-        console.log('tareas_lista', tareasLista);
+        if(tareas){
+
+            let rows = [];
+            tareas.forEach(tarea => {
+                rows.push(tarea);
+            });
+            setTareasLista(rows);
+        }
     },[tareas]);
 
     useEffect(()=>{
-        let rows = [];
-        tareas.forEach(tarea => {
-            rows.push(tarea);
-        });
-        setTareasLista(rows);
-        console.log('tareas_lista', tareasLista);
+        if(franjas){
+            let rows = [];
+            franjas?.forEach(franja => {
+                rows.push(franja);
+            });
+            setFranjasLista(rows);
+        }
+    },[franjas]);
+
+    useEffect(()=>{
+        if(tareas){
+            let rows = [];
+            tareas.forEach(tarea => {
+                rows.push(tarea);
+            });
+            setTareasLista(rows);
+        }
+        if(franjas){
+            rows = [];
+            franjas?.forEach(franja => {
+                rows.push(franja);
+            });
+            setFranjasLista(rows);
+        }
     },[]);
-    return (
+    return esTarea ? (
         tareasLista.map((tarea) => {
             
             return(
             <Tarea key={`tarea-${llave}`} tarea={tarea} setTareaSeleccionada={setTareaSeleccionada}/>
         )})
-    );
+    ):!esTarea? (
+        franjasLista.map((franja) => {
+            console.log('Entra??')
+            return(
+                <Franja key={`franja-${franja.id}`} franja={franja} setFranja={setFranja}/>
+            )
+        })
+    ): <></>;
 
 }
 
 function Tarea({tarea, setTareaSeleccionada}) {
     const handleOnClick = (tarea)=>{
-        console.log('taea', tarea)
         setTareaSeleccionada(tarea);
     }
-    console.log('aa tarea', tarea)
     return(
         tarea.length > 0 ?
         tarea.map((t, index )=> {
@@ -46,4 +73,18 @@ function Tarea({tarea, setTareaSeleccionada}) {
         <a> - </a>
     )
 
+}
+
+function Franja({franja, setFranja}) {
+    const handleOnClick = (franja)=>{
+        setFranja(franja);
+    }
+    return (
+        franja.length > 0 ?
+        franja.map((f, index) => {
+            const nombre = f ? f?.nombre : '-';
+            return(<a key={index} onClick={()=>{handleOnClick(f)}} className="ml-4 text-3xl hover:font-bold hover:text-3xl">{`${nombre} `}</a>)
+        }):
+        <a> - </a>
+    )
 }

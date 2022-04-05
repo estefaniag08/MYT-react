@@ -18,9 +18,7 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
     horaEntrega: "",
   });
   function iniciarValores()  {
-    console.log('tareaSeleccionada', tareaSeleccionada);
     if (!esClicModificar || !tareaSeleccionada?.nombre) {
-      console.log('vacíooooo');
       return {
         nombre: "",
         descripcion: "",
@@ -35,12 +33,10 @@ function FormularioTarea({ tareaSeleccionada, setTareaSeleccionada,
       fecha_entrega: formatearFechaAnioMesDia(tareaSeleccionada.fecha_entrega.toDate()),
       horaEntrega: getTime(tareaSeleccionada.horaEntrega)
     };
-    console.log(datosInicialesTareaSeleccionada);
     return datosInicialesTareaSeleccionada;
   };
 
   useEffect(() => {
-    console.log(initialValues);
     setInitialValues(iniciarValores());
   },[tareaSeleccionada])
   

@@ -39,7 +39,7 @@ function ContenedorImportantes({ listaTareas, fecha, setFecha, setTareaSeleccion
             <button onClick={clicDiaAnterior} type="button" className="font-bold">
               {"<"}
             </button>
-            <h1 className="lg:text-5xl text-3xl">TAREAS {tituloDia}</h1>
+            <h1 className="lg:text-3xl text-2xl">TAREAS {tituloDia}</h1>
             <button onClick={clicSiguienteDia} type="button" className="font-bold">
               {">"}
             </button>
