@@ -23,6 +23,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
   */
   useEffect(() => {
     if (idFranja) {
+      console.log(datosFranja)
       setInitialValues({
         nombreFranja: datosFranja.nombreFranja,
         tipoFranja: datosFranja.tipoFranja,
@@ -36,7 +37,7 @@ function FormularioFranja({ idFranja, datosFranja }) {
         document.getElementsByName(datosFranja.frecuencia[i])[1].click()
       }
     }
-  }, [idFranja])
+  }, [datosFranja])
 
   //const usuario = localStorage.getItem("IdUser") //"vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
