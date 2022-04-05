@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 function FormModificarFranja({ idFranja }) {
   const [datosFranja, setDatosFranja] = useState({});
-  const usuario =  "vMCIp2NBOORMJhVcw9HV"; //Como prueba  localStorage.getItem("IdUser")
+  const usuario = localStorage.getItem("IdUser"); //"vMCIp2NBOORMJhVcw9HV"; //Como prueba  localStorage.getItem("IdUser")
   useEffect(() => {
     if (idFranja) {
       //alert("id de la franja a editar: " + idFranja + "id usuario: "+ usuario)      

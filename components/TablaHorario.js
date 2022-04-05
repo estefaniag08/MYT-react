@@ -31,7 +31,7 @@ function TablaHorario({ setFranja}) {
   ])
   const [franjasSemana, setFranjasSemana] = useState([]);
  const estiloHeaderTail = "table-cell border-solid border-2 border-white";
- const usuario = "vMCIp2NBOORMJhVcw9HV";
+ const usuario = localStorage.getItem("IdUser");//"vMCIp2NBOORMJhVcw9HV";
 
 
   const llenarListaFranjas = async() => {

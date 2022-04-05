@@ -12,7 +12,7 @@ function Agenda() {
   const [listaFranjas, setListaFranjas] = useState([]);
   const [tareaSeleccionada, setTareaSeleccionada] = useState({});
   const [fecha, setFecha] = useState(new Date());
-  const usuario = "vMCIp2NBOORMJhVcw9HV"; //Como prueba
+  const usuario = localStorage.getItem("IdUser");//"vMCIp2NBOORMJhVcw9HV"; //Como prueba
 
   useEffect(() => {
     const fechaInicio = new Date(fecha);
