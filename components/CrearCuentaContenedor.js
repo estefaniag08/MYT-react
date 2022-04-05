@@ -150,41 +150,41 @@ function CrearCuentaContenedor(){
               <Form>
                 <div className=" flex flex-col w-80 h-full justify-center ">
                 
-                  <h1 className="text-[#20557B] text-5xl sm:text-7xl font-semibold text-center">crea tu cuenta</h1>
-                  <h1 className="text-[#4D4B51] font-semibold sm:text-4xl text-left">usuario: </h1>
+                  <h1 className="text-[#20557B] text-3xl sm:text-7xl font-semibold text-center">crea tu cuenta</h1>
+                  <h1 className="text-[#4D4B51] -mb-5 sm:mb-0  font-semibold sm:text-4xl text-left">usuario: </h1>
                   <TextField 
                     type="text" 
                     id="username" 
                     name="username"
                     aria-label="campo de nombre de usuario"                    
-                    className="w-full h-8"
+                    className="w-full h-6 sm:h-8"
                   />                  
 
-                  <h1 className="text-[#4D4B51] font-semibold sm:text-4xl ">correo electrónico:</h1>
+                  <h1 className="text-[#4D4B51] -mb-5 sm:mb-0 font-semibold sm:text-4xl ">correo electrónico:</h1>
                   <TextField 
                     type="email"
                     name="email"
                     id="email"
                     aria-label="campo de correo electronico"                    
-                    className="w-full h-8"
+                    className="w-full h-6 sm:h-8"
                   />                  
 
-                  <h1 className="text-[#4D4B51] font-semibold sm:text-4xl ">contraseña:</h1>
+                  <h1 className="text-[#4D4B51] -mb-5 sm:mb-0 font-semibold sm:text-4xl ">contraseña:</h1>
                   <TextField 
                     type="password"
                     name="password"
                     id="password"
                     aria-label="campo de contraseña"                    
-                    className="w-full h-8"
+                    className="w-full h-6 sm:h-8"
                   />                  
 
-                  <h1 className="text-[#4D4B51] font-semibold sm:text-4xl">repite la contraseña:</h1>
+                  <h1 className="text-[#4D4B51] -mb-5 sm:mb-0 font-semibold sm:text-4xl">repite la contraseña:</h1>
                   <TextField
                     type="password"
                     name="repeat_password"
                     id="repeat_password"  
                     aria-label="campo de repetición de la contraseña"                
-                    className="w-full h-8"
+                    className="w-full h-6 sm:h-8"
                   />                  
                   
                   <button type="submit" className="bg-[#20557B] p-1 text-white font-bold text-4xl hover:bg-[#A0C9E6] active:bg-[#49D1CD]">crear cuenta</button>                                  
