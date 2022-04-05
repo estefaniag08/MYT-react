@@ -52,30 +52,33 @@ function PanelTarea({ tareaSeleccionada, setTareaSeleccionada, setListaTareas, l
   const eliminarTarea = async () => {
     if (typeof tareaSeleccionada === "undefined"){
       alert("No hay tarea seleccionada para eliminar")
-    } else {      
-      const usuario = localStorage.getItem("IdUser");         
-      const tarea = {
-        activo: false,
-        descripcion: tareaSeleccionada.descripcion,
-        dificultad: tareaSeleccionada.dificultad,
-        estado: "sin iniciar",
-        fecha_entrega: tareaSeleccionada.fecha_entrega,
-        horaEntrega: tareaSeleccionada.horaEntrega,
-        nombre: tareaSeleccionada.nombre,
-        tipo: tareaSeleccionada.tipo
-      };      
-      //Si es modificacion
-      try {        
-        const tareaUsuarioId = doc(
-          firestore,
-          `tareas/${usuario}/tarea`,
-          tareaSeleccionada.id
-        )                
-        console.log(tareaUsuarioId);
-        await updateDoc(tareaUsuarioId, tarea);        
-      } catch (error) {        
-        console.error(error);
-      }
+    } else {    
+      var opcion = confirm("Estás seguro de que deseas eliminar la tarea seleccionada ?")  
+      if (opcion === true){
+        const usuario = localStorage.getItem("IdUser");         
+        const tarea = {
+          activo: false,
+          descripcion: tareaSeleccionada.descripcion,
+          dificultad: tareaSeleccionada.dificultad,
+          estado: "sin iniciar",
+          fecha_entrega: tareaSeleccionada.fecha_entrega,
+          horaEntrega: tareaSeleccionada.horaEntrega,
+          nombre: tareaSeleccionada.nombre,
+          tipo: tareaSeleccionada.tipo
+        };      
+        //Si es modificacion
+        try {        
+          const tareaUsuarioId = doc(
+            firestore,
+            `tareas/${usuario}/tarea`,
+            tareaSeleccionada.id
+          )                
+          console.log(tareaUsuarioId);
+          await updateDoc(tareaUsuarioId, tarea);        
+        } catch (error) {        
+          console.error(error);
+        }
+      }      
     }
   }
   return (

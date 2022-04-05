@@ -31,11 +31,18 @@ function FormularioFranja({ idFranja, datosFranja }) {
         horaInicio: getTime(datosFranja.horaInicio),//datosFranja.horaInicio,//
         horaFinal: getTime(datosFranja.horaFinal)//datosFranja.horaFinal//,
       });
-
-      for (let i = 0; i < datosFranja.frecuencia.length; i++) {
-        //alert(datosFranja.frecuencia[i])
-        document.getElementsByName(datosFranja.frecuencia[i])[1].click()
-      }
+      const frecuencia = [         
+         "btn_lunes",
+         "btn_martes",
+         "btn_miercoles",
+         "btn_jueves",
+         "btn_viernes",
+         "btn_sabado",
+         "btn_domingo"
+      ]
+      for (let i = 0; i < datosFranja.frecuencia.length; i++) {        
+        document.getElementsByName(datosFranja.frecuencia[i])[8].click()                
+      }      
     }
   }, [datosFranja])
 
